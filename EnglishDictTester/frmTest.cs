@@ -19,11 +19,11 @@ namespace EnglishDictTester
         int i = 0;
         int wordA = 0;
         int wordB = 0;
-        //double score = 0;
         int correctAnswer = 0;
         string examWord = string.Empty;
         string translateWord = string.Empty;
-        string[] arrWords;
+        string[] arrAllWords;
+        string[] arrSelectedWords;
         bool isFinish = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
@@ -41,7 +41,7 @@ namespace EnglishDictTester
                 wordB = 1;
 
                 int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
-                arrWords = new string[arrayLength];
+                arrAllWords = new string[arrayLength];
 
                 var enWordsId = context.WordEns?.Select(i => new { i.WordEnId }).ToList();
                 var bgWordsId = context.WordBgs?.Select(i => new { i.WordBgId }).ToList();
@@ -78,13 +78,13 @@ namespace EnglishDictTester
                     //dictWords.Add(wordEn, wordBg);
                     if (comboBoxLanguage.SelectedIndex == 0)//En
                     {
-                        arrWords[wordA] = wordEn;
-                        arrWords[wordB] = wordBg;
+                        arrAllWords[wordA] = wordEn;
+                        arrAllWords[wordB] = wordBg;
                     }
                     else if (comboBoxLanguage.SelectedIndex == 1)//Bg
                     {
-                        arrWords[wordA] = wordBg;
-                        arrWords[wordB] = wordEn;
+                        arrAllWords[wordA] = wordBg;
+                        arrAllWords[wordB] = wordEn;
                     }
                     //arrWords[wordA] = wordEn;
                     //arrWords[wordB] = wordBg;
@@ -96,7 +96,32 @@ namespace EnglishDictTester
                     }
                 }
 
-                labelExamWord.Text = arrWords[i];
+                arrSelectedWords = new string[numberOfWords * 2];
+
+                for (int i = 0, j = 1; i < numberOfWords * 2; i += 2, j += 2)
+                {
+                    if (j < numberOfWords * 2)
+                    {
+                        int index = rnd.Next(arrAllWords.Length - 2);
+
+                        if (index % 2 == 0)
+                        {
+                            arrSelectedWords[i] = arrAllWords[index];
+                            arrSelectedWords[j] = arrAllWords[index + 1];
+                        }
+                        else
+                        {
+                            arrSelectedWords[i] = arrAllWords[index + 1];
+                            arrSelectedWords[j] = arrAllWords[index + 2];
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                labelExamWord.Text = arrSelectedWords[i];
             }
         }
 
@@ -110,7 +135,7 @@ namespace EnglishDictTester
 
             //rnd.Next(arrWords.Length);
 
-            translateWord = arrWords[i + 1];
+            translateWord = arrSelectedWords[i + 1];
 
             writtenWord = textBoxTranslateWord.Text.ToUpper();
 
@@ -121,12 +146,12 @@ namespace EnglishDictTester
 
             labelScore.Text = "Score: " + correctAnswer;
 
-            if (i == arrWords.Length - 2)
+            if (i == arrSelectedWords.Length - 2)
             {
                 MessageBox.Show("Finish!");
                 isFinish = true;
             }
-            if (i < arrWords.Length)
+            if (i < arrSelectedWords.Length)
             {
                 if (isFinish == false)
                 {
@@ -135,7 +160,7 @@ namespace EnglishDictTester
 
                 if (i > 0)
                 {
-                    labelExamWord.Text = arrWords[i];
+                    labelExamWord.Text = arrSelectedWords[i];
                     textBoxTranslateWord.Text = "";
                 }
             }
@@ -162,7 +187,7 @@ namespace EnglishDictTester
 
         private void buttonHint_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(arrWords[i + 1]);
+            MessageBox.Show(arrSelectedWords[i + 1]);
         }
     }
 }
