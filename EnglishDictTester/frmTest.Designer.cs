@@ -37,21 +37,24 @@
             comboBoxLanguage = new ComboBox();
             label3 = new Label();
             buttonLoad = new Button();
+            labelAllWords = new Label();
+            buttonLoadAllWords = new Button();
+            labelScore = new Label();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
             comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50", "100" });
-            comboBoxNumberOfWords.Location = new Point(16, 90);
+            comboBoxNumberOfWords.Location = new Point(12, 131);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
-            comboBoxNumberOfWords.Size = new Size(69, 23);
+            comboBoxNumberOfWords.Size = new Size(63, 23);
             comboBoxNumberOfWords.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(16, 72);
+            label1.Location = new Point(12, 116);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 2;
@@ -61,7 +64,7 @@
             // 
             labelExamWord.AutoSize = true;
             labelExamWord.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            labelExamWord.Location = new Point(248, 171);
+            labelExamWord.Location = new Point(288, 172);
             labelExamWord.Name = "labelExamWord";
             labelExamWord.Size = new Size(70, 25);
             labelExamWord.TabIndex = 3;
@@ -69,14 +72,14 @@
             // 
             // textBoxTranslateWord
             // 
-            textBoxTranslateWord.Location = new Point(196, 240);
+            textBoxTranslateWord.Location = new Point(236, 239);
             textBoxTranslateWord.Name = "textBoxTranslateWord";
-            textBoxTranslateWord.Size = new Size(173, 23);
+            textBoxTranslateWord.Size = new Size(172, 23);
             textBoxTranslateWord.TabIndex = 4;
             // 
             // buttonNextWord
             // 
-            buttonNextWord.Location = new Point(375, 239);
+            buttonNextWord.Location = new Point(414, 239);
             buttonNextWord.Name = "buttonNextWord";
             buttonNextWord.Size = new Size(75, 23);
             buttonNextWord.TabIndex = 5;
@@ -86,26 +89,27 @@
             // 
             // buttonHint
             // 
-            buttonHint.Location = new Point(554, 31);
+            buttonHint.Location = new Point(544, 33);
             buttonHint.Name = "buttonHint";
             buttonHint.Size = new Size(75, 23);
             buttonHint.TabIndex = 6;
             buttonHint.Text = "Hint";
             buttonHint.UseVisualStyleBackColor = true;
+            buttonHint.Click += buttonHint_Click;
             // 
             // comboBoxLanguage
             // 
             comboBoxLanguage.FormattingEnabled = true;
             comboBoxLanguage.Items.AddRange(new object[] { "En", "Bg" });
-            comboBoxLanguage.Location = new Point(16, 39);
+            comboBoxLanguage.Location = new Point(12, 34);
             comboBoxLanguage.Name = "comboBoxLanguage";
-            comboBoxLanguage.Size = new Size(69, 23);
+            comboBoxLanguage.Size = new Size(59, 23);
             comboBoxLanguage.TabIndex = 7;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(16, 21);
+            label3.Location = new Point(12, 16);
             label3.Name = "label3";
             label3.Size = new Size(59, 15);
             label3.TabIndex = 8;
@@ -113,19 +117,52 @@
             // 
             // buttonLoad
             // 
-            buttonLoad.Location = new Point(91, 90);
+            buttonLoad.Location = new Point(81, 131);
             buttonLoad.Name = "buttonLoad";
-            buttonLoad.Size = new Size(75, 23);
+            buttonLoad.Size = new Size(84, 23);
             buttonLoad.TabIndex = 9;
-            buttonLoad.Text = "Load";
+            buttonLoad.Text = "Load  words";
             buttonLoad.UseVisualStyleBackColor = true;
             buttonLoad.Click += buttonLoad_Click;
+            // 
+            // labelAllWords
+            // 
+            labelAllWords.AutoSize = true;
+            labelAllWords.Location = new Point(114, 76);
+            labelAllWords.Name = "labelAllWords";
+            labelAllWords.Size = new Size(60, 15);
+            labelAllWords.TabIndex = 10;
+            labelAllWords.Text = "all words: ";
+            // 
+            // buttonLoadAllWords
+            // 
+            buttonLoadAllWords.Location = new Point(12, 72);
+            buttonLoadAllWords.Name = "buttonLoadAllWords";
+            buttonLoadAllWords.Size = new Size(96, 23);
+            buttonLoadAllWords.TabIndex = 11;
+            buttonLoadAllWords.Text = "All words in DB";
+            buttonLoadAllWords.UseVisualStyleBackColor = true;
+            buttonLoadAllWords.Click += buttonLoadAllWords_Click;
+            // 
+            // labelScore
+            // 
+            labelScore.AutoSize = true;
+            labelScore.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelScore.Location = new Point(544, 355);
+            labelScore.Name = "labelScore";
+            labelScore.RightToLeft = RightToLeft.No;
+            labelScore.Size = new Size(56, 21);
+            labelScore.TabIndex = 12;
+            labelScore.Text = "Score:";
             // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(678, 407);
+            ClientSize = new Size(673, 404);
+            Controls.Add(labelScore);
+            Controls.Add(buttonLoadAllWords);
+            Controls.Add(labelAllWords);
             Controls.Add(buttonLoad);
             Controls.Add(label3);
             Controls.Add(comboBoxLanguage);
@@ -135,6 +172,7 @@
             Controls.Add(labelExamWord);
             Controls.Add(label1);
             Controls.Add(comboBoxNumberOfWords);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmTest";
             Text = "Test";
             ResumeLayout(false);
@@ -151,5 +189,8 @@
         private ComboBox comboBoxLanguage;
         private Label label3;
         private Button buttonLoad;
+        public Label labelAllWords;
+        private Button buttonLoadAllWords;
+        private Label labelScore;
     }
 }
