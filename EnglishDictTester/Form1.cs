@@ -115,5 +115,11 @@ namespace EnglishDictTester
             frmTables.Show();
 
         }
+
+        private void buttonResults_Click(object sender, EventArgs e)
+        {
+            frmResults frmResults = new frmResults();
+            frmResults.Show();
+        }
     }
 }

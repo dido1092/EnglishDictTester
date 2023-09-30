@@ -39,6 +39,7 @@
             buttonMakeTest = new Button();
             wordsEnBgBindingSource = new BindingSource(components);
             buttonTables = new Button();
+            buttonResults = new Button();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -102,7 +103,7 @@
             // 
             // buttonMakeTest
             // 
-            buttonMakeTest.Location = new Point(541, 160);
+            buttonMakeTest.Location = new Point(541, 141);
             buttonMakeTest.Name = "buttonMakeTest";
             buttonMakeTest.Size = new Size(83, 33);
             buttonMakeTest.TabIndex = 7;
@@ -116,7 +117,7 @@
             // 
             // buttonTables
             // 
-            buttonTables.Location = new Point(541, 239);
+            buttonTables.Location = new Point(541, 202);
             buttonTables.Name = "buttonTables";
             buttonTables.Size = new Size(83, 31);
             buttonTables.TabIndex = 9;
@@ -124,11 +125,22 @@
             buttonTables.UseVisualStyleBackColor = true;
             buttonTables.Click += button1_Click;
             // 
+            // buttonResults
+            // 
+            buttonResults.Location = new Point(541, 261);
+            buttonResults.Name = "buttonResults";
+            buttonResults.Size = new Size(83, 31);
+            buttonResults.TabIndex = 10;
+            buttonResults.Text = "Results";
+            buttonResults.UseVisualStyleBackColor = true;
+            buttonResults.Click += buttonResults_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(663, 361);
+            Controls.Add(buttonResults);
             Controls.Add(buttonTables);
             Controls.Add(buttonMakeTest);
             Controls.Add(buttonRecord);
@@ -159,5 +171,6 @@
         private Button buttonMakeTest;
         private BindingSource wordsEnBgBindingSource;
         private Button buttonTables;
+        private Button buttonResults;
     }
 }

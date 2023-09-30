@@ -1,5 +1,6 @@
 ﻿using EnglishDictTester.Data;
 using EnglishDictTester.Data.Models;
+using EnglishDictTester.Enumerators;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,11 @@ namespace EnglishDictTester
         int wordA = 0;
         int wordB = 0;
         int correctAnswer = 0;
-        string examWord = string.Empty;
+        //string examWord = string.Empty;
         string translateWord = string.Empty;
-        string[] arrAllWords;
-        string[] arrSelectedWords;
+        string[]? arrAllWords;
+        string[]? arrSelectedWords;
+        string[]? arrMyAnswers;
         bool isFinish = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
@@ -75,7 +77,6 @@ namespace EnglishDictTester
                     }
                     numberOfWords++;
 
-                    //dictWords.Add(wordEn, wordBg);
                     if (comboBoxLanguage.SelectedIndex == 0)//En
                     {
                         arrAllWords[wordA] = wordEn;
@@ -86,8 +87,7 @@ namespace EnglishDictTester
                         arrAllWords[wordA] = wordBg;
                         arrAllWords[wordB] = wordEn;
                     }
-                    //arrWords[wordA] = wordEn;
-                    //arrWords[wordB] = wordBg;
+
                     wordA += 2;
                     wordB += 2;
                     if (numberOfWords.ToString() == comboBoxNumberOfWords.Text)
@@ -95,33 +95,37 @@ namespace EnglishDictTester
                         break;
                     }
                 }
+                SelectedWords(numberOfWords);
 
-                arrSelectedWords = new string[numberOfWords * 2];
+                labelExamWord.Text = arrSelectedWords[i];
+            }
+        }
 
-                for (int i = 0, j = 1; i < numberOfWords * 2; i += 2, j += 2)
+        private void SelectedWords(int numberOfWords)
+        {
+            arrSelectedWords = new string[numberOfWords * 2];
+
+            for (int i = 0, j = 1; i < numberOfWords * 2; i += 2, j += 2)
+            {
+                if (j < numberOfWords * 2)
                 {
-                    if (j < numberOfWords * 2)
-                    {
-                        int index = rnd.Next(arrAllWords.Length - 2);
+                    int index = rnd.Next(arrAllWords.Length - 2);
 
-                        if (index % 2 == 0)
-                        {
-                            arrSelectedWords[i] = arrAllWords[index];
-                            arrSelectedWords[j] = arrAllWords[index + 1];
-                        }
-                        else
-                        {
-                            arrSelectedWords[i] = arrAllWords[index + 1];
-                            arrSelectedWords[j] = arrAllWords[index + 2];
-                        }
+                    if (index % 2 == 0)
+                    {
+                        arrSelectedWords[i] = arrAllWords[index];
+                        arrSelectedWords[j] = arrAllWords[index + 1];
                     }
                     else
                     {
-                        break;
+                        arrSelectedWords[i] = arrAllWords[index + 1];
+                        arrSelectedWords[j] = arrAllWords[index + 2];
                     }
                 }
-
-                labelExamWord.Text = arrSelectedWords[i];
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -142,6 +146,11 @@ namespace EnglishDictTester
             if (writtenWord == translateWord)
             {
                 correctAnswer++;
+                InsertIntoTest("correct");
+            }
+            else
+            {
+                InsertIntoTest("Incorrect");
             }
 
             labelScore.Text = "Score: " + correctAnswer;
@@ -165,7 +174,24 @@ namespace EnglishDictTester
                 }
             }
         }
+        private void InsertIntoTest(string getAnswer)
+        {
+            try
+            {
+                if (comboBoxLanguage.Text == "En")
+                {
+                    Tests t = new Tests {  lngName = comboBoxLanguage.Text,  enW = labelExamWord.Text, bgW = textBoxTranslateWord.Text, answer = getAnswer };
+                    context.Add(t);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Enums.WordBg_Duplicated.ToString());
+                throw;
+            }
 
+        }
         private async void buttonLoadAllWords_Click(object sender, EventArgs e)
         {
             int numberOfRows = 0;

@@ -14,6 +14,8 @@ namespace EnglishDictTester.Data
         public DbSet<WordEn>? WordEns { get; set; }
         public DbSet<WordsEnBg>? WordsEnBgs { get; set; }
 
+        public DbSet<Tests>? Tests { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -40,6 +42,9 @@ namespace EnglishDictTester.Data
             modelBuilder.Entity<WordsEnBg>()
                     .HasOne<WordBg>(wEn => wEn.WordBg)
                     .WithMany(wEnBg => wEnBg.WordsEnBgs);
+
+            modelBuilder.Entity<Tests>()
+                .HasKey(t => new { t.testId });
 
         }
     }

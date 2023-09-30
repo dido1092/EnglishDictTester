@@ -4,6 +4,7 @@ using EnglishDictTester.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishDictTester.Data.Migrations
 {
     [DbContext(typeof(EnglishDictTesterContext))]
-    partial class EnglishDictTesterContextModelSnapshot : ModelSnapshot
+    [Migration("20230930180852_NewTableTests_3")]
+    partial class NewTableTests_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
