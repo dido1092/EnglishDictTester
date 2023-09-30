@@ -4,6 +4,7 @@ using EnglishDictTester.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishDictTester.Data.Migrations
 {
     [DbContext(typeof(EnglishDictTesterContext))]
-    partial class EnglishDictTesterContextModelSnapshot : ModelSnapshot
+    [Migration("20230930203032_NewTableTests_4")]
+    partial class NewTableTests_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,27 +26,21 @@ namespace EnglishDictTester.Data.Migrations
 
             modelBuilder.Entity("EnglishDictTester.Data.Models.Tests", b =>
                 {
-                    b.Property<int?>("testId")
+                    b.Property<int>("testId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("testId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("testId"), 1L, 1);
 
                     b.Property<string>("answer")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int?>("bgId")
-                        .HasColumnType("int");
-
                     b.Property<string>("bgW")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("enId")
-                        .HasColumnType("int");
 
                     b.Property<string>("enW")
                         .IsRequired()
@@ -63,11 +59,11 @@ namespace EnglishDictTester.Data.Migrations
 
             modelBuilder.Entity("EnglishDictTester.Data.Models.WordBg", b =>
                 {
-                    b.Property<int?>("WordBgId")
+                    b.Property<int>("WordBgId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("WordBgId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordBgId"), 1L, 1);
 
                     b.Property<string>("BgWord")
                         .IsRequired()
@@ -81,11 +77,11 @@ namespace EnglishDictTester.Data.Migrations
 
             modelBuilder.Entity("EnglishDictTester.Data.Models.WordEn", b =>
                 {
-                    b.Property<int?>("WordEnId")
+                    b.Property<int>("WordEnId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("WordEnId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordEnId"), 1L, 1);
 
                     b.Property<string>("EnWord")
                         .IsRequired()

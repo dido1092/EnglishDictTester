@@ -11,7 +11,7 @@ namespace EnglishDictTester.Data.Models
         }
 
         [Key]
-        public int WordEnId { get; set; }
+        public int? WordEnId { get; set; }
 
         [Required]
         [MaxLength(ValidationConstants.WordEnMaxLength)]

@@ -40,6 +40,8 @@
             labelAllWords = new Label();
             buttonLoadAllWords = new Button();
             labelScore = new Label();
+            buttonLoadAllIncorrectAnswers = new Button();
+            labelIncorrectWords = new Label();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
@@ -155,11 +157,32 @@
             labelScore.TabIndex = 12;
             labelScore.Text = "Score:";
             // 
+            // buttonLoadAllIncorrectAnswers
+            // 
+            buttonLoadAllIncorrectAnswers.Location = new Point(12, 196);
+            buttonLoadAllIncorrectAnswers.Name = "buttonLoadAllIncorrectAnswers";
+            buttonLoadAllIncorrectAnswers.Size = new Size(153, 23);
+            buttonLoadAllIncorrectAnswers.TabIndex = 13;
+            buttonLoadAllIncorrectAnswers.Text = "Load All Incorrect answers";
+            buttonLoadAllIncorrectAnswers.UseVisualStyleBackColor = true;
+            buttonLoadAllIncorrectAnswers.Click += buttonLoadAllIncorrectAnswers_Click;
+            // 
+            // labelIncorrectWords
+            // 
+            labelIncorrectWords.AutoSize = true;
+            labelIncorrectWords.Location = new Point(12, 224);
+            labelIncorrectWords.Name = "labelIncorrectWords";
+            labelIncorrectWords.Size = new Size(95, 15);
+            labelIncorrectWords.TabIndex = 14;
+            labelIncorrectWords.Text = "Incorrect words: ";
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(673, 404);
+            Controls.Add(labelIncorrectWords);
+            Controls.Add(buttonLoadAllIncorrectAnswers);
             Controls.Add(labelScore);
             Controls.Add(buttonLoadAllWords);
             Controls.Add(labelAllWords);
@@ -179,6 +202,11 @@
             PerformLayout();
         }
 
+        private void ButtonLoadAllIncorrectAnswers_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
         private ComboBox comboBoxNumberOfWords;
         private Label label1;
@@ -192,5 +220,7 @@
         public Label labelAllWords;
         private Button buttonLoadAllWords;
         private Label labelScore;
+        private Button buttonLoadAllIncorrectAnswers;
+        private Label labelIncorrectWords;
     }
 }

@@ -13,7 +13,6 @@ namespace EnglishDictTester.Data
         public DbSet<WordBg>? WordBgs { get; set; }
         public DbSet<WordEn>? WordEns { get; set; }
         public DbSet<WordsEnBg>? WordsEnBgs { get; set; }
-
         public DbSet<Tests>? Tests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

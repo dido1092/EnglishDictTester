@@ -11,19 +11,24 @@ namespace EnglishDictTester.Data.Models
     public class Tests
     {
         [Key]
-        public int testId { get; set; }
+        public int? testId { get; set; }
 
         [Required]
         [MaxLength(ValidationConstants.languageName)]
         public string? lngName { get; set; }
 
+        public int? bgId { get; set; }
+
         [Required]
         [MaxLength(ValidationConstants.WordBgMaxLength)]
         public string? bgW { get; set; }
 
+        public int? enId { get; set; }
+
         [Required]
         [MaxLength(ValidationConstants.WordEnMaxLength)]
         public string? enW { get; set; }
+
 
         [Required]
         [MaxLength(ValidationConstants.Answer)]
