@@ -164,7 +164,6 @@ namespace EnglishDictTester
                     textBoxTranslateWord.Text = "";
                 }
             }
-
         }
 
         private async void buttonLoadAllWords_Click(object sender, EventArgs e)
