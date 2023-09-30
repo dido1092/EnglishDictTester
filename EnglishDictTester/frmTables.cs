@@ -28,31 +28,39 @@ namespace EnglishDictTester
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnn;
 
-            TableWordBg(connectionString);
-            TableWordEn(connectionString);
-            TableMap(connectionString);
+            try
+            {
+                TableWordBg(connectionString);
+                TableWordEn(connectionString);
+                TableMap(connectionString);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void TableWordBg(string connectionString)
         {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordBg", connectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordBgs", connectionString);
             DataSet ds = new DataSet();
-            da.Fill(ds, "WordBg");
-            dataGridViewBg.DataSource = ds.Tables["WordBg"]?.DefaultView;
+            da.Fill(ds, "WordBgs");
+            dataGridViewBg.DataSource = ds.Tables["WordBgs"]?.DefaultView;
         }
         private void TableWordEn(string connectionString)
         {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordEn", connectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordEns", connectionString);
             DataSet ds = new DataSet();
-            da.Fill(ds, "WordEn");
-            dataGridViewEn.DataSource = ds.Tables["WordEn"]?.DefaultView;
+            da.Fill(ds, "WordEns");
+            dataGridViewEn.DataSource = ds.Tables["WordEns"]?.DefaultView;
         }
         private void TableMap(string connectionString)
         {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordsEnBg", connectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordsEnBgs", connectionString);
             DataSet ds = new DataSet();
-            da.Fill(ds, "WordsEnBg");
-            dataGridViewMap.DataSource = ds.Tables["WorWordsEnBgdEn"]?.DefaultView;
+            da.Fill(ds, "WordsEnBgs");
+            dataGridViewMap.DataSource = ds.Tables["WordsEnBgs"]?.DefaultView;
         }
     }
 }

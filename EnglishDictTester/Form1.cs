@@ -26,8 +26,8 @@ namespace EnglishDictTester
 
         private void buttonRecord_Click(object sender, EventArgs e)
         {
-            string wordBg = textBoxWordBg.Text;
-            string wordEn = textBoxWordEn.Text;
+            string wordBg = textBoxWordBg.Text.ToUpper();
+            string wordEn = textBoxWordEn.Text.ToUpper();
             string transcriptions = textBoxTranscriptions.Text;
 
 
@@ -37,31 +37,17 @@ namespace EnglishDictTester
                 InsertEnWord(wordEn, transcriptions);
                 InsertInMappingTable(wordBg, wordEn);
 
+                ClearTextBoxes();
+
                 MessageBox.Show("Success!");
-
-                textBoxWordBg.Text = "";
-                textBoxWordEn.Text = "";
-                textBoxTranscriptions.Text = "";
-
-                //con.Open();
-                //string select = "SELECT * from table_name";
-                //SqlDataAdapter da = new SqlDataAdapter(select, con);
-                //DataSet ds = new DataSet();
-                //da.Fill(ds, "table_name");
-                //dataGridView1.DataSource = ds;
-
-                //WordsEnBg dbe = new WordsEnBg();
-                //BindingSource bs = new BindingSource();
-                //dataProducts.DataSource = null;
-                //List<Book> books = dbe.Book.ToList();
-                //bs.DataSource = books;
-                //dataProducts.DataSource = bs;
-
-
-                //dataGridView1.DataSource = 
-                //dataGridView1.Update();
-                //dataGridView1.Refresh();
             }
+        }
+
+        private void ClearTextBoxes()
+        {
+            textBoxWordBg.Text = "";
+            textBoxWordEn.Text = "";
+            textBoxTranscriptions.Text = "";
         }
 
         public void InsertInMappingTable(string wordBg, string wordEn)
@@ -121,6 +107,13 @@ namespace EnglishDictTester
                 MessageBox.Show(Enums.WordEn_Duplicated.ToString());
                 throw;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)//Button Tables
+        {
+            frmTables frmTables = new frmTables();
+            frmTables.Show();
+
         }
     }
 }

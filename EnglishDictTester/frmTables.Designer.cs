@@ -30,31 +30,27 @@
         {
             components = new System.ComponentModel.Container();
             dataGridViewBg = new DataGridView();
+            wordBgIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bgWordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            wordBgBindingSource = new BindingSource(components);
             dataGridViewEn = new DataGridView();
+            wordEnIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            enWordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            transcriptionsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            wordEnBindingSource = new BindingSource(components);
             dataGridViewMap = new DataGridView();
+            wordBgIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            wordEnIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            wordsEnBgBindingSource = new BindingSource(components);
             buttonRefresh = new Button();
             labelWordsBg = new Label();
             labelWordsEn = new Label();
             labelMappingTable = new Label();
-            wordBgBindingSource = new BindingSource(components);
-            wordBgIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            bgWordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordsEnBgsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordEnBindingSource = new BindingSource(components);
-            wordEnIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            enWordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            transcriptionsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordsEnBgsDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            wordsEnBgBindingSource = new BindingSource(components);
-            wordBgIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            wordEnIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            wordBgDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordEnDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewEn).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMap).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewEn).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordEnBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMap).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -62,78 +58,13 @@
             // 
             dataGridViewBg.AutoGenerateColumns = false;
             dataGridViewBg.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewBg.Columns.AddRange(new DataGridViewColumn[] { wordBgIdDataGridViewTextBoxColumn, bgWordDataGridViewTextBoxColumn, wordsEnBgsDataGridViewTextBoxColumn });
+            dataGridViewBg.Columns.AddRange(new DataGridViewColumn[] { wordBgIdDataGridViewTextBoxColumn, bgWordDataGridViewTextBoxColumn });
             dataGridViewBg.DataSource = wordBgBindingSource;
             dataGridViewBg.Location = new Point(21, 88);
             dataGridViewBg.Name = "dataGridViewBg";
             dataGridViewBg.RowTemplate.Height = 25;
-            dataGridViewBg.Size = new Size(343, 309);
+            dataGridViewBg.Size = new Size(244, 309);
             dataGridViewBg.TabIndex = 0;
-            // 
-            // dataGridViewEn
-            // 
-            dataGridViewEn.AutoGenerateColumns = false;
-            dataGridViewEn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewEn.Columns.AddRange(new DataGridViewColumn[] { wordEnIdDataGridViewTextBoxColumn, enWordDataGridViewTextBoxColumn, transcriptionsDataGridViewTextBoxColumn, wordsEnBgsDataGridViewTextBoxColumn1 });
-            dataGridViewEn.DataSource = wordEnBindingSource;
-            dataGridViewEn.Location = new Point(370, 88);
-            dataGridViewEn.Name = "dataGridViewEn";
-            dataGridViewEn.RowTemplate.Height = 25;
-            dataGridViewEn.Size = new Size(443, 309);
-            dataGridViewEn.TabIndex = 1;
-            // 
-            // dataGridViewMap
-            // 
-            dataGridViewMap.AutoGenerateColumns = false;
-            dataGridViewMap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewMap.Columns.AddRange(new DataGridViewColumn[] { wordBgIdDataGridViewTextBoxColumn1, wordEnIdDataGridViewTextBoxColumn1, wordBgDataGridViewTextBoxColumn, wordEnDataGridViewTextBoxColumn });
-            dataGridViewMap.DataSource = wordsEnBgBindingSource;
-            dataGridViewMap.Location = new Point(833, 88);
-            dataGridViewMap.Name = "dataGridViewMap";
-            dataGridViewMap.RowTemplate.Height = 25;
-            dataGridViewMap.Size = new Size(445, 309);
-            dataGridViewMap.TabIndex = 2;
-            // 
-            // buttonRefresh
-            // 
-            buttonRefresh.Location = new Point(21, 12);
-            buttonRefresh.Name = "buttonRefresh";
-            buttonRefresh.Size = new Size(109, 42);
-            buttonRefresh.TabIndex = 3;
-            buttonRefresh.Text = "Refresh";
-            buttonRefresh.UseVisualStyleBackColor = true;
-            buttonRefresh.Click += buttonRefresh_Click;
-            // 
-            // labelWordsBg
-            // 
-            labelWordsBg.AutoSize = true;
-            labelWordsBg.Location = new Point(21, 70);
-            labelWordsBg.Name = "labelWordsBg";
-            labelWordsBg.Size = new Size(59, 15);
-            labelWordsBg.TabIndex = 4;
-            labelWordsBg.Text = "Words BG";
-            // 
-            // labelWordsEn
-            // 
-            labelWordsEn.AutoSize = true;
-            labelWordsEn.Location = new Point(370, 70);
-            labelWordsEn.Name = "labelWordsEn";
-            labelWordsEn.Size = new Size(59, 15);
-            labelWordsEn.TabIndex = 5;
-            labelWordsEn.Text = "Words EN";
-            // 
-            // labelMappingTable
-            // 
-            labelMappingTable.AutoSize = true;
-            labelMappingTable.Location = new Point(833, 70);
-            labelMappingTable.Name = "labelMappingTable";
-            labelMappingTable.Size = new Size(78, 15);
-            labelMappingTable.TabIndex = 6;
-            labelMappingTable.Text = "Maping Table";
-            // 
-            // wordBgBindingSource
-            // 
-            wordBgBindingSource.DataSource = typeof(Data.Models.WordBg);
             // 
             // wordBgIdDataGridViewTextBoxColumn
             // 
@@ -147,15 +78,21 @@
             bgWordDataGridViewTextBoxColumn.HeaderText = "BgWord";
             bgWordDataGridViewTextBoxColumn.Name = "bgWordDataGridViewTextBoxColumn";
             // 
-            // wordsEnBgsDataGridViewTextBoxColumn
+            // wordBgBindingSource
             // 
-            wordsEnBgsDataGridViewTextBoxColumn.DataPropertyName = "WordsEnBgs";
-            wordsEnBgsDataGridViewTextBoxColumn.HeaderText = "WordsEnBgs";
-            wordsEnBgsDataGridViewTextBoxColumn.Name = "wordsEnBgsDataGridViewTextBoxColumn";
+            wordBgBindingSource.DataSource = typeof(Data.Models.WordBg);
             // 
-            // wordEnBindingSource
+            // dataGridViewEn
             // 
-            wordEnBindingSource.DataSource = typeof(Data.Models.WordEn);
+            dataGridViewEn.AutoGenerateColumns = false;
+            dataGridViewEn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewEn.Columns.AddRange(new DataGridViewColumn[] { wordEnIdDataGridViewTextBoxColumn, enWordDataGridViewTextBoxColumn, transcriptionsDataGridViewTextBoxColumn });
+            dataGridViewEn.DataSource = wordEnBindingSource;
+            dataGridViewEn.Location = new Point(281, 88);
+            dataGridViewEn.Name = "dataGridViewEn";
+            dataGridViewEn.RowTemplate.Height = 25;
+            dataGridViewEn.Size = new Size(344, 309);
+            dataGridViewEn.TabIndex = 1;
             // 
             // wordEnIdDataGridViewTextBoxColumn
             // 
@@ -175,15 +112,21 @@
             transcriptionsDataGridViewTextBoxColumn.HeaderText = "Transcriptions";
             transcriptionsDataGridViewTextBoxColumn.Name = "transcriptionsDataGridViewTextBoxColumn";
             // 
-            // wordsEnBgsDataGridViewTextBoxColumn1
+            // wordEnBindingSource
             // 
-            wordsEnBgsDataGridViewTextBoxColumn1.DataPropertyName = "WordsEnBgs";
-            wordsEnBgsDataGridViewTextBoxColumn1.HeaderText = "WordsEnBgs";
-            wordsEnBgsDataGridViewTextBoxColumn1.Name = "wordsEnBgsDataGridViewTextBoxColumn1";
+            wordEnBindingSource.DataSource = typeof(Data.Models.WordEn);
             // 
-            // wordsEnBgBindingSource
+            // dataGridViewMap
             // 
-            wordsEnBgBindingSource.DataSource = typeof(Data.Models.WordsEnBg);
+            dataGridViewMap.AutoGenerateColumns = false;
+            dataGridViewMap.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewMap.Columns.AddRange(new DataGridViewColumn[] { wordBgIdDataGridViewTextBoxColumn1, wordEnIdDataGridViewTextBoxColumn1 });
+            dataGridViewMap.DataSource = wordsEnBgBindingSource;
+            dataGridViewMap.Location = new Point(660, 88);
+            dataGridViewMap.Name = "dataGridViewMap";
+            dataGridViewMap.RowTemplate.Height = 25;
+            dataGridViewMap.Size = new Size(244, 309);
+            dataGridViewMap.TabIndex = 2;
             // 
             // wordBgIdDataGridViewTextBoxColumn1
             // 
@@ -197,23 +140,52 @@
             wordEnIdDataGridViewTextBoxColumn1.HeaderText = "WordEnId";
             wordEnIdDataGridViewTextBoxColumn1.Name = "wordEnIdDataGridViewTextBoxColumn1";
             // 
-            // wordBgDataGridViewTextBoxColumn
+            // wordsEnBgBindingSource
             // 
-            wordBgDataGridViewTextBoxColumn.DataPropertyName = "WordBg";
-            wordBgDataGridViewTextBoxColumn.HeaderText = "WordBg";
-            wordBgDataGridViewTextBoxColumn.Name = "wordBgDataGridViewTextBoxColumn";
+            wordsEnBgBindingSource.DataSource = typeof(Data.Models.WordsEnBg);
             // 
-            // wordEnDataGridViewTextBoxColumn
+            // buttonRefresh
             // 
-            wordEnDataGridViewTextBoxColumn.DataPropertyName = "WordEn";
-            wordEnDataGridViewTextBoxColumn.HeaderText = "WordEn";
-            wordEnDataGridViewTextBoxColumn.Name = "wordEnDataGridViewTextBoxColumn";
+            buttonRefresh.Location = new Point(930, 12);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(109, 42);
+            buttonRefresh.TabIndex = 3;
+            buttonRefresh.Text = "Refresh";
+            buttonRefresh.UseVisualStyleBackColor = true;
+            buttonRefresh.Click += buttonRefresh_Click;
+            // 
+            // labelWordsBg
+            // 
+            labelWordsBg.AutoSize = true;
+            labelWordsBg.Location = new Point(21, 70);
+            labelWordsBg.Name = "labelWordsBg";
+            labelWordsBg.Size = new Size(59, 15);
+            labelWordsBg.TabIndex = 4;
+            labelWordsBg.Text = "Words BG";
+            // 
+            // labelWordsEn
+            // 
+            labelWordsEn.AutoSize = true;
+            labelWordsEn.Location = new Point(281, 70);
+            labelWordsEn.Name = "labelWordsEn";
+            labelWordsEn.Size = new Size(59, 15);
+            labelWordsEn.TabIndex = 5;
+            labelWordsEn.Text = "Words EN";
+            // 
+            // labelMappingTable
+            // 
+            labelMappingTable.AutoSize = true;
+            labelMappingTable.Location = new Point(660, 70);
+            labelMappingTable.Name = "labelMappingTable";
+            labelMappingTable.Size = new Size(78, 15);
+            labelMappingTable.TabIndex = 6;
+            labelMappingTable.Text = "Maping Table";
             // 
             // frmTables
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1306, 460);
+            ClientSize = new Size(1051, 460);
             Controls.Add(labelMappingTable);
             Controls.Add(labelWordsEn);
             Controls.Add(labelWordsBg);
@@ -221,13 +193,14 @@
             Controls.Add(dataGridViewMap);
             Controls.Add(dataGridViewEn);
             Controls.Add(dataGridViewBg);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "frmTables";
             Text = "Tables";
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewEn).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMap).EndInit();
             ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewEn).EndInit();
             ((System.ComponentModel.ISupportInitialize)wordEnBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMap).EndInit();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -242,19 +215,15 @@
         private Label labelWordsBg;
         private Label labelWordsEn;
         private Label labelMappingTable;
+        private BindingSource wordBgBindingSource;
+        private BindingSource wordEnBindingSource;
+        private BindingSource wordsEnBgBindingSource;
         private DataGridViewTextBoxColumn wordBgIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn bgWordDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn wordsEnBgsDataGridViewTextBoxColumn;
-        private BindingSource wordBgBindingSource;
         private DataGridViewTextBoxColumn wordEnIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn enWordDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn transcriptionsDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn wordsEnBgsDataGridViewTextBoxColumn1;
-        private BindingSource wordEnBindingSource;
         private DataGridViewTextBoxColumn wordBgIdDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn wordEnIdDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn wordBgDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn wordEnDataGridViewTextBoxColumn;
-        private BindingSource wordsEnBgBindingSource;
     }
 }
