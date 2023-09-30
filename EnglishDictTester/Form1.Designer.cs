@@ -29,48 +29,39 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            textBoxWordBg = new TextBox();
+            textBoxWordEn = new TextBox();
+            textBoxTranscriptions = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             buttonRecord = new Button();
             buttonMakeTest = new Button();
-            dataGridView1 = new DataGridView();
-            wordBgIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordEnIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordBgDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            wordEnDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             wordsEnBgBindingSource = new BindingSource(components);
-            wordBgBindingSource = new BindingSource(components);
-            wordEnBindingSource = new BindingSource(components);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)wordEnBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // textBox1
+            // textBoxWordBg
             // 
-            textBox1.Location = new Point(27, 35);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(192, 23);
-            textBox1.TabIndex = 0;
+            textBoxWordBg.Location = new Point(27, 35);
+            textBoxWordBg.Name = "textBoxWordBg";
+            textBoxWordBg.Size = new Size(192, 23);
+            textBoxWordBg.TabIndex = 0;
             // 
-            // textBox2
+            // textBoxWordEn
             // 
-            textBox2.Location = new Point(249, 35);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(192, 23);
-            textBox2.TabIndex = 1;
+            textBoxWordEn.Location = new Point(249, 35);
+            textBoxWordEn.Name = "textBoxWordEn";
+            textBoxWordEn.Size = new Size(192, 23);
+            textBoxWordEn.TabIndex = 1;
             // 
-            // textBox3
+            // textBoxTranscriptions
             // 
-            textBox3.Location = new Point(249, 91);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(131, 23);
-            textBox3.TabIndex = 2;
+            textBoxTranscriptions.Location = new Point(249, 91);
+            textBoxTranscriptions.Name = "textBoxTranscriptions";
+            textBoxTranscriptions.Size = new Size(131, 23);
+            textBoxTranscriptions.TabIndex = 2;
             // 
             // label1
             // 
@@ -95,9 +86,9 @@
             label3.AutoSize = true;
             label3.Location = new Point(249, 73);
             label3.Name = "label3";
-            label3.Size = new Size(75, 15);
+            label3.Size = new Size(80, 15);
             label3.TabIndex = 5;
-            label3.Text = "Transcription";
+            label3.Text = "Transcriptions";
             // 
             // buttonRecord
             // 
@@ -107,108 +98,65 @@
             buttonRecord.TabIndex = 6;
             buttonRecord.Text = "Record";
             buttonRecord.UseVisualStyleBackColor = true;
+            buttonRecord.Click += buttonRecord_Click;
             // 
             // buttonMakeTest
             // 
-            buttonMakeTest.Location = new Point(504, 203);
+            buttonMakeTest.Location = new Point(541, 159);
             buttonMakeTest.Name = "buttonMakeTest";
-            buttonMakeTest.Size = new Size(92, 33);
+            buttonMakeTest.Size = new Size(83, 33);
             buttonMakeTest.TabIndex = 7;
             buttonMakeTest.Text = "Make Test";
             buttonMakeTest.UseVisualStyleBackColor = true;
             buttonMakeTest.Click += buttonMakeTest_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { wordBgIdDataGridViewTextBoxColumn, wordEnIdDataGridViewTextBoxColumn, wordBgDataGridViewTextBoxColumn, wordEnDataGridViewTextBoxColumn });
-            dataGridView1.DataSource = wordsEnBgBindingSource;
-            dataGridView1.Location = new Point(27, 203);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(443, 225);
-            dataGridView1.TabIndex = 8;
-            // 
-            // wordBgIdDataGridViewTextBoxColumn
-            // 
-            wordBgIdDataGridViewTextBoxColumn.DataPropertyName = "WordBgId";
-            wordBgIdDataGridViewTextBoxColumn.HeaderText = "WordBgId";
-            wordBgIdDataGridViewTextBoxColumn.Name = "wordBgIdDataGridViewTextBoxColumn";
-            // 
-            // wordEnIdDataGridViewTextBoxColumn
-            // 
-            wordEnIdDataGridViewTextBoxColumn.DataPropertyName = "WordEnId";
-            wordEnIdDataGridViewTextBoxColumn.HeaderText = "WordEnId";
-            wordEnIdDataGridViewTextBoxColumn.Name = "wordEnIdDataGridViewTextBoxColumn";
-            // 
-            // wordBgDataGridViewTextBoxColumn
-            // 
-            wordBgDataGridViewTextBoxColumn.DataPropertyName = "WordBg";
-            wordBgDataGridViewTextBoxColumn.HeaderText = "WordBg";
-            wordBgDataGridViewTextBoxColumn.Name = "wordBgDataGridViewTextBoxColumn";
-            // 
-            // wordEnDataGridViewTextBoxColumn
-            // 
-            wordEnDataGridViewTextBoxColumn.DataPropertyName = "WordEn";
-            wordEnDataGridViewTextBoxColumn.HeaderText = "WordEn";
-            wordEnDataGridViewTextBoxColumn.Name = "wordEnDataGridViewTextBoxColumn";
-            // 
             // wordsEnBgBindingSource
             // 
             wordsEnBgBindingSource.DataSource = typeof(Data.Models.WordsEnBg);
             // 
-            // wordBgBindingSource
+            // button1
             // 
-            wordBgBindingSource.DataSource = typeof(Data.Models.WordBg);
-            // 
-            // wordEnBindingSource
-            // 
-            wordEnBindingSource.DataSource = typeof(Data.Models.WordEn);
+            button1.Location = new Point(541, 239);
+            button1.Name = "button1";
+            button1.Size = new Size(83, 31);
+            button1.TabIndex = 9;
+            button1.Text = "Tables";
+            button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(696, 484);
-            Controls.Add(dataGridView1);
+            Controls.Add(button1);
             Controls.Add(buttonMakeTest);
             Controls.Add(buttonRecord);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxTranscriptions);
+            Controls.Add(textBoxWordEn);
+            Controls.Add(textBoxWordBg);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EnBgDictTester";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)wordEnBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private TextBox textBoxWordBg;
+        private TextBox textBoxWordEn;
+        private TextBox textBoxTranscriptions;
         private Label label1;
         private Label label2;
         private Label label3;
         private Button buttonRecord;
         private Button buttonMakeTest;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn wordBgIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn wordEnIdDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn wordBgDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn wordEnDataGridViewTextBoxColumn;
         private BindingSource wordsEnBgBindingSource;
-        private BindingSource wordBgBindingSource;
-        private BindingSource wordEnBindingSource;
+        private Button button1;
     }
 }
