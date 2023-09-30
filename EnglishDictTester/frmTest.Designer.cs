@@ -28,69 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            comboBox1 = new ComboBox();
+            comboBoxNumberOfWords = new ComboBox();
             label1 = new Label();
-            label2 = new Label();
-            textBox1 = new TextBox();
+            labelExamWord = new Label();
+            textBoxTranslateWord = new TextBox();
             buttonNextWord = new Button();
             buttonHint = new Button();
-            comboBox2 = new ComboBox();
+            comboBoxLanguage = new ComboBox();
             label3 = new Label();
+            buttonLoad = new Button();
             SuspendLayout();
             // 
-            // button1
+            // comboBoxNumberOfWords
             // 
-            button1.Location = new Point(91, 40);
-            button1.Name = "button1";
-            button1.Size = new Size(83, 25);
-            button1.TabIndex = 0;
-            button1.Text = "Load words";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50", "100" });
-            comboBox1.Location = new Point(16, 42);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(69, 23);
-            comboBox1.TabIndex = 1;
+            comboBoxNumberOfWords.FormattingEnabled = true;
+            comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50", "100" });
+            comboBoxNumberOfWords.Location = new Point(16, 90);
+            comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
+            comboBoxNumberOfWords.Size = new Size(69, 23);
+            comboBoxNumberOfWords.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(16, 24);
+            label1.Location = new Point(16, 72);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 2;
             label1.Text = "# of words";
             // 
-            // label2
+            // labelExamWord
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(246, 116);
-            label2.Name = "label2";
-            label2.Size = new Size(70, 25);
-            label2.TabIndex = 3;
-            label2.Text = "WORD";
+            labelExamWord.AutoSize = true;
+            labelExamWord.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            labelExamWord.Location = new Point(248, 171);
+            labelExamWord.Name = "labelExamWord";
+            labelExamWord.Size = new Size(70, 25);
+            labelExamWord.TabIndex = 3;
+            labelExamWord.Text = "WORD";
             // 
-            // textBox1
+            // textBoxTranslateWord
             // 
-            textBox1.Location = new Point(218, 184);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(134, 23);
-            textBox1.TabIndex = 4;
+            textBoxTranslateWord.Location = new Point(196, 240);
+            textBoxTranslateWord.Name = "textBoxTranslateWord";
+            textBoxTranslateWord.Size = new Size(173, 23);
+            textBoxTranslateWord.TabIndex = 4;
             // 
             // buttonNextWord
             // 
-            buttonNextWord.Location = new Point(381, 184);
+            buttonNextWord.Location = new Point(375, 239);
             buttonNextWord.Name = "buttonNextWord";
             buttonNextWord.Size = new Size(75, 23);
             buttonNextWord.TabIndex = 5;
             buttonNextWord.Text = "Next word";
             buttonNextWord.UseVisualStyleBackColor = true;
+            buttonNextWord.Click += buttonNextWord_Click;
             // 
             // buttonHint
             // 
@@ -101,54 +93,63 @@
             buttonHint.Text = "Hint";
             buttonHint.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // comboBoxLanguage
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "En", "Bg" });
-            comboBox2.Location = new Point(16, 90);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(69, 23);
-            comboBox2.TabIndex = 7;
+            comboBoxLanguage.FormattingEnabled = true;
+            comboBoxLanguage.Items.AddRange(new object[] { "En", "Bg" });
+            comboBoxLanguage.Location = new Point(16, 39);
+            comboBoxLanguage.Name = "comboBoxLanguage";
+            comboBoxLanguage.Size = new Size(69, 23);
+            comboBoxLanguage.TabIndex = 7;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(17, 72);
+            label3.Location = new Point(16, 21);
             label3.Name = "label3";
             label3.Size = new Size(59, 15);
             label3.TabIndex = 8;
             label3.Text = "Language";
             // 
-            // Test
+            // buttonLoad
+            // 
+            buttonLoad.Location = new Point(91, 90);
+            buttonLoad.Name = "buttonLoad";
+            buttonLoad.Size = new Size(75, 23);
+            buttonLoad.TabIndex = 9;
+            buttonLoad.Text = "Load";
+            buttonLoad.UseVisualStyleBackColor = true;
+            buttonLoad.Click += buttonLoad_Click;
+            // 
+            // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(678, 407);
+            Controls.Add(buttonLoad);
             Controls.Add(label3);
-            Controls.Add(comboBox2);
+            Controls.Add(comboBoxLanguage);
             Controls.Add(buttonHint);
             Controls.Add(buttonNextWord);
-            Controls.Add(textBox1);
-            Controls.Add(label2);
+            Controls.Add(textBoxTranslateWord);
+            Controls.Add(labelExamWord);
             Controls.Add(label1);
-            Controls.Add(comboBox1);
-            Controls.Add(button1);
-            Name = "Test";
+            Controls.Add(comboBoxNumberOfWords);
+            Name = "frmTest";
             Text = "Test";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button button1;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxNumberOfWords;
         private Label label1;
-        private Label label2;
-        private TextBox textBox1;
+        private Label labelExamWord;
+        private TextBox textBoxTranslateWord;
         private Button buttonNextWord;
         private Button buttonHint;
-        private ComboBox comboBox2;
+        private ComboBox comboBoxLanguage;
         private Label label3;
+        private Button buttonLoad;
     }
 }

@@ -38,7 +38,7 @@
             buttonRecord = new Button();
             buttonMakeTest = new Button();
             wordsEnBgBindingSource = new BindingSource(components);
-            button1 = new Button();
+            buttonTables = new Button();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -102,7 +102,7 @@
             // 
             // buttonMakeTest
             // 
-            buttonMakeTest.Location = new Point(541, 159);
+            buttonMakeTest.Location = new Point(541, 160);
             buttonMakeTest.Name = "buttonMakeTest";
             buttonMakeTest.Size = new Size(83, 33);
             buttonMakeTest.TabIndex = 7;
@@ -114,22 +114,22 @@
             // 
             wordsEnBgBindingSource.DataSource = typeof(Data.Models.WordsEnBg);
             // 
-            // button1
+            // buttonTables
             // 
-            button1.Location = new Point(541, 239);
-            button1.Name = "button1";
-            button1.Size = new Size(83, 31);
-            button1.TabIndex = 9;
-            button1.Text = "Tables";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonTables.Location = new Point(541, 239);
+            buttonTables.Name = "buttonTables";
+            buttonTables.Size = new Size(83, 31);
+            buttonTables.TabIndex = 9;
+            buttonTables.Text = "Tables";
+            buttonTables.UseVisualStyleBackColor = true;
+            buttonTables.Click += button1_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(696, 484);
-            Controls.Add(button1);
+            ClientSize = new Size(663, 361);
+            Controls.Add(buttonTables);
             Controls.Add(buttonMakeTest);
             Controls.Add(buttonRecord);
             Controls.Add(label3);
@@ -138,7 +138,7 @@
             Controls.Add(textBoxTranscriptions);
             Controls.Add(textBoxWordEn);
             Controls.Add(textBoxWordBg);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EnBgDictTester";
@@ -158,6 +158,6 @@
         private Button buttonRecord;
         private Button buttonMakeTest;
         private BindingSource wordsEnBgBindingSource;
-        private Button button1;
+        private Button buttonTables;
     }
 }
