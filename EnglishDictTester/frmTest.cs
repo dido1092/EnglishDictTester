@@ -22,11 +22,13 @@ namespace EnglishDictTester
         int wordA = 0;
         int wordB = 0;
         int correctAnswer = 0;
-        string? correctWordBg = string.Empty;
+        //string? correctWordBg = string.Empty;
         string translateWord = string.Empty;
         string[]? arrAllWords;
         string[]? arrSelectedWords;
-        string[]? arrAllCorrectedWords;
+        string[]? arrAllCorrectedBgWords;
+        string[]? arrAllCorrectedEnWords;
+        string[]? arrWords;
         List<object>? lsEnIds = new List<object>();
         bool isFinish = false;
         bool isButtonLoadAllIncorrectAnswersIsClicked = false;
@@ -137,51 +139,73 @@ namespace EnglishDictTester
 
         private void buttonNextWord_Click(object sender, EventArgs e)
         {
-            string writtenWord = string.Empty;
-            if (isFinish)
+            if (textBoxTranslateWord.Text != "")
             {
-                return;
-            }
-
-
-            if (isButtonLoadAllIncorrectAnswersIsClicked)
-            {
-                translateWord = arrAllCorrectedWords[i + 1];
-            }
-            else
-            {
-                translateWord = arrSelectedWords[i + 1];
-            }
-            writtenWord = textBoxTranslateWord.Text.ToUpper();
-
-            if (writtenWord == translateWord)
-            {
-                correctAnswer++;
-                InsertIntoTest("correct");
-            }
-            else
-            {
-                InsertIntoTest("Incorrect");
-            }
-
-            labelScore.Text = "Score: " + correctAnswer;
-
-            if (i == arrSelectedWords.Length - 2)
-            {
-                MessageBox.Show("Finish!");
-                isFinish = true;
-            }
-            if (i < arrSelectedWords.Length)
-            {
-                if (isFinish == false)
+                string writtenWord = string.Empty;
+                if (isFinish)
                 {
-                    i += 2;
+                    return;
                 }
 
-                if (i > 0)
+                if (isButtonLoadAllIncorrectAnswersIsClicked)
                 {
-                    labelExamWord.Text = arrSelectedWords[i];
-                    textBoxTranslateWord.Text = "";
+                    //translateWord = arrAllCorrectedWords[i + 1];
+                    arrWords = arrAllCorrectedEnWords;
+                    translateWord = arrAllCorrectedBgWords[i];
+                }
+                else
+                {
+                    //translateWord = arrSelectedWords[i + 1];
+                    arrWords = arrSelectedWords;
+                    translateWord = arrWords[i + 1]; 
+                }
+
+                //translateWord = arrWords[i]; 
+
+                writtenWord = textBoxTranslateWord.Text.ToUpper();
+
+                if (writtenWord == translateWord)
+                {
+                    correctAnswer++;
+                    InsertIntoTest("correct");
+                }
+                else
+                {
+                    InsertIntoTest("Incorrect");
+                }
+
+                labelScore.Text = "Score: " + correctAnswer;
+
+
+                if (!isButtonLoadAllIncorrectAnswersIsClicked)
+                {
+                    if (i == arrWords.Length - 2)
+                    {
+                        MessageBox.Show("Finish!");
+                        isFinish = true;
+                    }
+                    if (i < arrWords.Length)
+                    {
+                        if (isFinish == false)
+                        {
+                            i += 2;
+                        }
+
+                        if (i > 0)
+                        {
+                            labelExamWord.Text = arrWords[i];
+                            textBoxTranslateWord.Text = "";
+                        }
+                    }
+                }
+                else
+                {
+                    if (i == arrWords.Length - 1)
+                    {
+                        MessageBox.Show("Finish!");
+                        isFinish = true;
+                    }
+                    i++;
                 }
             }
         }
@@ -196,8 +220,8 @@ namespace EnglishDictTester
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
-                        enW = labelExamWord.Text,
-                        bgW = textBoxTranslateWord.Text,
+                        enW = labelExamWord.Text.ToUpper(),
+                        bgW = textBoxTranslateWord.Text.ToUpper(),
                         answer = getAnswer,
                         enId = getEnId.GetWordEnID(labelExamWord.Text),
                         bgId = getBgId.GetWordBgID(textBoxTranslateWord.Text)
@@ -238,57 +262,39 @@ namespace EnglishDictTester
 
         private void buttonLoadAllIncorrectAnswers_Click(object sender, EventArgs e)
         {
-            var enCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.enW, t.answer }).Where(a => a.answer == "Incorrect").ToList();
-            var enIds = enCorrectWordsId?.Select(w => new { w.enId }).ToList();
+            var enCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.enW, t.answer }).Where(a => a.answer == "Incorrect");
+            var enIds = enCorrectWordsId?.Select(w => new { w.enId });
 
 
             labelIncorrectWords.Text = "Incorrect words: " + enIds?.Count().ToString();
 
-            if (enIds != null)
-            {
-                //Fill Incorrect words into List
-
-                foreach (var enId in enIds)
-                {
-                    lsEnIds?.Add(enId);
-                }
-
-                //List<int> lsEn = new List<int>();
-
-                //foreach (var item in lsEnIds.ToString())
-                //{
-                //    lsEn = (int)item;
-
-                //}
-                CorrectBgWord();
-            }
-            isButtonLoadAllIncorrectAnswersIsClicked = true;
-        }
-
-        private void CorrectBgWord()
-        {
             int count = 0;
+            int? correctIdBgAnalog = 0;
+            int? correctIdEnAnalog = 0;
 
-            arrAllCorrectedWords = new string[lsEnIds.Count];
+            arrAllCorrectedBgWords = new string[enIds.Count()];
+            arrAllCorrectedEnWords = new string[enIds.Count()];
 
-            foreach (var getIdEn in lsEnIds)
+            foreach (var getIdEn in enIds)
             {
-                //string word = currentCorrectWord.Replace(" ", string.Empty);
-
-                //var getCorrectNameEn = context.WordEns?.Select(i => new { i.WordEnId, i.EnWord }).SingleOrDefault(a => a.EnWord == currentCorrectWord);
-                //int? getIdEn = getCorrectNameEn.WordEnId;
-               // Int32? convertToInt = (Int32?)getIdEn;
+                if (getIdEn != null)
+                {
 
 
-                var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordBgId, enBg.WordEnId }).SingleOrDefault(i => i.WordEnId.ToString() == getIdEn.ToString());
+                    var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(i => i.WordEnId == getIdEn.enId.Value);
+                    correctIdBgAnalog = mapTableIDs.WordBgId.Value;
+                    correctIdEnAnalog = mapTableIDs.WordEnId.Value;
 
-                int? correctIdBgAnalog = mapTableIDs.WordBgId;
+                    var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(i => i.WordBgId.ToString() == correctIdBgAnalog.ToString());
+                    var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(i => i.WordEnId.ToString() == correctIdEnAnalog.ToString());
+                    arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
+                    arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
 
-                correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(i => i.WordBgId == correctIdBgAnalog).ToString();
-
-                arrAllCorrectedWords[count] = correctWordBg;
-                count++;
+                    count++;
+                }
             }
+            labelExamWord.Text = arrAllCorrectedEnWords[0];
+            isButtonLoadAllIncorrectAnswersIsClicked = true;
         }
     }
 }

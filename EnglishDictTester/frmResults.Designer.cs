@@ -30,13 +30,16 @@
         {
             components = new System.ComponentModel.Container();
             dataGridViewResults = new DataGridView();
+            testsBindingSource = new BindingSource(components);
+            buttonResultRefresh = new Button();
             testIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             lngNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bgId = new DataGridViewTextBoxColumn();
+            enId = new DataGridViewTextBoxColumn();
             bgWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             enWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             answerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            testsBindingSource = new BindingSource(components);
-            buttonResultRefresh = new Button();
+            buttonUpdateResult = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).BeginInit();
             SuspendLayout();
@@ -45,13 +48,27 @@
             // 
             dataGridViewResults.AutoGenerateColumns = false;
             dataGridViewResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { testIdDataGridViewTextBoxColumn, lngNameDataGridViewTextBoxColumn, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn });
+            dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { testIdDataGridViewTextBoxColumn, lngNameDataGridViewTextBoxColumn, bgId, enId, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn });
             dataGridViewResults.DataSource = testsBindingSource;
             dataGridViewResults.Location = new Point(22, 22);
             dataGridViewResults.Name = "dataGridViewResults";
             dataGridViewResults.RowTemplate.Height = 25;
-            dataGridViewResults.Size = new Size(545, 356);
+            dataGridViewResults.Size = new Size(743, 356);
             dataGridViewResults.TabIndex = 0;
+            // 
+            // testsBindingSource
+            // 
+            testsBindingSource.DataSource = typeof(Data.Models.Tests);
+            // 
+            // buttonResultRefresh
+            // 
+            buttonResultRefresh.Location = new Point(781, 22);
+            buttonResultRefresh.Name = "buttonResultRefresh";
+            buttonResultRefresh.Size = new Size(96, 34);
+            buttonResultRefresh.TabIndex = 1;
+            buttonResultRefresh.Text = "Refresh";
+            buttonResultRefresh.UseVisualStyleBackColor = true;
+            buttonResultRefresh.Click += buttonResultRefresh_Click;
             // 
             // testIdDataGridViewTextBoxColumn
             // 
@@ -64,6 +81,18 @@
             lngNameDataGridViewTextBoxColumn.DataPropertyName = "lngName";
             lngNameDataGridViewTextBoxColumn.HeaderText = "lngName";
             lngNameDataGridViewTextBoxColumn.Name = "lngNameDataGridViewTextBoxColumn";
+            // 
+            // bgId
+            // 
+            bgId.DataPropertyName = "bgId";
+            bgId.HeaderText = "bgId";
+            bgId.Name = "bgId";
+            // 
+            // enId
+            // 
+            enId.DataPropertyName = "enId";
+            enId.HeaderText = "enId";
+            enId.Name = "enId";
             // 
             // bgWDataGridViewTextBoxColumn
             // 
@@ -83,25 +112,22 @@
             answerDataGridViewTextBoxColumn.HeaderText = "answer";
             answerDataGridViewTextBoxColumn.Name = "answerDataGridViewTextBoxColumn";
             // 
-            // testsBindingSource
+            // buttonUpdateResult
             // 
-            testsBindingSource.DataSource = typeof(Data.Models.Tests);
-            // 
-            // buttonResultRefresh
-            // 
-            buttonResultRefresh.Location = new Point(589, 22);
-            buttonResultRefresh.Name = "buttonResultRefresh";
-            buttonResultRefresh.Size = new Size(96, 34);
-            buttonResultRefresh.TabIndex = 1;
-            buttonResultRefresh.Text = "Refresh";
-            buttonResultRefresh.UseVisualStyleBackColor = true;
-            buttonResultRefresh.Click += buttonResultRefresh_Click;
+            buttonUpdateResult.Location = new Point(784, 90);
+            buttonUpdateResult.Name = "buttonUpdateResult";
+            buttonUpdateResult.Size = new Size(93, 32);
+            buttonUpdateResult.TabIndex = 2;
+            buttonUpdateResult.Text = "Update";
+            buttonUpdateResult.UseVisualStyleBackColor = true;
+            buttonUpdateResult.Click += buttonUpdateResult_Click;
             // 
             // frmResults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(697, 418);
+            ClientSize = new Size(1026, 655);
+            Controls.Add(buttonUpdateResult);
             Controls.Add(buttonResultRefresh);
             Controls.Add(dataGridViewResults);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -115,12 +141,15 @@
         #endregion
 
         private DataGridView dataGridViewResults;
+        private BindingSource testsBindingSource;
+        private Button buttonResultRefresh;
         private DataGridViewTextBoxColumn testIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn lngNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn bgId;
+        private DataGridViewTextBoxColumn enId;
         private DataGridViewTextBoxColumn bgWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn enWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn answerDataGridViewTextBoxColumn;
-        private BindingSource testsBindingSource;
-        private Button buttonResultRefresh;
+        private Button buttonUpdateResult;
     }
 }
