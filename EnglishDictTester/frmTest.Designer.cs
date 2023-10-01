@@ -48,7 +48,7 @@
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
             comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50", "100" });
-            comboBoxNumberOfWords.Location = new Point(12, 131);
+            comboBoxNumberOfWords.Location = new Point(12, 97);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
             comboBoxNumberOfWords.Size = new Size(63, 23);
             comboBoxNumberOfWords.TabIndex = 1;
@@ -56,7 +56,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 116);
+            label1.Location = new Point(12, 79);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 2;
@@ -105,7 +105,7 @@
             comboBoxLanguage.Items.AddRange(new object[] { "En", "Bg" });
             comboBoxLanguage.Location = new Point(12, 34);
             comboBoxLanguage.Name = "comboBoxLanguage";
-            comboBoxLanguage.Size = new Size(59, 23);
+            comboBoxLanguage.Size = new Size(63, 23);
             comboBoxLanguage.TabIndex = 7;
             // 
             // label3
@@ -119,7 +119,7 @@
             // 
             // buttonLoad
             // 
-            buttonLoad.Location = new Point(81, 131);
+            buttonLoad.Location = new Point(81, 97);
             buttonLoad.Name = "buttonLoad";
             buttonLoad.Size = new Size(84, 23);
             buttonLoad.TabIndex = 9;
@@ -130,7 +130,7 @@
             // labelAllWords
             // 
             labelAllWords.AutoSize = true;
-            labelAllWords.Location = new Point(114, 76);
+            labelAllWords.Location = new Point(183, 38);
             labelAllWords.Name = "labelAllWords";
             labelAllWords.Size = new Size(60, 15);
             labelAllWords.TabIndex = 10;
@@ -138,7 +138,7 @@
             // 
             // buttonLoadAllWords
             // 
-            buttonLoadAllWords.Location = new Point(12, 72);
+            buttonLoadAllWords.Location = new Point(81, 34);
             buttonLoadAllWords.Name = "buttonLoadAllWords";
             buttonLoadAllWords.Size = new Size(96, 23);
             buttonLoadAllWords.TabIndex = 11;
@@ -159,7 +159,7 @@
             // 
             // buttonLoadAllIncorrectAnswers
             // 
-            buttonLoadAllIncorrectAnswers.Location = new Point(12, 196);
+            buttonLoadAllIncorrectAnswers.Location = new Point(12, 148);
             buttonLoadAllIncorrectAnswers.Name = "buttonLoadAllIncorrectAnswers";
             buttonLoadAllIncorrectAnswers.Size = new Size(153, 23);
             buttonLoadAllIncorrectAnswers.TabIndex = 13;
@@ -170,7 +170,7 @@
             // labelIncorrectWords
             // 
             labelIncorrectWords.AutoSize = true;
-            labelIncorrectWords.Location = new Point(12, 224);
+            labelIncorrectWords.Location = new Point(12, 174);
             labelIncorrectWords.Name = "labelIncorrectWords";
             labelIncorrectWords.Size = new Size(95, 15);
             labelIncorrectWords.TabIndex = 14;

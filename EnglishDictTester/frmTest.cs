@@ -104,6 +104,7 @@ namespace EnglishDictTester
                 }
                 SelectedWords(numberOfWords);
 
+                //labelExamWord.Text = arrSelectedWords[i];
                 labelExamWord.Text = arrSelectedWords[i];
                 isButtonLoadAllIncorrectAnswersIsClicked = false;
             }
@@ -141,26 +142,22 @@ namespace EnglishDictTester
         {
             if (textBoxTranslateWord.Text != "")
             {
+
                 string writtenWord = string.Empty;
                 if (isFinish)
                 {
                     return;
                 }
-
                 if (isButtonLoadAllIncorrectAnswersIsClicked)
                 {
-                    //translateWord = arrAllCorrectedWords[i + 1];
                     arrWords = arrAllCorrectedEnWords;
                     translateWord = arrAllCorrectedBgWords[i];
                 }
                 else
                 {
-                    //translateWord = arrSelectedWords[i + 1];
                     arrWords = arrSelectedWords;
-                    translateWord = arrWords[i + 1]; 
+                    translateWord = arrWords[i + 1];
                 }
-
-                //translateWord = arrWords[i]; 
 
                 writtenWord = textBoxTranslateWord.Text.ToUpper();
 
@@ -175,7 +172,7 @@ namespace EnglishDictTester
                 }
 
                 labelScore.Text = "Score: " + correctAnswer;
-
+                //i++;
 
                 if (!isButtonLoadAllIncorrectAnswersIsClicked)
                 {
@@ -183,6 +180,7 @@ namespace EnglishDictTester
                     {
                         MessageBox.Show("Finish!");
                         isFinish = true;
+                        //return;
                     }
                     if (i < arrWords.Length)
                     {
@@ -190,23 +188,21 @@ namespace EnglishDictTester
                         {
                             i += 2;
                         }
-
-                        if (i > 0)
-                        {
-                            labelExamWord.Text = arrWords[i];
-                            textBoxTranslateWord.Text = "";
-                        }
                     }
                 }
                 else
                 {
-                    if (i == arrWords.Length - 1)
+                    i++;
+                    if (i == arrWords.Length)
                     {
                         MessageBox.Show("Finish!");
                         isFinish = true;
+                        return;
                     }
-                    i++;
                 }
+
+                labelExamWord.Text = arrWords[i];
+                textBoxTranslateWord.Text = "";
             }
         }
         private void InsertIntoTest(string getAnswer)
@@ -235,7 +231,6 @@ namespace EnglishDictTester
                 MessageBox.Show(Enums.WordBg_Duplicated.ToString());
                 throw;
             }
-
         }
         private async void buttonLoadAllWords_Click(object sender, EventArgs e)
         {
@@ -279,14 +274,14 @@ namespace EnglishDictTester
             {
                 if (getIdEn != null)
                 {
+                    var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordEnId == getIdEn.enId.Value);
 
-
-                    var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(i => i.WordEnId == getIdEn.enId.Value);
                     correctIdBgAnalog = mapTableIDs.WordBgId.Value;
                     correctIdEnAnalog = mapTableIDs.WordEnId.Value;
 
                     var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(i => i.WordBgId.ToString() == correctIdBgAnalog.ToString());
                     var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(i => i.WordEnId.ToString() == correctIdEnAnalog.ToString());
+
                     arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
                     arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
 
