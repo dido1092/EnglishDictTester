@@ -2,16 +2,13 @@
 using EnglishDictTester.Data.Models;
 using EnglishDictTester.Enumerators;
 using EnglishDictTester.Get_Id_s;
+using Google.Cloud.Translation.V2;
+using Azure;
+using Azure.AI.Translation.Text;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using FluentAssertions.Common;
+using System.Net;
 
 namespace EnglishDictTester
 {
@@ -22,6 +19,7 @@ namespace EnglishDictTester
         int wordA = 0;
         int wordB = 0;
         int correctAnswer = 0;
+        int numberOfWords = 0;
         //string? correctWordBg = string.Empty;
         string translateWord = string.Empty;
         string[]? arrAllWords;
@@ -32,6 +30,7 @@ namespace EnglishDictTester
         List<object>? lsEnIds = new List<object>();
         bool isFinish = false;
         bool isButtonLoadAllIncorrectAnswersIsClicked = false;
+        bool isButtonLoad = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
         public frmTest()
@@ -43,9 +42,11 @@ namespace EnglishDictTester
             if ((comboBoxLanguage.SelectedIndex == 0 || comboBoxLanguage.SelectedIndex == 1) && comboBoxNumberOfWords.Text != null)
             {
                 correctAnswer = 0;
-                int numberOfWords = 0;
+                numberOfWords = 0;
                 wordA = 0;
                 wordB = 1;
+                isButtonLoad = true;
+                isButtonLoadAllIncorrectAnswersIsClicked = false;
 
                 int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
                 arrAllWords = new string[arrayLength];
@@ -104,7 +105,6 @@ namespace EnglishDictTester
                 }
                 SelectedWords(numberOfWords);
 
-                //labelExamWord.Text = arrSelectedWords[i];
                 labelExamWord.Text = arrSelectedWords[i];
                 isButtonLoadAllIncorrectAnswersIsClicked = false;
             }
@@ -142,16 +142,25 @@ namespace EnglishDictTester
         {
             if (textBoxTranslateWord.Text != "")
             {
-
                 string writtenWord = string.Empty;
+
                 if (isFinish)
                 {
                     return;
                 }
                 if (isButtonLoadAllIncorrectAnswersIsClicked)
                 {
-                    arrWords = arrAllCorrectedEnWords;
-                    translateWord = arrAllCorrectedBgWords[i];
+                    if (comboBoxLanguage.Text == "En")
+                    {
+                        arrWords = arrAllCorrectedEnWords;
+                        translateWord = arrAllCorrectedBgWords[i];
+                    }
+                    if (comboBoxLanguage.Text == "Bg")
+                    {
+                        arrWords = arrAllCorrectedBgWords;
+                        translateWord = arrAllCorrectedEnWords[i];
+                    }
+
                 }
                 else
                 {
@@ -225,6 +234,21 @@ namespace EnglishDictTester
                     context.Add(t);
                     context.SaveChanges();
                 }
+                else if (comboBoxLanguage.Text == "Bg")
+                {
+                    Tests t = new Tests
+                    {
+                        lngName = comboBoxLanguage.Text,
+                        //enW = labelExamWord.Text.ToUpper(),
+                        enW = textBoxTranslateWord.Text.ToUpper(),
+                        bgW = labelExamWord.Text.ToUpper(),
+                        answer = getAnswer,
+                        enId = getEnId.GetWordEnID(textBoxTranslateWord.Text),
+                        bgId = getBgId.GetWordBgID(labelExamWord.Text)
+                    };
+                    context.Add(t);
+                    context.SaveChanges();
+                }
             }
             catch (Exception)
             {
@@ -250,46 +274,147 @@ namespace EnglishDictTester
             comboBoxNumberOfWords.Text = numberOfRows.ToString();
         }
 
-        private void buttonHint_Click(object sender, EventArgs e)
+        public async void buttonHint_ClickAsync(object sender, EventArgs e)
         {
-            MessageBox.Show(arrSelectedWords[i + 1]);
+            if (isButtonLoad)
+            {
+                MessageBox.Show(arrSelectedWords[i + 1]);
+            }
+            //await TranslateWord().ConfigureAwait(true);
+
+            //var client = TranslationClient.Create();
+            //var text = labelExamWord.Text;
+            ////var response = client.TranslateText(text, LanguageCodes.Bulgarian, LanguageCodes.English);
+
+
+            //if (comboBoxLanguage.Text == "En" && isButtonLoadAllIncorrectAnswersIsClicked == true)
+            //{
+            //    var response = client.TranslateText(text, LanguageCodes.Bulgarian, LanguageCodes.English);
+            //    MessageBox.Show(text);
+            //    textBoxHint.Text = response.TranslatedText;
+            //}
+            //if (comboBoxLanguage.Text == "Bg" && isButtonLoadAllIncorrectAnswersIsClicked == true)
+            //{
+            //    var response = client.TranslateText(text, LanguageCodes.English, LanguageCodes.Bulgarian);
+            //    MessageBox.Show(text);
+            //    textBoxHint.Text = response.TranslatedText;
+            //}
+        }
+
+        private async Task TranslateWord()
+        {
+            string key = "4ac12a19038d4adf905b85187491c727";
+
+            AzureKeyCredential credential = new(key);
+            TextTranslationClient client = new(credential);
+            try
+            {
+                string targetLanguage = "bg";
+                string inputText = labelExamWord.Text;
+
+                Response<IReadOnlyList<TranslatedTextItem>> response = await client.TranslateAsync(targetLanguage, inputText).ConfigureAwait(false);
+                IReadOnlyList<TranslatedTextItem> translations = response.Value;
+                TranslatedTextItem translation = translations.FirstOrDefault();
+
+                textBoxHint.Text = ($"Detected languages of the input text: {translation?.DetectedLanguage?.Language} with score: {translation?.DetectedLanguage?.Score}.");
+                textBoxHint.Text = ($"Text was translated to: '{translation?.Translations?.FirstOrDefault().To}' and the result is: '{translation?.Translations?.FirstOrDefault()?.Text}'.");
+            }
+            catch (RequestFailedException exception)
+            {
+                MessageBox.Show($"Error Code: {exception.ErrorCode}");
+                MessageBox.Show($"Message: {exception.Message}");
+            }
         }
 
         private void buttonLoadAllIncorrectAnswers_Click(object sender, EventArgs e)
         {
-            var enCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.enW, t.answer }).Where(a => a.answer == "Incorrect");
-            var enIds = enCorrectWordsId?.Select(w => new { w.enId });
-
-
-            labelIncorrectWords.Text = "Incorrect words: " + enIds?.Count().ToString();
+            isButtonLoad = false;
 
             int count = 0;
             int? correctIdBgAnalog = 0;
             int? correctIdEnAnalog = 0;
 
-            arrAllCorrectedBgWords = new string[enIds.Count()];
-            arrAllCorrectedEnWords = new string[enIds.Count()];
+            ClearVariablesAndControls();
 
-            foreach (var getIdEn in enIds)
+            if (comboBoxLanguage.Text == "En")
             {
-                if (getIdEn != null)
+                var enCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.bgId, t.lngName, t.enW, t.answer }).Where(a => a.answer == "Incorrect" && a.lngName == "En");
+                var enIds = enCorrectWordsId?.Select(w => new { w.enId });
+
+                arrAllCorrectedEnWords = new string[enIds.Count()];
+                arrAllCorrectedBgWords = new string[enIds.Count()];
+
+                labelIncorrectWords.Text = "Incorrect words: " + enIds?.Count().ToString();
+
+                foreach (var getIdEn in enIds)
                 {
-                    var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordEnId == getIdEn.enId.Value);
+                    if (getIdEn != null)
+                    {
+                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordEnId == getIdEn.enId.Value);
 
-                    correctIdBgAnalog = mapTableIDs.WordBgId.Value;
-                    correctIdEnAnalog = mapTableIDs.WordEnId.Value;
+                        correctIdBgAnalog = mapTableIDs.WordBgId.Value;
+                        correctIdEnAnalog = mapTableIDs.WordEnId.Value;
 
-                    var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(i => i.WordBgId.ToString() == correctIdBgAnalog.ToString());
-                    var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(i => i.WordEnId.ToString() == correctIdEnAnalog.ToString());
+                        var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(x => x.WordBgId.ToString() == correctIdBgAnalog.ToString());
+                        var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(x => x.WordEnId.ToString() == correctIdEnAnalog.ToString());
 
-                    arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
-                    arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
+                        arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
+                        arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
 
-                    count++;
+                        count++;
+                    }
                 }
+                //numberOfWords = arrAllCorrectedEnWords.Count();
+                //SelectedWords(numberOfWords);
+
+                labelExamWord.Text = arrAllCorrectedEnWords[0];
             }
-            labelExamWord.Text = arrAllCorrectedEnWords[0];
+
+            if (comboBoxLanguage.Text == "Bg")
+            {
+                var bgCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.bgId, t.lngName, t.enW, t.answer }).Where(a => a.answer == "Incorrect" && a.lngName == "Bg");
+                var bgIds = bgCorrectWordsId?.Select(w => new { w.bgId });
+
+                arrAllCorrectedEnWords = new string[bgIds.Count()];
+                arrAllCorrectedBgWords = new string[bgIds.Count()];
+
+                labelIncorrectWords.Text = "Incorrect words: " + bgIds?.Count().ToString();
+
+                foreach (var getIdBg in bgIds)
+                {
+                    if (getIdBg != null)
+                    {
+
+                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordBgId == getIdBg.bgId.Value);
+
+                        correctIdBgAnalog = mapTableIDs.WordBgId.Value;
+                        correctIdEnAnalog = mapTableIDs.WordEnId.Value;
+
+                        var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(i => i.WordBgId.ToString() == correctIdBgAnalog.ToString());
+                        var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(i => i.WordEnId.ToString() == correctIdEnAnalog.ToString());
+
+                        arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
+                        arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
+
+                        count++;
+                    }
+                }
+                //numberOfWords = arrAllCorrectedBgWords.Count();
+                //SelectedWords(numberOfWords);
+
+                labelExamWord.Text = arrAllCorrectedBgWords[0];
+            }
+
             isButtonLoadAllIncorrectAnswersIsClicked = true;
+        }
+
+        private void ClearVariablesAndControls()
+        {
+            i = 0;
+            correctAnswer = 0;
+            isFinish = false;
+            textBoxTranslateWord.Text = "";
+            labelScore.Text = "Score: 0";
         }
     }
 }
