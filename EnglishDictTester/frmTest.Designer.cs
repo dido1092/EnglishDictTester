@@ -42,7 +42,6 @@
             labelScore = new Label();
             buttonLoadAllIncorrectAnswers = new Button();
             labelIncorrectWords = new Label();
-            textBoxHint = new TextBox();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
@@ -177,19 +176,11 @@
             labelIncorrectWords.TabIndex = 14;
             labelIncorrectWords.Text = "Incorrect words: ";
             // 
-            // textBoxHint
-            // 
-            textBoxHint.Location = new Point(544, 71);
-            textBoxHint.Name = "textBoxHint";
-            textBoxHint.Size = new Size(100, 23);
-            textBoxHint.TabIndex = 15;
-            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(673, 404);
-            Controls.Add(textBoxHint);
             Controls.Add(labelIncorrectWords);
             Controls.Add(buttonLoadAllIncorrectAnswers);
             Controls.Add(labelScore);
@@ -231,6 +222,5 @@
         private Label labelScore;
         private Button buttonLoadAllIncorrectAnswers;
         private Label labelIncorrectWords;
-        private TextBox textBoxHint;
     }
 }

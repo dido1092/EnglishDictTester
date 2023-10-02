@@ -30,7 +30,7 @@ namespace EnglishDictTester
         List<object>? lsEnIds = new List<object>();
         bool isFinish = false;
         bool isButtonLoadAllIncorrectAnswersIsClicked = false;
-        bool isButtonLoad = false;
+        bool isButtonLoadClicked = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
         public frmTest()
@@ -41,12 +41,16 @@ namespace EnglishDictTester
         {
             if ((comboBoxLanguage.SelectedIndex == 0 || comboBoxLanguage.SelectedIndex == 1) && comboBoxNumberOfWords.Text != null)
             {
-                correctAnswer = 0;
-                numberOfWords = 0;
+                i = 0;
                 wordA = 0;
                 wordB = 1;
-                isButtonLoad = true;
+                correctAnswer = 0;
+                numberOfWords = 0;
+                isFinish = false;
+                textBoxTranslateWord.Text = "";
+                isButtonLoadClicked = true;
                 isButtonLoadAllIncorrectAnswersIsClicked = false;
+                labelScore.Text = "Score: 0";
 
                 int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
                 arrAllWords = new string[arrayLength];
@@ -105,8 +109,8 @@ namespace EnglishDictTester
                 }
                 SelectedWords(numberOfWords);
 
-                labelExamWord.Text = arrSelectedWords[i];
-                isButtonLoadAllIncorrectAnswersIsClicked = false;
+                labelExamWord.Text = arrSelectedWords[0];
+                //isButtonLoadAllIncorrectAnswersIsClicked = false;
             }
         }
 
@@ -114,20 +118,20 @@ namespace EnglishDictTester
         {
             arrSelectedWords = new string[numberOfWords * 2];
 
-            for (int i = 0, j = 1; i < numberOfWords * 2; i += 2, j += 2)
+            for (int k = 0, j = 1; k < numberOfWords * 2; k += 2, j += 2)
             {
                 if (j < numberOfWords * 2)
                 {
                     int index = rnd.Next(arrAllWords.Length - 2);
 
-                    if (index % 2 == 0)
+                    if (index % 2 == 0)//En or Bg
                     {
-                        arrSelectedWords[i] = arrAllWords[index];
+                        arrSelectedWords[k] = arrAllWords[index];
                         arrSelectedWords[j] = arrAllWords[index + 1];
                     }
                     else
                     {
-                        arrSelectedWords[i] = arrAllWords[index + 1];
+                        arrSelectedWords[k] = arrAllWords[index + 1];
                         arrSelectedWords[j] = arrAllWords[index + 2];
                     }
                 }
@@ -162,7 +166,7 @@ namespace EnglishDictTester
                     }
 
                 }
-                else
+                else if(isButtonLoadClicked)
                 {
                     arrWords = arrSelectedWords;
                     translateWord = arrWords[i + 1];
@@ -276,59 +280,25 @@ namespace EnglishDictTester
 
         public async void buttonHint_ClickAsync(object sender, EventArgs e)
         {
-            if (isButtonLoad)
+            if (isButtonLoadClicked)
             {
-                MessageBox.Show(arrSelectedWords[i + 1]);
+                MessageBox.Show(arrSelectedWords[i + 1]);//i+1
             }
-            //await TranslateWord().ConfigureAwait(true);
-
-            //var client = TranslationClient.Create();
-            //var text = labelExamWord.Text;
-            ////var response = client.TranslateText(text, LanguageCodes.Bulgarian, LanguageCodes.English);
-
-
-            //if (comboBoxLanguage.Text == "En" && isButtonLoadAllIncorrectAnswersIsClicked == true)
-            //{
-            //    var response = client.TranslateText(text, LanguageCodes.Bulgarian, LanguageCodes.English);
-            //    MessageBox.Show(text);
-            //    textBoxHint.Text = response.TranslatedText;
-            //}
-            //if (comboBoxLanguage.Text == "Bg" && isButtonLoadAllIncorrectAnswersIsClicked == true)
-            //{
-            //    var response = client.TranslateText(text, LanguageCodes.English, LanguageCodes.Bulgarian);
-            //    MessageBox.Show(text);
-            //    textBoxHint.Text = response.TranslatedText;
-            //}
-        }
-
-        private async Task TranslateWord()
-        {
-            string key = "4ac12a19038d4adf905b85187491c727";
-
-            AzureKeyCredential credential = new(key);
-            TextTranslationClient client = new(credential);
-            try
+            if (isButtonLoadAllIncorrectAnswersIsClicked)
             {
-                string targetLanguage = "bg";
-                string inputText = labelExamWord.Text;
-
-                Response<IReadOnlyList<TranslatedTextItem>> response = await client.TranslateAsync(targetLanguage, inputText).ConfigureAwait(false);
-                IReadOnlyList<TranslatedTextItem> translations = response.Value;
-                TranslatedTextItem translation = translations.FirstOrDefault();
-
-                textBoxHint.Text = ($"Detected languages of the input text: {translation?.DetectedLanguage?.Language} with score: {translation?.DetectedLanguage?.Score}.");
-                textBoxHint.Text = ($"Text was translated to: '{translation?.Translations?.FirstOrDefault().To}' and the result is: '{translation?.Translations?.FirstOrDefault()?.Text}'.");
-            }
-            catch (RequestFailedException exception)
-            {
-                MessageBox.Show($"Error Code: {exception.ErrorCode}");
-                MessageBox.Show($"Message: {exception.Message}");
+                if (comboBoxLanguage.Text == "En")
+                {
+                    MessageBox.Show(arrAllCorrectedBgWords[i]);
+                }
+                else if (comboBoxLanguage.Text == "Bg")
+                {
+                    MessageBox.Show(arrAllCorrectedEnWords[i]);
+                }
             }
         }
-
         private void buttonLoadAllIncorrectAnswers_Click(object sender, EventArgs e)
         {
-            isButtonLoad = false;
+            isButtonLoadClicked = false;
 
             int count = 0;
             int? correctIdBgAnalog = 0;
