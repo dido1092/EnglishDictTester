@@ -42,13 +42,16 @@
             labelScore = new Label();
             buttonLoadAllIncorrectAnswers = new Button();
             labelIncorrectWords = new Label();
+            label2 = new Label();
+            comboBoxNumberOfIncorrectWords = new ComboBox();
+            buttonLoadSelectedWords = new Button();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
-            comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50", "100" });
-            comboBoxNumberOfWords.Location = new Point(12, 97);
+            comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50" });
+            comboBoxNumberOfWords.Location = new Point(136, 63);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
             comboBoxNumberOfWords.Size = new Size(63, 23);
             comboBoxNumberOfWords.TabIndex = 1;
@@ -56,7 +59,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 79);
+            label1.Location = new Point(136, 46);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 2;
@@ -66,7 +69,7 @@
             // 
             labelExamWord.AutoSize = true;
             labelExamWord.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            labelExamWord.Location = new Point(288, 172);
+            labelExamWord.Location = new Point(340, 184);
             labelExamWord.Name = "labelExamWord";
             labelExamWord.Size = new Size(70, 25);
             labelExamWord.TabIndex = 3;
@@ -74,14 +77,14 @@
             // 
             // textBoxTranslateWord
             // 
-            textBoxTranslateWord.Location = new Point(236, 239);
+            textBoxTranslateWord.Location = new Point(283, 229);
             textBoxTranslateWord.Name = "textBoxTranslateWord";
-            textBoxTranslateWord.Size = new Size(172, 23);
+            textBoxTranslateWord.Size = new Size(191, 23);
             textBoxTranslateWord.TabIndex = 4;
             // 
             // buttonNextWord
             // 
-            buttonNextWord.Location = new Point(414, 239);
+            buttonNextWord.Location = new Point(480, 228);
             buttonNextWord.Name = "buttonNextWord";
             buttonNextWord.Size = new Size(75, 23);
             buttonNextWord.TabIndex = 5;
@@ -91,7 +94,7 @@
             // 
             // buttonHint
             // 
-            buttonHint.Location = new Point(544, 33);
+            buttonHint.Location = new Point(480, 38);
             buttonHint.Name = "buttonHint";
             buttonHint.Size = new Size(75, 23);
             buttonHint.TabIndex = 6;
@@ -119,7 +122,7 @@
             // 
             // buttonLoad
             // 
-            buttonLoad.Location = new Point(81, 97);
+            buttonLoad.Location = new Point(205, 63);
             buttonLoad.Name = "buttonLoad";
             buttonLoad.Size = new Size(84, 23);
             buttonLoad.TabIndex = 9;
@@ -130,7 +133,7 @@
             // labelAllWords
             // 
             labelAllWords.AutoSize = true;
-            labelAllWords.Location = new Point(183, 38);
+            labelAllWords.Location = new Point(15, 89);
             labelAllWords.Name = "labelAllWords";
             labelAllWords.Size = new Size(60, 15);
             labelAllWords.TabIndex = 10;
@@ -138,7 +141,7 @@
             // 
             // buttonLoadAllWords
             // 
-            buttonLoadAllWords.Location = new Point(81, 34);
+            buttonLoadAllWords.Location = new Point(12, 63);
             buttonLoadAllWords.Name = "buttonLoadAllWords";
             buttonLoadAllWords.Size = new Size(96, 23);
             buttonLoadAllWords.TabIndex = 11;
@@ -150,7 +153,7 @@
             // 
             labelScore.AutoSize = true;
             labelScore.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            labelScore.Location = new Point(544, 355);
+            labelScore.Location = new Point(480, 357);
             labelScore.Name = "labelScore";
             labelScore.RightToLeft = RightToLeft.No;
             labelScore.Size = new Size(56, 21);
@@ -159,9 +162,9 @@
             // 
             // buttonLoadAllIncorrectAnswers
             // 
-            buttonLoadAllIncorrectAnswers.Location = new Point(12, 148);
+            buttonLoadAllIncorrectAnswers.Location = new Point(12, 143);
             buttonLoadAllIncorrectAnswers.Name = "buttonLoadAllIncorrectAnswers";
-            buttonLoadAllIncorrectAnswers.Size = new Size(153, 23);
+            buttonLoadAllIncorrectAnswers.Size = new Size(159, 23);
             buttonLoadAllIncorrectAnswers.TabIndex = 13;
             buttonLoadAllIncorrectAnswers.Text = "Load All Incorrect answers";
             buttonLoadAllIncorrectAnswers.UseVisualStyleBackColor = true;
@@ -170,17 +173,48 @@
             // labelIncorrectWords
             // 
             labelIncorrectWords.AutoSize = true;
-            labelIncorrectWords.Location = new Point(12, 174);
+            labelIncorrectWords.Location = new Point(12, 169);
             labelIncorrectWords.Name = "labelIncorrectWords";
             labelIncorrectWords.Size = new Size(95, 15);
             labelIncorrectWords.TabIndex = 14;
             labelIncorrectWords.Text = "Incorrect words: ";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 211);
+            label2.Name = "label2";
+            label2.Size = new Size(123, 15);
+            label2.TabIndex = 16;
+            label2.Text = "# of incorrect answers";
+            // 
+            // comboBoxNumberOfIncorrectWords
+            // 
+            comboBoxNumberOfIncorrectWords.FormattingEnabled = true;
+            comboBoxNumberOfIncorrectWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50" });
+            comboBoxNumberOfIncorrectWords.Location = new Point(12, 229);
+            comboBoxNumberOfIncorrectWords.Name = "comboBoxNumberOfIncorrectWords";
+            comboBoxNumberOfIncorrectWords.Size = new Size(63, 23);
+            comboBoxNumberOfIncorrectWords.TabIndex = 18;
+            // 
+            // buttonLoadSelectedWords
+            // 
+            buttonLoadSelectedWords.Location = new Point(14, 270);
+            buttonLoadSelectedWords.Name = "buttonLoadSelectedWords";
+            buttonLoadSelectedWords.Size = new Size(129, 23);
+            buttonLoadSelectedWords.TabIndex = 19;
+            buttonLoadSelectedWords.Text = "Load selected words";
+            buttonLoadSelectedWords.UseVisualStyleBackColor = true;
+            buttonLoadSelectedWords.Click += buttonLoadSelectedWords_Click;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(673, 404);
+            ClientSize = new Size(603, 419);
+            Controls.Add(buttonLoadSelectedWords);
+            Controls.Add(comboBoxNumberOfIncorrectWords);
+            Controls.Add(label2);
             Controls.Add(labelIncorrectWords);
             Controls.Add(buttonLoadAllIncorrectAnswers);
             Controls.Add(labelScore);
@@ -222,5 +256,8 @@
         private Label labelScore;
         private Button buttonLoadAllIncorrectAnswers;
         private Label labelIncorrectWords;
+        private Label label2;
+        private ComboBox comboBoxNumberOfIncorrectWords;
+        private Button buttonLoadSelectedWords;
     }
 }

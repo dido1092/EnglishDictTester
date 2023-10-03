@@ -30,6 +30,7 @@ namespace EnglishDictTester
         List<object>? lsEnIds = new List<object>();
         bool isFinish = false;
         bool isButtonLoadAllIncorrectAnswersIsClicked = false;
+        bool isButtonLoadSelectedIncorrectWordsClicked = false;
         bool isButtonLoadClicked = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
@@ -50,6 +51,7 @@ namespace EnglishDictTester
                 textBoxTranslateWord.Text = "";
                 isButtonLoadClicked = true;
                 isButtonLoadAllIncorrectAnswersIsClicked = false;
+                isButtonLoadSelectedIncorrectWordsClicked = false;
                 labelScore.Text = "Score: 0";
 
                 int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
@@ -148,6 +150,7 @@ namespace EnglishDictTester
             {
                 string writtenWord = string.Empty;
 
+
                 if (isFinish)
                 {
                     return;
@@ -166,7 +169,7 @@ namespace EnglishDictTester
                     }
 
                 }
-                else if(isButtonLoadClicked)
+                else if (isButtonLoadClicked)
                 {
                     arrWords = arrSelectedWords;
                     translateWord = arrWords[i + 1];
@@ -185,8 +188,14 @@ namespace EnglishDictTester
                 }
 
                 labelScore.Text = "Score: " + correctAnswer;
-                //i++;
 
+                if (isButtonLoadSelectedIncorrectWordsClicked && i == int.Parse(comboBoxNumberOfIncorrectWords.Text) - 1)
+                {
+                    isFinish = true;
+                    textBoxTranslateWord.Text = "";
+                    correctAnswer = 0;
+                    MessageBox.Show("Finish");
+                }
                 if (!isButtonLoadAllIncorrectAnswersIsClicked)
                 {
                     if (i == arrWords.Length - 2)
@@ -263,6 +272,7 @@ namespace EnglishDictTester
         private async void buttonLoadAllWords_Click(object sender, EventArgs e)
         {
             int numberOfRows = 0;
+            isButtonLoadSelectedIncorrectWordsClicked = false;
 
             if (comboBoxLanguage.Text == "En")
             {
@@ -276,6 +286,7 @@ namespace EnglishDictTester
             labelAllWords.Text = numberOfRows.ToString();
             comboBoxNumberOfWords.Items.Clear();
             comboBoxNumberOfWords.Text = numberOfRows.ToString();
+
         }
 
         public async void buttonHint_ClickAsync(object sender, EventArgs e)
@@ -299,6 +310,7 @@ namespace EnglishDictTester
         private void buttonLoadAllIncorrectAnswers_Click(object sender, EventArgs e)
         {
             isButtonLoadClicked = false;
+            isButtonLoadSelectedIncorrectWordsClicked = false;
 
             int count = 0;
             int? correctIdBgAnalog = 0;
@@ -338,6 +350,8 @@ namespace EnglishDictTester
                 //SelectedWords(numberOfWords);
 
                 labelExamWord.Text = arrAllCorrectedEnWords[0];
+
+                comboBoxNumberOfIncorrectWords.Text = enIds?.Count().ToString();
             }
 
             if (comboBoxLanguage.Text == "Bg")
@@ -373,6 +387,8 @@ namespace EnglishDictTester
                 //SelectedWords(numberOfWords);
 
                 labelExamWord.Text = arrAllCorrectedBgWords[0];
+
+                comboBoxNumberOfIncorrectWords.Text = bgIds?.Count().ToString();
             }
 
             isButtonLoadAllIncorrectAnswersIsClicked = true;
@@ -380,11 +396,27 @@ namespace EnglishDictTester
 
         private void ClearVariablesAndControls()
         {
-            i = 0;
-            correctAnswer = 0;
+            //i = 0;
+            //correctAnswer = 0;
             isFinish = false;
             textBoxTranslateWord.Text = "";
             labelScore.Text = "Score: 0";
+        }
+        private void buttonLoadSelectedWords_Click(object sender, EventArgs e)
+        {
+            i = 0;
+            isFinish = false;
+            isButtonLoadSelectedIncorrectWordsClicked = true;
+            labelScore.Text = "Score: 0";
+
+            if (comboBoxLanguage.Text == "En")
+            {
+                labelExamWord.Text = arrAllCorrectedEnWords[0];
+            }
+            else if (comboBoxLanguage.Text == "Bg")
+            {
+                labelExamWord.Text = arrAllCorrectedBgWords[0];
+            }
         }
     }
 }
