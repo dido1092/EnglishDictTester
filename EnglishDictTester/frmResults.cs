@@ -92,5 +92,39 @@ namespace EnglishDictTester
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell cell = dataGridViewResults.SelectedCells[0] as DataGridViewCell;
+
+            string value = cell.Value.ToString();
+            int getID = int.Parse(value);
+
+            //Remove row from DataGridView
+            int rowIndex = dataGridViewResults.CurrentCell.RowIndex;
+            this.dataGridViewResults.Rows.RemoveAt(rowIndex);
+
+            //String Connection
+            string connetionString = null;
+            connetionString = DbConfig.ConnectionString;
+            SqlConnection cnn = new SqlConnection(connetionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnn;
+
+            //Delete from DB
+            cmd.CommandText = ("Delete From Tests Where testId=" + getID + "");
+
+            try
+            {
+                cnn.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("The row has been deleted ! ");
+                cnn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot open connection ! ");
+            }
+        }
     }
 }

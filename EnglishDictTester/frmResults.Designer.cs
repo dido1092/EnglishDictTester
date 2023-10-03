@@ -30,8 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             dataGridViewResults = new DataGridView();
-            testsBindingSource = new BindingSource(components);
-            buttonResultRefresh = new Button();
             testIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             lngNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bgId = new DataGridViewTextBoxColumn();
@@ -39,7 +37,10 @@
             bgWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             enWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             answerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            testsBindingSource = new BindingSource(components);
+            buttonResultRefresh = new Button();
             buttonUpdateResult = new Button();
+            buttonDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).BeginInit();
             SuspendLayout();
@@ -50,25 +51,11 @@
             dataGridViewResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { testIdDataGridViewTextBoxColumn, lngNameDataGridViewTextBoxColumn, bgId, enId, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn });
             dataGridViewResults.DataSource = testsBindingSource;
-            dataGridViewResults.Location = new Point(22, 22);
+            dataGridViewResults.Location = new Point(21, 22);
             dataGridViewResults.Name = "dataGridViewResults";
             dataGridViewResults.RowTemplate.Height = 25;
-            dataGridViewResults.Size = new Size(743, 356);
+            dataGridViewResults.Size = new Size(743, 591);
             dataGridViewResults.TabIndex = 0;
-            // 
-            // testsBindingSource
-            // 
-            testsBindingSource.DataSource = typeof(Data.Models.Tests);
-            // 
-            // buttonResultRefresh
-            // 
-            buttonResultRefresh.Location = new Point(781, 22);
-            buttonResultRefresh.Name = "buttonResultRefresh";
-            buttonResultRefresh.Size = new Size(96, 34);
-            buttonResultRefresh.TabIndex = 1;
-            buttonResultRefresh.Text = "Refresh";
-            buttonResultRefresh.UseVisualStyleBackColor = true;
-            buttonResultRefresh.Click += buttonResultRefresh_Click;
             // 
             // testIdDataGridViewTextBoxColumn
             // 
@@ -112,9 +99,23 @@
             answerDataGridViewTextBoxColumn.HeaderText = "answer";
             answerDataGridViewTextBoxColumn.Name = "answerDataGridViewTextBoxColumn";
             // 
+            // testsBindingSource
+            // 
+            testsBindingSource.DataSource = typeof(Data.Models.Tests);
+            // 
+            // buttonResultRefresh
+            // 
+            buttonResultRefresh.Location = new Point(781, 22);
+            buttonResultRefresh.Name = "buttonResultRefresh";
+            buttonResultRefresh.Size = new Size(96, 34);
+            buttonResultRefresh.TabIndex = 1;
+            buttonResultRefresh.Text = "Refresh";
+            buttonResultRefresh.UseVisualStyleBackColor = true;
+            buttonResultRefresh.Click += buttonResultRefresh_Click;
+            // 
             // buttonUpdateResult
             // 
-            buttonUpdateResult.Location = new Point(784, 90);
+            buttonUpdateResult.Location = new Point(781, 92);
             buttonUpdateResult.Name = "buttonUpdateResult";
             buttonUpdateResult.Size = new Size(93, 32);
             buttonUpdateResult.TabIndex = 2;
@@ -122,11 +123,22 @@
             buttonUpdateResult.UseVisualStyleBackColor = true;
             buttonUpdateResult.Click += buttonUpdateResult_Click;
             // 
+            // buttonDelete
+            // 
+            buttonDelete.Location = new Point(781, 160);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(93, 32);
+            buttonDelete.TabIndex = 3;
+            buttonDelete.Text = "Delete";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
+            // 
             // frmResults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1026, 655);
+            ClientSize = new Size(955, 655);
+            Controls.Add(buttonDelete);
             Controls.Add(buttonUpdateResult);
             Controls.Add(buttonResultRefresh);
             Controls.Add(dataGridViewResults);
@@ -151,5 +163,6 @@
         private DataGridViewTextBoxColumn enWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn answerDataGridViewTextBoxColumn;
         private Button buttonUpdateResult;
+        private Button buttonDelete;
     }
 }

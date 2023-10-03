@@ -150,24 +150,24 @@ namespace EnglishDictTester
             {
                 string writtenWord = string.Empty;
 
-
                 if (isFinish)
                 {
                     return;
                 }
                 if (isButtonLoadAllIncorrectAnswersIsClicked)
                 {
-                    if (comboBoxLanguage.Text == "En")
+                    if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
                     {
                         arrWords = arrAllCorrectedEnWords;
                         translateWord = arrAllCorrectedBgWords[i];
+
+
                     }
-                    if (comboBoxLanguage.Text == "Bg")
+                    if (comboBoxLanguage.Text == "Bg" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
                     {
                         arrWords = arrAllCorrectedBgWords;
                         translateWord = arrAllCorrectedEnWords[i];
                     }
-
                 }
                 else if (isButtonLoadClicked)
                 {
@@ -177,16 +177,22 @@ namespace EnglishDictTester
 
                 writtenWord = textBoxTranslateWord.Text.ToUpper();
 
-                if (writtenWord == translateWord)
+                if (translateWord != "")
                 {
-                    correctAnswer++;
-                    InsertIntoTest("correct");
+                    if (writtenWord == translateWord)
+                    {
+                        correctAnswer++;
+                        InsertIntoTest("correct");
+                    }
+                    else
+                    {
+                        InsertIntoTest("Incorrect");
+                    }
                 }
                 else
                 {
-                    InsertIntoTest("Incorrect");
+                    return;
                 }
-
                 labelScore.Text = "Score: " + correctAnswer;
 
                 if (isButtonLoadSelectedIncorrectWordsClicked && i == int.Parse(comboBoxNumberOfIncorrectWords.Text) - 1)
@@ -195,9 +201,11 @@ namespace EnglishDictTester
                     textBoxTranslateWord.Text = "";
                     correctAnswer = 0;
                     MessageBox.Show("Finish");
+
                 }
                 if (!isButtonLoadAllIncorrectAnswersIsClicked)
                 {
+
                     if (i == arrWords.Length - 2)
                     {
                         MessageBox.Show("Finish!");
@@ -215,15 +223,22 @@ namespace EnglishDictTester
                 else
                 {
                     i++;
-                    if (i == arrWords.Length)
+                    if (arrWords != null)
                     {
-                        MessageBox.Show("Finish!");
-                        isFinish = true;
-                        return;
+                        if (i == arrWords.Length)
+                        {
+                            MessageBox.Show("Finish!");
+                            isFinish = true;
+                            return;
+                        }
                     }
-                }
 
-                labelExamWord.Text = arrWords[i];
+                }
+                if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)
+                {
+                    labelExamWord.Text = arrWords[i];
+
+                }
                 textBoxTranslateWord.Text = "";
             }
         }
@@ -343,13 +358,17 @@ namespace EnglishDictTester
                         arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
                         arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
 
+
+
                         count++;
                     }
                 }
                 //numberOfWords = arrAllCorrectedEnWords.Count();
                 //SelectedWords(numberOfWords);
-
-                labelExamWord.Text = arrAllCorrectedEnWords[0];
+                if (arrAllCorrectedEnWords.Length != 0)
+                {
+                    labelExamWord.Text = arrAllCorrectedEnWords[0];
+                }
 
                 comboBoxNumberOfIncorrectWords.Text = enIds?.Count().ToString();
             }
@@ -385,8 +404,10 @@ namespace EnglishDictTester
                 }
                 //numberOfWords = arrAllCorrectedBgWords.Count();
                 //SelectedWords(numberOfWords);
-
-                labelExamWord.Text = arrAllCorrectedBgWords[0];
+                if (arrAllCorrectedBgWords.Length != 0)
+                {
+                    labelExamWord.Text = arrAllCorrectedBgWords[0];
+                }
 
                 comboBoxNumberOfIncorrectWords.Text = bgIds?.Count().ToString();
             }
@@ -407,6 +428,7 @@ namespace EnglishDictTester
             i = 0;
             isFinish = false;
             isButtonLoadSelectedIncorrectWordsClicked = true;
+            textBoxTranslateWord.Text = "";
             labelScore.Text = "Score: 0";
 
             if (comboBoxLanguage.Text == "En")
