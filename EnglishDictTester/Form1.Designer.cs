@@ -88,9 +88,9 @@
             label3.AutoSize = true;
             label3.Location = new Point(249, 73);
             label3.Name = "label3";
-            label3.Size = new Size(80, 15);
+            label3.Size = new Size(65, 15);
             label3.TabIndex = 5;
-            label3.Text = "Transcriptions";
+            label3.Text = "Pronounce";
             // 
             // buttonRecord
             // 

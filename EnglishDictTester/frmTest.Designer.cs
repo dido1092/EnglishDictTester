@@ -46,13 +46,14 @@
             label2 = new Label();
             comboBoxNumberOfIncorrectWords = new ComboBox();
             buttonLoadSelectedWords = new Button();
+            labelPronounce = new Label();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
             comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50" });
-            comboBoxNumberOfWords.Location = new Point(136, 63);
+            comboBoxNumberOfWords.Location = new Point(15, 137);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
             comboBoxNumberOfWords.Size = new Size(63, 23);
             comboBoxNumberOfWords.TabIndex = 1;
@@ -60,7 +61,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(136, 46);
+            label1.Location = new Point(15, 119);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 2;
@@ -70,7 +71,7 @@
             // 
             labelExamWord.AutoSize = true;
             labelExamWord.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            labelExamWord.Location = new Point(340, 184);
+            labelExamWord.Location = new Point(336, 193);
             labelExamWord.Name = "labelExamWord";
             labelExamWord.Size = new Size(70, 25);
             labelExamWord.TabIndex = 3;
@@ -78,14 +79,14 @@
             // 
             // textBoxTranslateWord
             // 
-            textBoxTranslateWord.Location = new Point(283, 229);
+            textBoxTranslateWord.Location = new Point(276, 264);
             textBoxTranslateWord.Name = "textBoxTranslateWord";
             textBoxTranslateWord.Size = new Size(191, 23);
             textBoxTranslateWord.TabIndex = 4;
             // 
             // buttonNextWord
             // 
-            buttonNextWord.Location = new Point(480, 228);
+            buttonNextWord.Location = new Point(480, 263);
             buttonNextWord.Name = "buttonNextWord";
             buttonNextWord.Size = new Size(75, 23);
             buttonNextWord.TabIndex = 5;
@@ -95,7 +96,7 @@
             // 
             // buttonHint
             // 
-            buttonHint.Location = new Point(480, 38);
+            buttonHint.Location = new Point(480, 33);
             buttonHint.Name = "buttonHint";
             buttonHint.Size = new Size(75, 23);
             buttonHint.TabIndex = 6;
@@ -123,7 +124,7 @@
             // 
             // buttonLoad
             // 
-            buttonLoad.Location = new Point(205, 63);
+            buttonLoad.Location = new Point(81, 137);
             buttonLoad.Name = "buttonLoad";
             buttonLoad.Size = new Size(84, 23);
             buttonLoad.TabIndex = 9;
@@ -163,7 +164,7 @@
             // 
             // buttonLoadAllIncorrectAnswers
             // 
-            buttonLoadAllIncorrectAnswers.Location = new Point(12, 143);
+            buttonLoadAllIncorrectAnswers.Location = new Point(12, 193);
             buttonLoadAllIncorrectAnswers.Name = "buttonLoadAllIncorrectAnswers";
             buttonLoadAllIncorrectAnswers.Size = new Size(159, 23);
             buttonLoadAllIncorrectAnswers.TabIndex = 13;
@@ -174,7 +175,7 @@
             // labelIncorrectWords
             // 
             labelIncorrectWords.AutoSize = true;
-            labelIncorrectWords.Location = new Point(12, 169);
+            labelIncorrectWords.Location = new Point(12, 219);
             labelIncorrectWords.Name = "labelIncorrectWords";
             labelIncorrectWords.Size = new Size(95, 15);
             labelIncorrectWords.TabIndex = 14;
@@ -183,7 +184,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 211);
+            label2.Location = new Point(12, 246);
             label2.Name = "label2";
             label2.Size = new Size(123, 15);
             label2.TabIndex = 16;
@@ -193,14 +194,14 @@
             // 
             comboBoxNumberOfIncorrectWords.FormattingEnabled = true;
             comboBoxNumberOfIncorrectWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50" });
-            comboBoxNumberOfIncorrectWords.Location = new Point(12, 229);
+            comboBoxNumberOfIncorrectWords.Location = new Point(12, 264);
             comboBoxNumberOfIncorrectWords.Name = "comboBoxNumberOfIncorrectWords";
             comboBoxNumberOfIncorrectWords.Size = new Size(63, 23);
             comboBoxNumberOfIncorrectWords.TabIndex = 18;
             // 
             // buttonLoadSelectedWords
             // 
-            buttonLoadSelectedWords.Location = new Point(14, 270);
+            buttonLoadSelectedWords.Location = new Point(81, 264);
             buttonLoadSelectedWords.Name = "buttonLoadSelectedWords";
             buttonLoadSelectedWords.Size = new Size(129, 23);
             buttonLoadSelectedWords.TabIndex = 19;
@@ -208,11 +209,22 @@
             buttonLoadSelectedWords.UseVisualStyleBackColor = true;
             buttonLoadSelectedWords.Click += buttonLoadSelectedWords_Click;
             // 
+            // labelPronounce
+            // 
+            labelPronounce.AutoSize = true;
+            labelPronounce.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelPronounce.Location = new Point(336, 230);
+            labelPronounce.Name = "labelPronounce";
+            labelPronounce.Size = new Size(74, 17);
+            labelPronounce.TabIndex = 20;
+            labelPronounce.Text = "Pronounce";
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(603, 419);
+            Controls.Add(labelPronounce);
             Controls.Add(buttonLoadSelectedWords);
             Controls.Add(comboBoxNumberOfIncorrectWords);
             Controls.Add(label2);
@@ -261,5 +273,6 @@
         private Label label2;
         private ComboBox comboBoxNumberOfIncorrectWords;
         private Button buttonLoadSelectedWords;
+        private Label labelPronounce;
     }
 }

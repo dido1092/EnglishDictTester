@@ -112,7 +112,8 @@ namespace EnglishDictTester
                 SelectedWords(numberOfWords);
 
                 labelExamWord.Text = arrSelectedWords[0];
-                //isButtonLoadAllIncorrectAnswersIsClicked = false;
+
+                Pronounce();
             }
         }
 
@@ -143,7 +144,21 @@ namespace EnglishDictTester
                 }
             }
         }
+        private void Pronounce()
+        {
+            if (comboBoxLanguage.Text == "En")
+            {
+                GetWordEnId getWordEnId1 = new GetWordEnId();
+                string getExamWord = labelExamWord.Text;
 
+                int? getEnId = getWordEnId1.GetWordEnID(getExamWord);
+
+                var getPronounce = context.WordEns?.Select(x => new { x.EnWord, x.WordEnId, x.Transcriptions }).SingleOrDefault(p => p.WordEnId == getEnId);
+                string? pronounce = getPronounce.Transcriptions;
+
+                labelPronounce.Text = $"{pronounce}";
+            }
+        }
         private void buttonNextWord_Click(object sender, EventArgs e)
         {
             int numberOfIncorrectWords = 0;
@@ -245,6 +260,7 @@ namespace EnglishDictTester
 
                 }
                 textBoxTranslateWord.Text = "";
+                Pronounce();
             }
         }
         private void InsertIntoTest(string getAnswer)
@@ -444,6 +460,7 @@ namespace EnglishDictTester
             {
                 labelExamWord.Text = arrAllCorrectedBgWords[0];
             }
+            Pronounce();
         }
     }
 }
