@@ -40,93 +40,99 @@ namespace EnglishDictTester
         }
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            if ((comboBoxLanguage.SelectedIndex == 0 || comboBoxLanguage.SelectedIndex == 1) && comboBoxNumberOfWords.Text != null)
+            if (comboBoxLanguage.SelectedIndex == 0 || comboBoxLanguage.SelectedIndex == 1)
             {
-                i = 0;
-                wordA = 0;
-                wordB = 1;
-                correctAnswer = 0;
-                numberOfWords = 0;
-                isFinish = false;
-                textBoxTranslateWord.Text = "";
-                isButtonLoadClicked = true;
-                isButtonLoadAllIncorrectAnswersIsClicked = false;
-                isButtonLoadSelectedIncorrectWordsClicked = false;
-                labelScore.Text = "Score: 0";
-                ProgressBarTest.Maximum = 0;
-
-                int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
-                arrAllWords = new string[arrayLength];
-
-                var enWordsId = context.WordEns?.Select(i => new { i.WordEnId }).ToList();
-                var bgWordsId = context.WordBgs?.Select(i => new { i.WordBgId }).ToList();
-
-                var enWords = context.WordEns?.Select(e => new { e.EnWord }).ToList();
-                var bgWords = context.WordBgs?.Select(b => new { b.BgWord }).ToList();
-
-                var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordBgId, enBg.WordEnId }).ToList();
-
-
-                foreach (var mapTableID in mapTableIDs)
-                {
-                    string wordEn = string.Empty;
-                    string wordBg = string.Empty;
-
-                    int mapEnId = int.Parse(mapTableID.WordEnId.ToString());
-                    //string mapEnId = mapTableID.WordEnId.ToString();
-                    var enIDs = context.WordEns?.Select(i => new { i.WordEnId, i.EnWord }).Where(w => w.WordEnId == mapEnId);
-
-                    int mapBgId = int.Parse(mapTableID.WordBgId.ToString());
-                    //string mapBgId = mapTableID.WordBgId.ToString();
-                    var bgIDs = context.WordBgs?.Select(i => new { i.WordBgId, i.BgWord }).Where(w => w.WordBgId == mapBgId);
-
-                    foreach (var enID in enIDs)
-                    {
-                        var currentWord = context.WordEns?.Select(i => new { i.WordEnId, i.EnWord }).SingleOrDefault(w => w.WordEnId == mapEnId);
-                        wordEn = currentWord.EnWord;
-                    }
-                    foreach (var bgID in bgIDs)
-                    {
-                        var currentWord = context.WordBgs?.Select(i => new { i.WordBgId, i.BgWord }).SingleOrDefault(w => w.WordBgId == mapBgId);
-                        wordBg = currentWord.BgWord;
-                    }
-                    numberOfWords++;
-
-                    if (comboBoxLanguage.SelectedIndex == 0)//En
-                    {
-                        arrAllWords[wordA] = wordEn;
-                        arrAllWords[wordB] = wordBg;
-                    }
-                    else if (comboBoxLanguage.SelectedIndex == 1)//Bg
-                    {
-                        arrAllWords[wordA] = wordBg;
-                        arrAllWords[wordB] = wordEn;
-                    }
-
-                    wordA += 2;
-                    wordB += 2;
-                    if (numberOfWords.ToString() == comboBoxNumberOfWords.Text)
-                    {
-                        break;
-                    }
-                }
                 if (comboBoxNumberOfWords.Text != "")
                 {
-                    int cbNumberOfWords = int.Parse(comboBoxNumberOfWords.Text);
-
-                    if (cbNumberOfWords != 0)
+                    if (int.Parse(comboBoxNumberOfWords.Text) != 0)
                     {
-                        ProgressBarTest.Minimum = 0;
-                        //ProgressBarTest.Value++;
-                        ProgressBarTest.Maximum = cbNumberOfWords;
+                        i = 0;
+                        wordA = 0;
+                        wordB = 1;
+                        correctAnswer = 0;
+                        numberOfWords = 0;
+                        isFinish = false;
+                        textBoxTranslateWord.Text = "";
+                        isButtonLoadClicked = true;
+                        isButtonLoadAllIncorrectAnswersIsClicked = false;
+                        isButtonLoadSelectedIncorrectWordsClicked = false;
+                        labelScore.Text = "Score: 0";
+                        ProgressBarTest.Maximum = 0;
 
+                        int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
+                        arrAllWords = new string[arrayLength];
+
+                        var enWordsId = context.WordEns?.Select(i => new { i.WordEnId }).ToList();
+                        var bgWordsId = context.WordBgs?.Select(i => new { i.WordBgId }).ToList();
+
+                        var enWords = context.WordEns?.Select(e => new { e.EnWord }).ToList();
+                        var bgWords = context.WordBgs?.Select(b => new { b.BgWord }).ToList();
+
+                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordBgId, enBg.WordEnId }).ToList();
+
+
+                        foreach (var mapTableID in mapTableIDs)
+                        {
+                            string wordEn = string.Empty;
+                            string wordBg = string.Empty;
+
+                            int mapEnId = int.Parse(mapTableID.WordEnId.ToString());
+                            //string mapEnId = mapTableID.WordEnId.ToString();
+                            var enIDs = context.WordEns?.Select(i => new { i.WordEnId, i.EnWord }).Where(w => w.WordEnId == mapEnId);
+
+                            int mapBgId = int.Parse(mapTableID.WordBgId.ToString());
+                            //string mapBgId = mapTableID.WordBgId.ToString();
+                            var bgIDs = context.WordBgs?.Select(i => new { i.WordBgId, i.BgWord }).Where(w => w.WordBgId == mapBgId);
+
+                            foreach (var enID in enIDs)
+                            {
+                                var currentWord = context.WordEns?.Select(i => new { i.WordEnId, i.EnWord }).SingleOrDefault(w => w.WordEnId == mapEnId);
+                                wordEn = currentWord.EnWord;
+                            }
+                            foreach (var bgID in bgIDs)
+                            {
+                                var currentWord = context.WordBgs?.Select(i => new { i.WordBgId, i.BgWord }).SingleOrDefault(w => w.WordBgId == mapBgId);
+                                wordBg = currentWord.BgWord;
+                            }
+                            numberOfWords++;
+
+                            if (comboBoxLanguage.SelectedIndex == 0)//En
+                            {
+                                arrAllWords[wordA] = wordEn;
+                                arrAllWords[wordB] = wordBg;
+                            }
+                            else if (comboBoxLanguage.SelectedIndex == 1)//Bg
+                            {
+                                arrAllWords[wordA] = wordBg;
+                                arrAllWords[wordB] = wordEn;
+                            }
+
+                            wordA += 2;
+                            wordB += 2;
+                            if (numberOfWords.ToString() == comboBoxNumberOfWords.Text)
+                            {
+                                break;
+                            }
+                        }
+                        if (comboBoxNumberOfWords.Text != "")
+                        {
+                            int cbNumberOfWords = int.Parse(comboBoxNumberOfWords.Text);
+
+                            if (cbNumberOfWords != 0)
+                            {
+                                ProgressBarTest.Minimum = 0;
+                                //ProgressBarTest.Value++;
+                                ProgressBarTest.Maximum = cbNumberOfWords;
+
+                            }
+                        }
+                        SelectedWords(numberOfWords);
+
+                        labelExamWord.Text = arrSelectedWords[0];
+
+                        Pronounce();
                     }
                 }
-                SelectedWords(numberOfWords);
-
-                labelExamWord.Text = arrSelectedWords[0];
-
-                Pronounce();
             }
         }
 
@@ -177,106 +183,109 @@ namespace EnglishDictTester
             int numberOfIncorrectWords = 0;
             if (textBoxTranslateWord.Text != "")
             {
-                string writtenWord = string.Empty;
-                ProgressBarTest.Value++;
+                if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
+                {
+                    string writtenWord = string.Empty;
+                    ProgressBarTest.Value++;
 
-                if (isFinish)
-                {
-                    return;
-                }
-                if (isButtonLoadAllIncorrectAnswersIsClicked)
-                {
-                    if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords != null && arrAllCorrectedBgWords != null)
+                    if (isFinish)
                     {
-                        arrWords = arrAllCorrectedEnWords;
-                        translateWord = arrAllCorrectedBgWords[i];
-
-
+                        return;
                     }
-                    if (comboBoxLanguage.Text == "Bg" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
+                    if (isButtonLoadAllIncorrectAnswersIsClicked)
                     {
-                        arrWords = arrAllCorrectedBgWords;
-                        translateWord = arrAllCorrectedEnWords[i];
+                        if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords != null && arrAllCorrectedBgWords != null)
+                        {
+                            arrWords = arrAllCorrectedEnWords;
+                            translateWord = arrAllCorrectedBgWords[i];
+
+
+                        }
+                        if (comboBoxLanguage.Text == "Bg" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
+                        {
+                            arrWords = arrAllCorrectedBgWords;
+                            translateWord = arrAllCorrectedEnWords[i];
+                        }
                     }
-                }
-                else if (isButtonLoadClicked)
-                {
-                    arrWords = arrSelectedWords;
-                    translateWord = arrWords[i + 1];
-                }
-
-                writtenWord = textBoxTranslateWord.Text.ToUpper();
-
-                if (translateWord != "")
-                {
-                    if (writtenWord == translateWord)
+                    else if (isButtonLoadClicked)
                     {
-                        correctAnswer++;
-                        InsertIntoTest("correct");
+                        arrWords = arrSelectedWords;
+                        translateWord = arrWords[i + 1];
+                    }
+
+                    writtenWord = textBoxTranslateWord.Text.ToUpper();
+
+                    if (translateWord != "")
+                    {
+                        if (writtenWord == translateWord)
+                        {
+                            correctAnswer++;
+                            InsertIntoTest("correct");
+                        }
+                        else
+                        {
+                            InsertIntoTest("Incorrect");
+                        }
                     }
                     else
                     {
-                        InsertIntoTest("Incorrect");
+                        return;
                     }
-                }
-                else
-                {
-                    return;
-                }
-                labelScore.Text = "Score: " + correctAnswer;
+                    labelScore.Text = "Score: " + correctAnswer;
 
-                if (isButtonLoadSelectedIncorrectWordsClicked && i == int.Parse(comboBoxNumberOfIncorrectWords.Text) - 1)
-                {
-                    isFinish = true;
-                    textBoxTranslateWord.Text = "";
-                    correctAnswer = 0;
-                    MessageBox.Show("Finish");
-
-                }
-                if (!isButtonLoadAllIncorrectAnswersIsClicked)
-                {
-
-                    if (i == arrWords.Length - 2)
+                    if (isButtonLoadSelectedIncorrectWordsClicked && i == int.Parse(comboBoxNumberOfIncorrectWords.Text) - 1)
                     {
-                        MessageBox.Show("Finish!");
                         isFinish = true;
-                        //return;
+                        textBoxTranslateWord.Text = "";
+                        correctAnswer = 0;
+                        MessageBox.Show("Finish");
+
                     }
-                    if (i < arrWords.Length)
+                    if (!isButtonLoadAllIncorrectAnswersIsClicked)
                     {
-                        if (isFinish == false)
-                        {
-                            i += 2;
-                        }
-                    }
-                }
-                else
-                {
-                    i++;
-                    if (arrWords != null)
-                    {
-                        if (i == arrWords.Length)
+
+                        if (i == arrWords.Length - 2)
                         {
                             MessageBox.Show("Finish!");
                             isFinish = true;
-                            return;
+                            //return;
+                        }
+                        if (i < arrWords.Length)
+                        {
+                            if (isFinish == false)
+                            {
+                                i += 2;
+                            }
                         }
                     }
+                    else
+                    {
+                        i++;
+                        if (arrWords != null)
+                        {
+                            if (i == arrWords.Length)
+                            {
+                                MessageBox.Show("Finish!");
+                                isFinish = true;
+                                return;
+                            }
+                        }
 
+                    }
+                    if (comboBoxNumberOfIncorrectWords.Text == "")
+                    {
+                        comboBoxNumberOfIncorrectWords.Text = "0";
+                    }
+                    if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)//While i reach number of incorrect words
+                    {
+                        labelExamWord.Text = arrWords[i];
+
+                    }
+
+                    textBoxTranslateWord.Text = "";
+
+                    Pronounce();
                 }
-                if (comboBoxNumberOfIncorrectWords.Text == "")
-                {
-                    comboBoxNumberOfIncorrectWords.Text = "0";
-                }
-                if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)//While i reach number of incorrect words
-                {
-                    labelExamWord.Text = arrWords[i];
-
-                }
-
-                textBoxTranslateWord.Text = "";
-
-                Pronounce();
             }
         }
         private void InsertIntoTest(string getAnswer)
@@ -347,15 +356,18 @@ namespace EnglishDictTester
             {
                 MessageBox.Show(arrSelectedWords[i + 1]);//i+1
             }
-            if (isButtonLoadAllIncorrectAnswersIsClicked)
+            if (isButtonLoadAllIncorrectAnswersIsClicked && comboBoxNumberOfIncorrectWords.Text != "")
             {
-                if (comboBoxLanguage.Text == "En")
+                if (int.Parse(comboBoxNumberOfIncorrectWords.Text) != 0)
                 {
-                    MessageBox.Show(arrAllCorrectedBgWords[i]);
-                }
-                else if (comboBoxLanguage.Text == "Bg")
-                {
-                    MessageBox.Show(arrAllCorrectedEnWords[i]);
+                    if (comboBoxLanguage.Text == "En")
+                    {
+                        MessageBox.Show(arrAllCorrectedBgWords[i]);
+                    }
+                    else if (comboBoxLanguage.Text == "Bg")
+                    {
+                        MessageBox.Show(arrAllCorrectedEnWords[i]);
+                    }
                 }
             }
         }
@@ -468,27 +480,32 @@ namespace EnglishDictTester
             textBoxTranslateWord.Text = "";
             labelScore.Text = "Score: 0";
             ProgressBarTest.Maximum = 0;
-
-            if (comboBoxLanguage.Text == "En")
-            {
-                labelExamWord.Text = arrAllCorrectedEnWords[0];
-            }
-            else if (comboBoxLanguage.Text == "Bg")
-            {
-                labelExamWord.Text = arrAllCorrectedBgWords[0];
-            }
             if (comboBoxNumberOfIncorrectWords.Text != "")
             {
-                int cbNumberOfWords = int.Parse(comboBoxNumberOfIncorrectWords.Text);
-
-                if (cbNumberOfWords != 0)
+                if (int.Parse(comboBoxNumberOfIncorrectWords.Text) != 0)
                 {
-                    ProgressBarTest.Minimum = 0;
-                    //ProgressBarTest.Value++;
-                    ProgressBarTest.Maximum = cbNumberOfWords;
+                    if (comboBoxLanguage.Text == "En")
+                    {
+                        labelExamWord.Text = arrAllCorrectedEnWords[0];
+                    }
+                    else if (comboBoxLanguage.Text == "Bg")
+                    {
+                        labelExamWord.Text = arrAllCorrectedBgWords[0];
+                    }
+                    if (comboBoxNumberOfIncorrectWords.Text != "")
+                    {
+                        int cbNumberOfWords = int.Parse(comboBoxNumberOfIncorrectWords.Text);
+
+                        if (cbNumberOfWords != 0)
+                        {
+                            ProgressBarTest.Minimum = 0;
+                            //ProgressBarTest.Value++;
+                            ProgressBarTest.Maximum = cbNumberOfWords;
+                        }
+                    }
+                    Pronounce();
                 }
             }
-            Pronounce();
         }
     }
 }
