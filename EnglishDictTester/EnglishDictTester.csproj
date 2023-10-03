@@ -8,7 +8,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject></StartupObject>
     <UseWPF>False</UseWPF>
+    <ApplicationIcon>dictionary_book_.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="dictionary_book_.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.AI.Translation.Text" Version="1.0.0-beta.1" />

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             textBoxWordBg = new TextBox();
             textBoxWordEn = new TextBox();
             textBoxTranscriptions = new TextBox();
@@ -151,6 +152,7 @@
             Controls.Add(textBoxWordEn);
             Controls.Add(textBoxWordBg);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "EnBgDictTester";

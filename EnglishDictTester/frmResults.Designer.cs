@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResults));
             dataGridViewResults = new DataGridView();
             testIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             lngNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -167,6 +168,7 @@
             Controls.Add(buttonResultRefresh);
             Controls.Add(dataGridViewResults);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmResults";
             Text = "frmResults";
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).EndInit();

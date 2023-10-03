@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTest));
             comboBoxNumberOfWords = new ComboBox();
             label1 = new Label();
             labelExamWord = new Label();
@@ -230,6 +231,7 @@
             Controls.Add(label1);
             Controls.Add(comboBoxNumberOfWords);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmTest";
             Text = "Test";
             ResumeLayout(false);

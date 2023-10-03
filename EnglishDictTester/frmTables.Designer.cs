@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTables));
             dataGridViewBg = new DataGridView();
             wordBgIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bgWordDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -270,6 +271,7 @@
             Controls.Add(dataGridViewEn);
             Controls.Add(dataGridViewBg);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmTables";
             Text = "Tables";
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).EndInit();
