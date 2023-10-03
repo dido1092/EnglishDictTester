@@ -47,6 +47,7 @@
             comboBoxNumberOfIncorrectWords = new ComboBox();
             buttonLoadSelectedWords = new Button();
             labelPronounce = new Label();
+            ProgressBarTest = new ProgressBar();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
@@ -219,11 +220,19 @@
             labelPronounce.TabIndex = 20;
             labelPronounce.Text = "Pronounce";
             // 
+            // ProgressBarTest
+            // 
+            ProgressBarTest.Location = new Point(276, 293);
+            ProgressBarTest.Name = "ProgressBarTest";
+            ProgressBarTest.Size = new Size(191, 10);
+            ProgressBarTest.TabIndex = 21;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(603, 419);
+            Controls.Add(ProgressBarTest);
             Controls.Add(labelPronounce);
             Controls.Add(buttonLoadSelectedWords);
             Controls.Add(comboBoxNumberOfIncorrectWords);
@@ -274,5 +283,6 @@
         private ComboBox comboBoxNumberOfIncorrectWords;
         private Button buttonLoadSelectedWords;
         private Label labelPronounce;
+        private ProgressBar ProgressBarTest;
     }
 }

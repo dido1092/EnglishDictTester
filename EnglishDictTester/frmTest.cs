@@ -53,6 +53,7 @@ namespace EnglishDictTester
                 isButtonLoadAllIncorrectAnswersIsClicked = false;
                 isButtonLoadSelectedIncorrectWordsClicked = false;
                 labelScore.Text = "Score: 0";
+                ProgressBarTest.Maximum = 0;
 
                 int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
                 arrAllWords = new string[arrayLength];
@@ -107,6 +108,18 @@ namespace EnglishDictTester
                     if (numberOfWords.ToString() == comboBoxNumberOfWords.Text)
                     {
                         break;
+                    }
+                }
+                if (comboBoxNumberOfWords.Text != "")
+                {
+                    int cbNumberOfWords = int.Parse(comboBoxNumberOfWords.Text);
+
+                    if (cbNumberOfWords != 0)
+                    {
+                        ProgressBarTest.Minimum = 0;
+                        //ProgressBarTest.Value++;
+                        ProgressBarTest.Maximum = cbNumberOfWords;
+
                     }
                 }
                 SelectedWords(numberOfWords);
@@ -165,6 +178,7 @@ namespace EnglishDictTester
             if (textBoxTranslateWord.Text != "")
             {
                 string writtenWord = string.Empty;
+                ProgressBarTest.Value++;
 
                 if (isFinish)
                 {
@@ -259,7 +273,9 @@ namespace EnglishDictTester
                     labelExamWord.Text = arrWords[i];
 
                 }
+
                 textBoxTranslateWord.Text = "";
+
                 Pronounce();
             }
         }
@@ -451,6 +467,7 @@ namespace EnglishDictTester
             isButtonLoadSelectedIncorrectWordsClicked = true;
             textBoxTranslateWord.Text = "";
             labelScore.Text = "Score: 0";
+            ProgressBarTest.Maximum = 0;
 
             if (comboBoxLanguage.Text == "En")
             {
@@ -459,6 +476,17 @@ namespace EnglishDictTester
             else if (comboBoxLanguage.Text == "Bg")
             {
                 labelExamWord.Text = arrAllCorrectedBgWords[0];
+            }
+            if (comboBoxNumberOfIncorrectWords.Text != "")
+            {
+                int cbNumberOfWords = int.Parse(comboBoxNumberOfIncorrectWords.Text);
+
+                if (cbNumberOfWords != 0)
+                {
+                    ProgressBarTest.Minimum = 0;
+                    //ProgressBarTest.Value++;
+                    ProgressBarTest.Maximum = cbNumberOfWords;
+                }
             }
             Pronounce();
         }
