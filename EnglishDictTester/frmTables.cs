@@ -199,5 +199,46 @@ namespace EnglishDictTester
                 MessageBox.Show("Cannot open connection ! ");
             }
         }
+
+        private void buttonUpdateTableEn_Click(object sender, EventArgs e)
+        {
+            string connectionString = null;
+            connectionString = DbConfig.ConnectionString;
+
+            SqlConnection cnn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnn;
+
+            int rowindex = dataGridViewEn.CurrentRow.Index;
+            int colindex = dataGridViewEn.CurrentCell.ColumnIndex;
+
+            string? columnName = dataGridViewEn.Columns[colindex].HeaderText;
+
+            string? getValue = dataGridViewEn.CurrentCell.Value.ToString();
+            string? id = dataGridViewEn.Rows[rowindex].Cells[0].Value.ToString();
+
+            //MessageBox.Show(columnName.ToString());
+
+            try
+            {
+                using (cnn = new SqlConnection(connectionString))
+                {
+                    cnn.Open();
+                    string sqlCommand = $"Update WordEns set {columnName}=@{columnName} Where WordEnId={id}";
+                    cmd = new SqlCommand(sqlCommand, cnn);
+                    cmd.Parameters.AddWithValue($"@{columnName}", getValue);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 1)
+                    {
+                        MessageBox.Show("Information Updated", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    cnn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

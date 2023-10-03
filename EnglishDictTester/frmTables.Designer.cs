@@ -54,6 +54,7 @@
             textBoxEnId = new TextBox();
             label1 = new Label();
             label2 = new Label();
+            buttonUpdateTableEn = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEn).BeginInit();
@@ -251,11 +252,22 @@
             label2.TabIndex = 13;
             label2.Text = "EnID";
             // 
+            // buttonUpdateTableEn
+            // 
+            buttonUpdateTableEn.Location = new Point(541, 403);
+            buttonUpdateTableEn.Name = "buttonUpdateTableEn";
+            buttonUpdateTableEn.Size = new Size(84, 29);
+            buttonUpdateTableEn.TabIndex = 14;
+            buttonUpdateTableEn.Text = "Update";
+            buttonUpdateTableEn.UseVisualStyleBackColor = true;
+            buttonUpdateTableEn.Click += buttonUpdateTableEn_Click;
+            // 
             // frmTables
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1145, 460);
+            Controls.Add(buttonUpdateTableEn);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBoxEnId);
@@ -310,5 +322,6 @@
         private TextBox textBoxEnId;
         private Label label1;
         private Label label2;
+        private Button buttonUpdateTableEn;
     }
 }
