@@ -126,5 +126,41 @@ namespace EnglishDictTester
                 MessageBox.Show("Cannot open connection ! ");
             }
         }
+
+        private void buttonRemoveAllIncorrectTests_Click(object sender, EventArgs e)
+        {
+            RemoveTest("Incorrect");
+        }
+
+        private void buttonRemoveAllCorrectTests_Click(object sender, EventArgs e)
+        {
+            RemoveTest("Correct");
+        }
+        private void RemoveTest(string answerStatus)
+        {
+            //String Connection
+            string connetionString = null;
+            connetionString = DbConfig.ConnectionString;
+            SqlConnection cnn = new SqlConnection(connetionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnn;
+
+            //Delete from DB
+            cmd.CommandText = ("Delete From Tests Where answer='" + answerStatus + "'");
+
+            try
+            {
+                cnn.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("The row has been deleted ! ");
+                cnn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot open connection ! ");
+            }
+
+
+        }
     }
 }

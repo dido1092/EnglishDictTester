@@ -9,7 +9,6 @@ namespace EnglishDictTester.Data.Models
 {
     public class WordsEnBg
     {
-
         public int? WordBgId { get; set; }
         public int? WordEnId { get; set; }
 

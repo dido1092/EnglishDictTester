@@ -46,6 +46,13 @@
             labelWordsBg = new Label();
             labelWordsEn = new Label();
             labelMappingTable = new Label();
+            buttonDeleteWordsBG = new Button();
+            buttonDeleteWordsEn = new Button();
+            buttonDeleteMappingTable = new Button();
+            textBoxBgId = new TextBox();
+            textBoxEnId = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEn).BeginInit();
@@ -146,7 +153,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(930, 12);
+            buttonRefresh.Location = new Point(1024, 12);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(109, 42);
             buttonRefresh.TabIndex = 3;
@@ -181,11 +188,80 @@
             labelMappingTable.TabIndex = 6;
             labelMappingTable.Text = "Maping Table";
             // 
+            // buttonDeleteWordsBG
+            // 
+            buttonDeleteWordsBG.Location = new Point(21, 403);
+            buttonDeleteWordsBG.Name = "buttonDeleteWordsBG";
+            buttonDeleteWordsBG.Size = new Size(84, 29);
+            buttonDeleteWordsBG.TabIndex = 7;
+            buttonDeleteWordsBG.Text = "Delete";
+            buttonDeleteWordsBG.UseVisualStyleBackColor = true;
+            buttonDeleteWordsBG.Click += buttonDeleteWordsBG_Click;
+            // 
+            // buttonDeleteWordsEn
+            // 
+            buttonDeleteWordsEn.Location = new Point(281, 403);
+            buttonDeleteWordsEn.Name = "buttonDeleteWordsEn";
+            buttonDeleteWordsEn.Size = new Size(84, 29);
+            buttonDeleteWordsEn.TabIndex = 8;
+            buttonDeleteWordsEn.Text = "Delete";
+            buttonDeleteWordsEn.UseVisualStyleBackColor = true;
+            buttonDeleteWordsEn.Click += buttonDeleteWordsEn_Click;
+            // 
+            // buttonDeleteMappingTable
+            // 
+            buttonDeleteMappingTable.Location = new Point(917, 148);
+            buttonDeleteMappingTable.Name = "buttonDeleteMappingTable";
+            buttonDeleteMappingTable.Size = new Size(147, 29);
+            buttonDeleteMappingTable.TabIndex = 9;
+            buttonDeleteMappingTable.Text = "Delete";
+            buttonDeleteMappingTable.UseVisualStyleBackColor = true;
+            buttonDeleteMappingTable.Click += buttonDeleteMappingTable_Click;
+            // 
+            // textBoxBgId
+            // 
+            textBoxBgId.Location = new Point(917, 107);
+            textBoxBgId.Name = "textBoxBgId";
+            textBoxBgId.Size = new Size(65, 23);
+            textBoxBgId.TabIndex = 10;
+            // 
+            // textBoxEnId
+            // 
+            textBoxEnId.Location = new Point(999, 107);
+            textBoxEnId.Name = "textBoxEnId";
+            textBoxEnId.Size = new Size(65, 23);
+            textBoxEnId.TabIndex = 11;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(917, 89);
+            label1.Name = "label1";
+            label1.Size = new Size(32, 15);
+            label1.TabIndex = 12;
+            label1.Text = "BgID";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(999, 89);
+            label2.Name = "label2";
+            label2.Size = new Size(31, 15);
+            label2.TabIndex = 13;
+            label2.Text = "EnID";
+            // 
             // frmTables
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1051, 460);
+            ClientSize = new Size(1145, 460);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(textBoxEnId);
+            Controls.Add(textBoxBgId);
+            Controls.Add(buttonDeleteMappingTable);
+            Controls.Add(buttonDeleteWordsEn);
+            Controls.Add(buttonDeleteWordsBG);
             Controls.Add(labelMappingTable);
             Controls.Add(labelWordsEn);
             Controls.Add(labelWordsBg);
@@ -225,5 +301,12 @@
         private DataGridViewTextBoxColumn transcriptionsDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn wordBgIdDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn wordEnIdDataGridViewTextBoxColumn1;
+        private Button buttonDeleteWordsBG;
+        private Button buttonDeleteWordsEn;
+        private Button buttonDeleteMappingTable;
+        private TextBox textBoxBgId;
+        private TextBox textBoxEnId;
+        private Label label1;
+        private Label label2;
     }
 }

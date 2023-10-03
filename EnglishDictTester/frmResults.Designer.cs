@@ -41,6 +41,8 @@
             buttonResultRefresh = new Button();
             buttonUpdateResult = new Button();
             buttonDelete = new Button();
+            buttonRemoveAllIncorrectTests = new Button();
+            buttonRemoveAllCorrectTests = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).BeginInit();
             SuspendLayout();
@@ -107,7 +109,7 @@
             // 
             buttonResultRefresh.Location = new Point(781, 22);
             buttonResultRefresh.Name = "buttonResultRefresh";
-            buttonResultRefresh.Size = new Size(96, 34);
+            buttonResultRefresh.Size = new Size(93, 34);
             buttonResultRefresh.TabIndex = 1;
             buttonResultRefresh.Text = "Refresh";
             buttonResultRefresh.UseVisualStyleBackColor = true;
@@ -133,11 +135,33 @@
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
+            // buttonRemoveAllIncorrectTests
+            // 
+            buttonRemoveAllIncorrectTests.Location = new Point(781, 226);
+            buttonRemoveAllIncorrectTests.Name = "buttonRemoveAllIncorrectTests";
+            buttonRemoveAllIncorrectTests.Size = new Size(93, 45);
+            buttonRemoveAllIncorrectTests.TabIndex = 4;
+            buttonRemoveAllIncorrectTests.Text = "Remove All Incorrect Tests";
+            buttonRemoveAllIncorrectTests.UseVisualStyleBackColor = true;
+            buttonRemoveAllIncorrectTests.Click += buttonRemoveAllIncorrectTests_Click;
+            // 
+            // buttonRemoveAllCorrectTests
+            // 
+            buttonRemoveAllCorrectTests.Location = new Point(781, 568);
+            buttonRemoveAllCorrectTests.Name = "buttonRemoveAllCorrectTests";
+            buttonRemoveAllCorrectTests.Size = new Size(93, 45);
+            buttonRemoveAllCorrectTests.TabIndex = 5;
+            buttonRemoveAllCorrectTests.Text = "Remove All Correct Tests";
+            buttonRemoveAllCorrectTests.UseVisualStyleBackColor = true;
+            buttonRemoveAllCorrectTests.Click += buttonRemoveAllCorrectTests_Click;
+            // 
             // frmResults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(955, 655);
+            Controls.Add(buttonRemoveAllCorrectTests);
+            Controls.Add(buttonRemoveAllIncorrectTests);
             Controls.Add(buttonDelete);
             Controls.Add(buttonUpdateResult);
             Controls.Add(buttonResultRefresh);
@@ -164,5 +188,7 @@
         private DataGridViewTextBoxColumn answerDataGridViewTextBoxColumn;
         private Button buttonUpdateResult;
         private Button buttonDelete;
+        private Button buttonRemoveAllIncorrectTests;
+        private Button buttonRemoveAllCorrectTests;
     }
 }

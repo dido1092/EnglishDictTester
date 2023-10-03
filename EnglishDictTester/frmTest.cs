@@ -146,6 +146,7 @@ namespace EnglishDictTester
 
         private void buttonNextWord_Click(object sender, EventArgs e)
         {
+            int numberOfIncorrectWords = 0;
             if (textBoxTranslateWord.Text != "")
             {
                 string writtenWord = string.Empty;
@@ -156,7 +157,7 @@ namespace EnglishDictTester
                 }
                 if (isButtonLoadAllIncorrectAnswersIsClicked)
                 {
-                    if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
+                    if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords != null && arrAllCorrectedBgWords != null)
                     {
                         arrWords = arrAllCorrectedEnWords;
                         translateWord = arrAllCorrectedBgWords[i];
@@ -234,7 +235,11 @@ namespace EnglishDictTester
                     }
 
                 }
-                if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)
+                if (comboBoxNumberOfIncorrectWords.Text == "")
+                {
+                    comboBoxNumberOfIncorrectWords.Text = "0";
+                }
+                if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)//While i reach number of incorrect words
                 {
                     labelExamWord.Text = arrWords[i];
 
