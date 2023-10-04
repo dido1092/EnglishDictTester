@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -23,6 +24,11 @@ namespace EnglishDictTester
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             string connectionString = null;
             connectionString = DbConfig.ConnectionString; //ConnectionString();
 
@@ -34,7 +40,7 @@ namespace EnglishDictTester
             {
                 TableWordBg(connectionString);
                 TableWordEn(connectionString);
-                TableMap(connectionString);
+                CountRows(connectionString);
             }
             catch (Exception)
             {
@@ -57,85 +63,26 @@ namespace EnglishDictTester
             da.Fill(ds, "WordEns");
             dataGridViewEn.DataSource = ds.Tables["WordEns"]?.DefaultView;
         }
-        private void TableMap(string connectionString)
+        private void CountRows(string connectionString)
         {
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM WordsEnBgs", connectionString);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "WordsEnBgs");
-            dataGridViewMap.DataSource = ds.Tables["WordsEnBgs"]?.DefaultView;
-        }
-        //private void Delete(DataGridViewCell cell, DataGridView language,string table, string id)
-        //{
-        //    string value = cell.Value.ToString();
-        //    int getID = int.Parse(value);
+            // Create the connection.
+            SqlConnection conn = new SqlConnection(DbConfig.ConnectionString);
 
-        //    //Remove row from DataGridView
-        //    int rowIndex = language.CurrentCell.RowIndex;
-        //    this.dataGridViewBg.Rows.RemoveAt(rowIndex);
+            // Build the query to count, including CustomerID criteria if specified.
+            String selectText = "SELECT COUNT(*) FROM WordEns";
 
-        //    //String Connection
-        //    string connetionString = null;
-        //    connetionString = DbConfig.ConnectionString;
-        //    SqlConnection cnn = new SqlConnection(connetionString);
-        //    SqlCommand cmd = new SqlCommand();
-        //    cmd.Connection = cnn;
+            // Create the command to count the records.
+            SqlCommand cmd = new SqlCommand(selectText, conn);
 
-        //    //Delete from DB
-        //    cmd.CommandText = ($"Delete From {table} Where {id}=" + getID + "");
-
-        //    try
-        //    {
-        //        cnn.Open();
-        //        cmd.ExecuteNonQuery();
-        //        MessageBox.Show("The row has been deleted ! ");
-        //        cnn.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Cannot open connection ! ");
-        //    }
-
-        //}
-        private void buttonDeleteWordsBG_Click(object sender, EventArgs e)
-        {
-            //Delete(cell, "WordBgs", "WordBgId");
-
-            DataGridViewCell cell = dataGridViewBg.SelectedCells[0] as DataGridViewCell;
-            string value = cell.Value.ToString();
-            int getID = int.Parse(value);
-
-            //Remove row from DataGridView
-            int rowIndex = dataGridViewBg.CurrentCell.RowIndex;
-            this.dataGridViewBg.Rows.RemoveAt(rowIndex);
-
-            //String Connection
-            string connetionString = null;
-            connetionString = DbConfig.ConnectionString;
-            SqlConnection cnn = new SqlConnection(connetionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = cnn;
-
-            //Delete from DB
-            cmd.CommandText = ($"Delete From WordBgs Where WordBgId=" + getID + "");
-
-            try
-            {
-                cnn.Open();
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("The row has been deleted ! ");
-                cnn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Cannot open connection ! ");
-            }
+            // Execute the command, storing the results.
+            conn.Open();
+            int recordCount = (int)cmd.ExecuteScalar();
+            conn.Close();
+            labelTablesNumberOfWords.Text = $"words: {recordCount}";
         }
 
         private void buttonDeleteWordsEn_Click(object sender, EventArgs e)
         {
-            //DataGridViewCell cell = dataGridViewEn.SelectedCells[0] as DataGridViewCell;
-            //Delete(cell, "WordEns", "WordEnId");
-
             DataGridViewCell cell = dataGridViewEn.SelectedCells[0] as DataGridViewCell;
             string value = cell.Value.ToString();
             int getID = int.Parse(value);
@@ -165,27 +112,8 @@ namespace EnglishDictTester
             {
                 MessageBox.Show("Cannot open connection ! ");
             }
-        }
 
-        private void buttonDeleteMappingTable_Click(object sender, EventArgs e)
-        {
-            DataGridViewCell cell = dataGridViewMap.SelectedCells[0] as DataGridViewCell;
-            string value = cell.Value.ToString();
-            int getID = int.Parse(value);
-
-            //Remove row from DataGridView
-            int rowIndex = dataGridViewMap.CurrentCell.RowIndex;
-            this.dataGridViewBg.Rows.RemoveAt(rowIndex);
-
-            //String Connection
-            string connetionString = null;
-            connetionString = DbConfig.ConnectionString;
-            SqlConnection cnn = new SqlConnection(connetionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = cnn;
-
-            //Delete from DB
-            cmd.CommandText = ($"DELETE FROM [WordsEnBgs] WHERE WordBgId = '{int.Parse(textBoxBgId.Text)}' AND WordEnId = '{int.Parse(textBoxEnId.Text)}'");
+            cmd.CommandText = ($"Delete From WordBgs Where WordBgId=" + getID + "");
 
             try
             {
@@ -198,6 +126,8 @@ namespace EnglishDictTester
             {
                 MessageBox.Show("Cannot open connection ! ");
             }
+
+            Refresh();
         }
 
         private void buttonUpdateTableEn_Click(object sender, EventArgs e)

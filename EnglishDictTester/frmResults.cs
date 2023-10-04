@@ -43,6 +43,24 @@ namespace EnglishDictTester
 
                 throw;
             }
+            CountRows();
+        }
+        private void CountRows()
+        {
+            // Create the connection.
+            SqlConnection conn = new SqlConnection(DbConfig.ConnectionString);
+
+            // Build the query to count, including CustomerID criteria if specified.
+            String selectText = "SELECT COUNT(*) FROM Tests";
+
+            // Create the command to count the records.
+            SqlCommand cmd = new SqlCommand(selectText, conn);
+
+            // Execute the command, storing the results.
+            conn.Open();
+            int recordCount = (int)cmd.ExecuteScalar();
+            conn.Close();
+            labelNumberOfTests.Text = $"Number of Test: {recordCount}";
         }
         private void TableTests(string connectionString)
         {

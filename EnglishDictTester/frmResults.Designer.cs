@@ -44,6 +44,7 @@
             buttonDelete = new Button();
             buttonRemoveAllIncorrectTests = new Button();
             buttonRemoveAllCorrectTests = new Button();
+            labelNumberOfTests = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).BeginInit();
             SuspendLayout();
@@ -156,11 +157,21 @@
             buttonRemoveAllCorrectTests.UseVisualStyleBackColor = true;
             buttonRemoveAllCorrectTests.Click += buttonRemoveAllCorrectTests_Click;
             // 
+            // labelNumberOfTests
+            // 
+            labelNumberOfTests.AutoSize = true;
+            labelNumberOfTests.Location = new Point(633, 616);
+            labelNumberOfTests.Name = "labelNumberOfTests";
+            labelNumberOfTests.Size = new Size(96, 15);
+            labelNumberOfTests.TabIndex = 6;
+            labelNumberOfTests.Text = "Number of Tests:";
+            // 
             // frmResults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(955, 655);
+            Controls.Add(labelNumberOfTests);
             Controls.Add(buttonRemoveAllCorrectTests);
             Controls.Add(buttonRemoveAllIncorrectTests);
             Controls.Add(buttonDelete);
@@ -174,6 +185,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).EndInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -192,5 +204,6 @@
         private Button buttonDelete;
         private Button buttonRemoveAllIncorrectTests;
         private Button buttonRemoveAllCorrectTests;
+        private Label labelNumberOfTests;
     }
 }
