@@ -177,6 +177,10 @@ namespace EnglishDictTester
 
                 labelPronounce.Text = $"{pronounce}";
             }
+            else if (comboBoxLanguage.Text == "Bg")
+            {
+                labelPronounce.Text = "";
+            }
         }
         private void buttonNextWord_Click(object sender, EventArgs e)
         {
