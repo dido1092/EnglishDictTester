@@ -154,7 +154,7 @@
             // 
             // buttonDeleteWordsEn
             // 
-            buttonDeleteWordsEn.Location = new Point(681, 88);
+            buttonDeleteWordsEn.Location = new Point(681, 368);
             buttonDeleteWordsEn.Name = "buttonDeleteWordsEn";
             buttonDeleteWordsEn.Size = new Size(84, 29);
             buttonDeleteWordsEn.TabIndex = 8;
@@ -164,7 +164,7 @@
             // 
             // buttonUpdateTableEn
             // 
-            buttonUpdateTableEn.Location = new Point(681, 136);
+            buttonUpdateTableEn.Location = new Point(681, 88);
             buttonUpdateTableEn.Name = "buttonUpdateTableEn";
             buttonUpdateTableEn.Size = new Size(84, 29);
             buttonUpdateTableEn.TabIndex = 14;
@@ -175,7 +175,7 @@
             // labelTablesNumberOfWords
             // 
             labelTablesNumberOfWords.AutoSize = true;
-            labelTablesNumberOfWords.Location = new Point(582, 400);
+            labelTablesNumberOfWords.Location = new Point(598, 400);
             labelTablesNumberOfWords.Name = "labelTablesNumberOfWords";
             labelTablesNumberOfWords.Size = new Size(42, 15);
             labelTablesNumberOfWords.TabIndex = 15;
