@@ -146,7 +146,7 @@
             // labelWordsEn
             // 
             labelWordsEn.AutoSize = true;
-            labelWordsEn.Location = new Point(281, 70);
+            labelWordsEn.Location = new Point(309, 70);
             labelWordsEn.Name = "labelWordsEn";
             labelWordsEn.Size = new Size(59, 15);
             labelWordsEn.TabIndex = 5;
@@ -175,7 +175,7 @@
             // labelTablesNumberOfWords
             // 
             labelTablesNumberOfWords.AutoSize = true;
-            labelTablesNumberOfWords.Location = new Point(598, 400);
+            labelTablesNumberOfWords.Location = new Point(608, 400);
             labelTablesNumberOfWords.Name = "labelTablesNumberOfWords";
             labelTablesNumberOfWords.Size = new Size(42, 15);
             labelTablesNumberOfWords.TabIndex = 15;
