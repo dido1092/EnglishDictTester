@@ -289,6 +289,7 @@ namespace EnglishDictTester
                     textBoxTranslateWord.Text = "";
 
                     Pronounce();
+                    textBoxTranslateWord.Focus();
                 }
             }
         }
