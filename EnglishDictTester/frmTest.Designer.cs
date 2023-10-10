@@ -72,7 +72,7 @@
             // 
             labelExamWord.AutoSize = true;
             labelExamWord.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            labelExamWord.Location = new Point(336, 193);
+            labelExamWord.Location = new Point(276, 193);
             labelExamWord.Name = "labelExamWord";
             labelExamWord.Size = new Size(70, 25);
             labelExamWord.TabIndex = 3;
@@ -214,7 +214,7 @@
             // 
             labelPronounce.AutoSize = true;
             labelPronounce.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelPronounce.Location = new Point(336, 230);
+            labelPronounce.Location = new Point(276, 231);
             labelPronounce.Name = "labelPronounce";
             labelPronounce.Size = new Size(74, 17);
             labelPronounce.TabIndex = 20;

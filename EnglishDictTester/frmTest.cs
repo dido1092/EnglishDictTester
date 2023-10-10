@@ -484,6 +484,8 @@ namespace EnglishDictTester
             textBoxTranslateWord.Text = "";
             labelScore.Text = "Score: 0";
             ProgressBarTest.Maximum = 0;
+            correctAnswer = 0;
+
             if (comboBoxNumberOfIncorrectWords.Text != "")
             {
                 if (int.Parse(comboBoxNumberOfIncorrectWords.Text) != 0)
