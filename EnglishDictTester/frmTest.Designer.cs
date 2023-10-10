@@ -91,7 +91,7 @@
             buttonNextWord.Name = "buttonNextWord";
             buttonNextWord.Size = new Size(75, 23);
             buttonNextWord.TabIndex = 5;
-            buttonNextWord.Text = "Next word";
+            buttonNextWord.Text = "Next";
             buttonNextWord.UseVisualStyleBackColor = true;
             buttonNextWord.Click += buttonNextWord_Click;
             // 
