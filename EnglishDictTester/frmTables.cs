@@ -170,5 +170,46 @@ namespace EnglishDictTester
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void buttonUpdateTableBg_Click(object sender, EventArgs e)
+        {
+            string connectionString = null;
+            connectionString = DbConfig.ConnectionString;
+
+            SqlConnection cnn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cnn;
+
+            int rowindex = dataGridViewBg.CurrentRow.Index;
+            int colindex = dataGridViewBg.CurrentCell.ColumnIndex;
+
+            string? columnName = dataGridViewBg.Columns[colindex].HeaderText;
+
+            string? getValue = dataGridViewBg.CurrentCell.Value.ToString();
+            string? id = dataGridViewBg.Rows[rowindex].Cells[0].Value.ToString();
+
+            //MessageBox.Show(columnName.ToString());
+
+            try
+            {
+                using (cnn = new SqlConnection(connectionString))
+                {
+                    cnn.Open();
+                    string sqlCommand = $"Update WordBgs set {columnName}=@{columnName} Where WordBgId={id}";
+                    cmd = new SqlCommand(sqlCommand, cnn);
+                    cmd.Parameters.AddWithValue($"@{columnName}", getValue);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected == 1)
+                    {
+                        MessageBox.Show("Information Updated", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    cnn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

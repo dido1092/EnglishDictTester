@@ -46,6 +46,7 @@
             buttonDeleteWordsEn = new Button();
             buttonUpdateTableEn = new Button();
             labelTablesNumberOfWords = new Label();
+            buttonUpdateTableBg = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEn).BeginInit();
@@ -126,7 +127,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(788, 12);
+            buttonRefresh.Location = new Point(701, 12);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(109, 42);
             buttonRefresh.TabIndex = 3;
@@ -154,7 +155,7 @@
             // 
             // buttonDeleteWordsEn
             // 
-            buttonDeleteWordsEn.Location = new Point(681, 368);
+            buttonDeleteWordsEn.Location = new Point(591, 403);
             buttonDeleteWordsEn.Name = "buttonDeleteWordsEn";
             buttonDeleteWordsEn.Size = new Size(84, 29);
             buttonDeleteWordsEn.TabIndex = 8;
@@ -164,7 +165,7 @@
             // 
             // buttonUpdateTableEn
             // 
-            buttonUpdateTableEn.Location = new Point(681, 88);
+            buttonUpdateTableEn.Location = new Point(309, 403);
             buttonUpdateTableEn.Name = "buttonUpdateTableEn";
             buttonUpdateTableEn.Size = new Size(84, 29);
             buttonUpdateTableEn.TabIndex = 14;
@@ -175,17 +176,28 @@
             // labelTablesNumberOfWords
             // 
             labelTablesNumberOfWords.AutoSize = true;
-            labelTablesNumberOfWords.Location = new Point(608, 400);
+            labelTablesNumberOfWords.Location = new Point(21, 465);
             labelTablesNumberOfWords.Name = "labelTablesNumberOfWords";
             labelTablesNumberOfWords.Size = new Size(42, 15);
             labelTablesNumberOfWords.TabIndex = 15;
             labelTablesNumberOfWords.Text = "words:";
             // 
+            // buttonUpdateTableBg
+            // 
+            buttonUpdateTableBg.Location = new Point(21, 403);
+            buttonUpdateTableBg.Name = "buttonUpdateTableBg";
+            buttonUpdateTableBg.Size = new Size(84, 29);
+            buttonUpdateTableBg.TabIndex = 16;
+            buttonUpdateTableBg.Text = "Update";
+            buttonUpdateTableBg.UseVisualStyleBackColor = true;
+            buttonUpdateTableBg.Click += buttonUpdateTableBg_Click;
+            // 
             // frmTables
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(909, 441);
+            ClientSize = new Size(837, 501);
+            Controls.Add(buttonUpdateTableBg);
             Controls.Add(labelTablesNumberOfWords);
             Controls.Add(buttonUpdateTableEn);
             Controls.Add(buttonDeleteWordsEn);
@@ -225,5 +237,6 @@
         private DataGridViewTextBoxColumn enWordDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn transcriptionsDataGridViewTextBoxColumn;
         private Label labelTablesNumberOfWords;
+        private Button buttonUpdateTableBg;
     }
 }
