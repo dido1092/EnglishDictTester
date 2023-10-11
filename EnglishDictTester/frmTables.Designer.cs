@@ -63,7 +63,7 @@
             dataGridViewBg.Location = new Point(21, 88);
             dataGridViewBg.Name = "dataGridViewBg";
             dataGridViewBg.RowTemplate.Height = 25;
-            dataGridViewBg.Size = new Size(282, 309);
+            dataGridViewBg.Size = new Size(312, 309);
             dataGridViewBg.TabIndex = 0;
             // 
             // wordBgIdDataGridViewTextBoxColumn
@@ -91,7 +91,7 @@
             dataGridViewEn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewEn.Columns.AddRange(new DataGridViewColumn[] { wordEnIdDataGridViewTextBoxColumn, enWordDataGridViewTextBoxColumn, transcriptionsDataGridViewTextBoxColumn });
             dataGridViewEn.DataSource = wordEnBindingSource;
-            dataGridViewEn.Location = new Point(309, 88);
+            dataGridViewEn.Location = new Point(339, 88);
             dataGridViewEn.Name = "dataGridViewEn";
             dataGridViewEn.RowTemplate.Height = 25;
             dataGridViewEn.Size = new Size(366, 309);
@@ -127,7 +127,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(701, 12);
+            buttonRefresh.Location = new Point(716, 12);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(109, 42);
             buttonRefresh.TabIndex = 3;
@@ -147,7 +147,7 @@
             // labelWordsEn
             // 
             labelWordsEn.AutoSize = true;
-            labelWordsEn.Location = new Point(309, 70);
+            labelWordsEn.Location = new Point(339, 70);
             labelWordsEn.Name = "labelWordsEn";
             labelWordsEn.Size = new Size(59, 15);
             labelWordsEn.TabIndex = 5;
@@ -155,7 +155,7 @@
             // 
             // buttonDeleteWordsEn
             // 
-            buttonDeleteWordsEn.Location = new Point(591, 403);
+            buttonDeleteWordsEn.Location = new Point(621, 403);
             buttonDeleteWordsEn.Name = "buttonDeleteWordsEn";
             buttonDeleteWordsEn.Size = new Size(84, 29);
             buttonDeleteWordsEn.TabIndex = 8;
@@ -165,7 +165,7 @@
             // 
             // buttonUpdateTableEn
             // 
-            buttonUpdateTableEn.Location = new Point(309, 403);
+            buttonUpdateTableEn.Location = new Point(339, 403);
             buttonUpdateTableEn.Name = "buttonUpdateTableEn";
             buttonUpdateTableEn.Size = new Size(84, 29);
             buttonUpdateTableEn.TabIndex = 14;
