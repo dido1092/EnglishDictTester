@@ -186,8 +186,8 @@ namespace EnglishDictTester
         {
             int numberOfIncorrectWords = 0;
 
-            //if (textBoxTranslateWord.Text != "" && correctAnswer < numberOfWords)
-            if (textBoxTranslateWord.Text != "")
+            if (textBoxTranslateWord.Text != "" && correctAnswer < numberOfWords)
+                //if (textBoxTranslateWord.Text != "")
             {
                 if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
                 {
