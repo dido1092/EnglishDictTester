@@ -12,6 +12,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <COMReference Include="SpeechLib">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>5</VersionMajor>
+      <Guid>e6da930b-bba5-44df-ac6f-fe60c1eddec8</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="dictionary_book_.ico" />
   </ItemGroup>
 
@@ -23,6 +35,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Speech" Version="7.0.0" />
     <PackageReference Include="XLocalizer.Translate.MicrosoftTranslate" Version="1.0.1" />
   </ItemGroup>
 
@@ -30,6 +43,21 @@
     <ProjectReference Include="..\EnglishDictTester.Data.Common\EnglishDictTester.Data.Common.csproj" />
     <ProjectReference Include="..\EnglishDictTester.Data.Models\EnglishDictTester.Data.Models.csproj" />
     <ProjectReference Include="..\EnglishDictTester.Data\EnglishDictTester.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

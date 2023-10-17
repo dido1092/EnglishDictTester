@@ -2,13 +2,10 @@
 using EnglishDictTester.Data.Models;
 using EnglishDictTester.Enumerators;
 using EnglishDictTester.Get_Id_s;
-using Google.Cloud.Translation.V2;
-using Azure;
-using Azure.AI.Translation.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Speech.Recognition;
 using System.Data;
-using FluentAssertions.Common;
-using System.Net;
+using System.Speech.Synthesis;
 
 namespace EnglishDictTester
 {
@@ -505,12 +502,26 @@ namespace EnglishDictTester
                         if (cbNumberOfWords != 0)
                         {
                             ProgressBarTest.Minimum = 0;
-                            //ProgressBarTest.Value++;
                             ProgressBarTest.Maximum = cbNumberOfWords;
                         }
                     }
                     Pronounce();
                 }
+            }
+        }
+
+        private void ReadText(string word)
+        {
+            SpeechSynthesizer speech = new SpeechSynthesizer();
+            speech.SpeakAsync(word);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (comboBoxLanguage.Text == "En")
+            {
+                string word = labelExamWord.Text;
+                ReadText(word);
             }
         }
     }

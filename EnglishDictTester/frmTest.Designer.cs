@@ -48,12 +48,13 @@
             buttonLoadSelectedWords = new Button();
             labelPronounce = new Label();
             ProgressBarTest = new ProgressBar();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
-            comboBoxNumberOfWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50" });
             comboBoxNumberOfWords.Location = new Point(15, 137);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
             comboBoxNumberOfWords.Size = new Size(63, 23);
@@ -97,7 +98,7 @@
             // 
             // buttonHint
             // 
-            buttonHint.Location = new Point(480, 33);
+            buttonHint.Location = new Point(480, 34);
             buttonHint.Name = "buttonHint";
             buttonHint.Size = new Size(75, 23);
             buttonHint.TabIndex = 6;
@@ -165,9 +166,9 @@
             // 
             // buttonLoadAllIncorrectAnswers
             // 
-            buttonLoadAllIncorrectAnswers.Location = new Point(12, 193);
+            buttonLoadAllIncorrectAnswers.Location = new Point(12, 188);
             buttonLoadAllIncorrectAnswers.Name = "buttonLoadAllIncorrectAnswers";
-            buttonLoadAllIncorrectAnswers.Size = new Size(159, 23);
+            buttonLoadAllIncorrectAnswers.Size = new Size(153, 23);
             buttonLoadAllIncorrectAnswers.TabIndex = 13;
             buttonLoadAllIncorrectAnswers.Text = "Load All Incorrect answers";
             buttonLoadAllIncorrectAnswers.UseVisualStyleBackColor = true;
@@ -176,7 +177,7 @@
             // labelIncorrectWords
             // 
             labelIncorrectWords.AutoSize = true;
-            labelIncorrectWords.Location = new Point(12, 219);
+            labelIncorrectWords.Location = new Point(12, 214);
             labelIncorrectWords.Name = "labelIncorrectWords";
             labelIncorrectWords.Size = new Size(95, 15);
             labelIncorrectWords.TabIndex = 14;
@@ -187,26 +188,25 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 246);
             label2.Name = "label2";
-            label2.Size = new Size(123, 15);
+            label2.Size = new Size(113, 15);
             label2.TabIndex = 16;
-            label2.Text = "# of incorrect answers";
+            label2.Text = "# of incorrect words";
             // 
             // comboBoxNumberOfIncorrectWords
             // 
             comboBoxNumberOfIncorrectWords.FormattingEnabled = true;
-            comboBoxNumberOfIncorrectWords.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "30", "50" });
             comboBoxNumberOfIncorrectWords.Location = new Point(12, 264);
             comboBoxNumberOfIncorrectWords.Name = "comboBoxNumberOfIncorrectWords";
-            comboBoxNumberOfIncorrectWords.Size = new Size(63, 23);
+            comboBoxNumberOfIncorrectWords.Size = new Size(66, 23);
             comboBoxNumberOfIncorrectWords.TabIndex = 18;
             // 
             // buttonLoadSelectedWords
             // 
             buttonLoadSelectedWords.Location = new Point(81, 264);
             buttonLoadSelectedWords.Name = "buttonLoadSelectedWords";
-            buttonLoadSelectedWords.Size = new Size(129, 23);
+            buttonLoadSelectedWords.Size = new Size(84, 23);
             buttonLoadSelectedWords.TabIndex = 19;
-            buttonLoadSelectedWords.Text = "Load selected words";
+            buttonLoadSelectedWords.Text = "Load words";
             buttonLoadSelectedWords.UseVisualStyleBackColor = true;
             buttonLoadSelectedWords.Click += buttonLoadSelectedWords_Click;
             // 
@@ -227,11 +227,22 @@
             ProgressBarTest.Size = new Size(191, 10);
             ProgressBarTest.TabIndex = 21;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Audio_24;
+            pictureBox1.Location = new Point(501, 74);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(25, 30);
+            pictureBox1.TabIndex = 23;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(603, 419);
+            Controls.Add(pictureBox1);
             Controls.Add(ProgressBarTest);
             Controls.Add(labelPronounce);
             Controls.Add(buttonLoadSelectedWords);
@@ -255,6 +266,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmTest";
             Text = "Test";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -284,5 +296,6 @@
         private Button buttonLoadSelectedWords;
         private Label labelPronounce;
         private ProgressBar ProgressBarTest;
+        private PictureBox pictureBox1;
     }
 }
