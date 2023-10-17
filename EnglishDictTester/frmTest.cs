@@ -20,7 +20,7 @@ namespace EnglishDictTester
         int wordB = 0;
         int correctAnswer = 0;
         int numberOfWords = 0;
-        //string? correctWordBg = string.Empty;
+        int countWords = 0;
         string translateWord = string.Empty;
         string[]? arrAllWords;
         string[]? arrSelectedWords;
@@ -51,6 +51,7 @@ namespace EnglishDictTester
                         wordB = 1;
                         correctAnswer = 0;
                         numberOfWords = 0;
+                        countWords = 0;
                         isFinish = false;
                         textBoxTranslateWord.Text = "";
                         isButtonLoadClicked = true;
@@ -77,11 +78,9 @@ namespace EnglishDictTester
                             string wordBg = string.Empty;
 
                             int mapEnId = int.Parse(mapTableID.WordEnId.ToString());
-                            //string mapEnId = mapTableID.WordEnId.ToString();
                             var enIDs = context.WordEns?.Select(i => new { i.WordEnId, i.EnWord }).Where(w => w.WordEnId == mapEnId);
 
                             int mapBgId = int.Parse(mapTableID.WordBgId.ToString());
-                            //string mapBgId = mapTableID.WordBgId.ToString();
                             var bgIDs = context.WordBgs?.Select(i => new { i.WordBgId, i.BgWord }).Where(w => w.WordBgId == mapBgId);
 
                             foreach (var enID in enIDs)
@@ -186,8 +185,10 @@ namespace EnglishDictTester
         {
             int numberOfIncorrectWords = 0;
 
+            countWords++;
+            if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords)
             //if (textBoxTranslateWord.Text != "" && correctAnswer < numberOfWords)
-            if (textBoxTranslateWord.Text != "")
+            //if (textBoxTranslateWord.Text != "")
             {
                 if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
                 {
@@ -254,7 +255,6 @@ namespace EnglishDictTester
                         {
                             MessageBox.Show("Finish!");
                             isFinish = true;
-                            //return;
                         }
                         if (i < arrWords.Length)
                         {
@@ -291,6 +291,7 @@ namespace EnglishDictTester
                     textBoxTranslateWord.Text = "";
 
                     Pronounce();
+
                     textBoxTranslateWord.Focus();
                 }
             }
@@ -320,7 +321,6 @@ namespace EnglishDictTester
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
-                        //enW = labelExamWord.Text.ToUpper(),
                         enW = textBoxTranslateWord.Text.ToUpper(),
                         bgW = labelExamWord.Text.ToUpper(),
                         answer = getAnswer,
@@ -419,8 +419,6 @@ namespace EnglishDictTester
                         count++;
                     }
                 }
-                //numberOfWords = arrAllCorrectedEnWords.Count();
-                //SelectedWords(numberOfWords);
                 if (arrAllCorrectedEnWords.Length != 0)
                 {
                     labelExamWord.Text = arrAllCorrectedEnWords[0];
@@ -458,8 +456,6 @@ namespace EnglishDictTester
                         count++;
                     }
                 }
-                //numberOfWords = arrAllCorrectedBgWords.Count();
-                //SelectedWords(numberOfWords);
                 if (arrAllCorrectedBgWords.Length != 0)
                 {
                     labelExamWord.Text = arrAllCorrectedBgWords[0];
@@ -473,21 +469,22 @@ namespace EnglishDictTester
 
         private void ClearVariablesAndControls()
         {
-            //i = 0;
-            //correctAnswer = 0;
             isFinish = false;
             textBoxTranslateWord.Text = "";
             labelScore.Text = "Score: 0";
+            countWords = 0;
         }
         private void buttonLoadSelectedWords_Click(object sender, EventArgs e)
         {
             i = 0;
+            countWords = 0;
             isFinish = false;
-            isButtonLoadSelectedIncorrectWordsClicked = true;
-            textBoxTranslateWord.Text = "";
-            labelScore.Text = "Score: 0";
-            ProgressBarTest.Maximum = 0;
             correctAnswer = 0;
+            ProgressBarTest.Maximum = 0;
+            labelScore.Text = "Score: 0";
+            textBoxTranslateWord.Text = "";
+            isButtonLoadSelectedIncorrectWordsClicked = true;
+            numberOfWords = int.Parse(comboBoxNumberOfIncorrectWords.Text);
 
             if (comboBoxNumberOfIncorrectWords.Text != "")
             {
