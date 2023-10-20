@@ -1,6 +1,6 @@
 ﻿using EnglishDictTester.Data;
 using EnglishDictTester.Data.Common;
-using EnglishDictTester.Data.Migrations;
+//using EnglishDictTester.Data.Migrations;
 using EnglishDictTester.Data.Models;
 using Microsoft.Data.SqlClient;
 using System;

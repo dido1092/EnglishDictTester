@@ -3,32 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishDictTester", "EnglishDictTester\EnglishDictTester.csproj", "{DE89039C-1210-495A-BC82-30027658A067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishDictTester", "EnglishDictTester\EnglishDictTester.csproj", "{DE89039C-1210-495A-BC82-30027658A067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishDictTester.Data", "EnglishDictTester.Data\EnglishDictTester.Data.csproj", "{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishDictTester.Data", "EnglishDictTester.Data\EnglishDictTester.Data.csproj", "{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishDictTester.Data.Common", "EnglishDictTester.Data.Common\EnglishDictTester.Data.Common.csproj", "{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishDictTester.Data.Common", "EnglishDictTester.Data.Common\EnglishDictTester.Data.Common.csproj", "{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishDictTester.Data.Models", "EnglishDictTester.Data.Models\EnglishDictTester.Data.Models.csproj", "{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishDictTester.Data.Models", "EnglishDictTester.Data.Models\EnglishDictTester.Data.Models.csproj", "{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE89039C-1210-495A-BC82-30027658A067}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{DE89039C-1210-495A-BC82-30027658A067}.All|Any CPU.Build.0 = Release|Any CPU
 		{DE89039C-1210-495A-BC82-30027658A067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE89039C-1210-495A-BC82-30027658A067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE89039C-1210-495A-BC82-30027658A067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE89039C-1210-495A-BC82-30027658A067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}.All|Any CPU.Build.0 = Release|Any CPU
 		{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FE3CA2E-D42A-40F2-BA79-354D0F76190A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}.All|Any CPU.Build.0 = Release|Any CPU
 		{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6C08293-DA48-40F9-9DEF-CC7ABA00FAD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}.All|Any CPU.Build.0 = Release|Any CPU
 		{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B5FACCF-5BD4-4A63-A0DB-3E2206CB1E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU

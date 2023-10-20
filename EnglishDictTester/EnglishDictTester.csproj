@@ -9,6 +9,7 @@
     <StartupObject></StartupObject>
     <UseWPF>False</UseWPF>
     <ApplicationIcon>dictionary_book_.ico</ApplicationIcon>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,15 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.AI.Translation.Text" Version="1.0.0-beta.1" />
-    <PackageReference Include="FluentAssertions" Version="6.12.0" />
-    <PackageReference Include="Google.Cloud.Translation.V2" Version="3.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="System.Speech" Version="7.0.0" />
-    <PackageReference Include="XLocalizer.Translate.MicrosoftTranslate" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using EnglishDictTester.Data.Common;
-using Google.Cloud.Translation.V2;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
