@@ -41,6 +41,7 @@
             wordsEnBgBindingSource = new BindingSource(components);
             buttonTables = new Button();
             buttonResults = new Button();
+            buttonWordGame = new Button();
             ((System.ComponentModel.ISupportInitialize)wordsEnBgBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -118,7 +119,7 @@
             // 
             // buttonTables
             // 
-            buttonTables.Location = new Point(541, 202);
+            buttonTables.Location = new Point(541, 259);
             buttonTables.Name = "buttonTables";
             buttonTables.Size = new Size(83, 31);
             buttonTables.TabIndex = 9;
@@ -128,7 +129,7 @@
             // 
             // buttonResults
             // 
-            buttonResults.Location = new Point(541, 261);
+            buttonResults.Location = new Point(541, 316);
             buttonResults.Name = "buttonResults";
             buttonResults.Size = new Size(83, 31);
             buttonResults.TabIndex = 10;
@@ -136,11 +137,22 @@
             buttonResults.UseVisualStyleBackColor = true;
             buttonResults.Click += buttonResults_Click;
             // 
+            // buttonWordGame
+            // 
+            buttonWordGame.Location = new Point(541, 199);
+            buttonWordGame.Name = "buttonWordGame";
+            buttonWordGame.Size = new Size(83, 33);
+            buttonWordGame.TabIndex = 11;
+            buttonWordGame.Text = "Word Game";
+            buttonWordGame.UseVisualStyleBackColor = true;
+            buttonWordGame.Click += buttonWordGame_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(663, 361);
+            ClientSize = new Size(663, 445);
+            Controls.Add(buttonWordGame);
             Controls.Add(buttonResults);
             Controls.Add(buttonTables);
             Controls.Add(buttonMakeTest);
@@ -174,5 +186,6 @@
         private BindingSource wordsEnBgBindingSource;
         private Button buttonTables;
         private Button buttonResults;
+        private Button buttonWordGame;
     }
 }

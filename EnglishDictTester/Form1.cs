@@ -121,5 +121,11 @@ namespace EnglishDictTester
             frmResults frmResults = new frmResults();
             frmResults.Show();
         }
+
+        private void buttonWordGame_Click(object sender, EventArgs e)
+        {
+            frmWordGame frmWordGame = new frmWordGame();
+            frmWordGame.Show();
+        }
     }
 }
