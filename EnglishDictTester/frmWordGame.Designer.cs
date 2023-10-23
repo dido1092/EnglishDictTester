@@ -35,7 +35,7 @@
             labelScore = new Label();
             textBoxNumberOfWords = new TextBox();
             label1 = new Label();
-            progressBar1 = new ProgressBar();
+            progressBarWordGame = new ProgressBar();
             SuspendLayout();
             // 
             // buttonLoad
@@ -101,19 +101,19 @@
             label1.TabIndex = 6;
             label1.Text = "# of words";
             // 
-            // progressBar1
+            // progressBarWordGame
             // 
-            progressBar1.Location = new Point(108, 197);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(206, 10);
-            progressBar1.TabIndex = 7;
+            progressBarWordGame.Location = new Point(108, 197);
+            progressBarWordGame.Name = "progressBarWordGame";
+            progressBarWordGame.Size = new Size(206, 10);
+            progressBarWordGame.TabIndex = 7;
             // 
             // frmWordGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(498, 394);
-            Controls.Add(progressBar1);
+            Controls.Add(progressBarWordGame);
             Controls.Add(label1);
             Controls.Add(textBoxNumberOfWords);
             Controls.Add(labelScore);
@@ -138,6 +138,6 @@
         private Label labelScore;
         private TextBox textBoxNumberOfWords;
         private Label label1;
-        private ProgressBar progressBar1;
+        private ProgressBar progressBarWordGame;
     }
 }

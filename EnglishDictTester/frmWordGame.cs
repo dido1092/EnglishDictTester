@@ -30,14 +30,14 @@ namespace EnglishDictTester
             q = 0;
             countScore = 0;
             int counter = 0;
-            progressBar1.Minimum = 0;
-            progressBar1.Value = 1;
+            progressBarWordGame.Minimum = 0;
+            progressBarWordGame.Value = 1;
 
             words = new string[int.Parse(textBoxNumberOfWords.Text)];
 
             wordsCount = words.Length;
 
-            progressBar1.Maximum = words.Length;
+            progressBarWordGame.Maximum = words.Length;
 
             var enWords = context.WordEns?.Select(e => new { e.EnWord }).ToList();
 
@@ -73,7 +73,7 @@ namespace EnglishDictTester
             }
             else
             {
-                progressBar1.Value += 1;
+                progressBarWordGame.Value += 1;
             }
             if (words[q] == writeWord)
             {
