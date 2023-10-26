@@ -17,7 +17,7 @@ namespace EnglishDictTester
         EnglishDictTesterContext context = new EnglishDictTesterContext();
         Random rnd = new Random();
         public static string[] words = null!;
-        public static int q = 0;
+        public static int counter = 0;
         public static int countScore = 0;
         public static int wordsCount = 0;
         public frmWordGame()
@@ -27,11 +27,12 @@ namespace EnglishDictTester
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            q = 0;
+            frmWordGame.counter = 0;
             countScore = 0;
             int counter = 0;
             progressBarWordGame.Minimum = 0;
             progressBarWordGame.Value = 1;
+            labelScore.Text = $"Score: {countScore}";
 
             words = new string[int.Parse(textBoxNumberOfWords.Text)];
 
@@ -63,9 +64,14 @@ namespace EnglishDictTester
         private void buttonNext_Click(object sender, EventArgs e)
         {
             string writeWord = textBoxWord.Text.ToUpper();
-            q++;
 
-            if (q >= wordsCount)
+
+            if (words[counter] == writeWord)
+            {
+                countScore++;
+                labelScore.Text = $"Score: {countScore}";
+            }
+            if (counter >= wordsCount - 1)
             {
                 MessageBox.Show("Finish!");
                 labelScore.Text = $"Score: {countScore}";
@@ -75,13 +81,8 @@ namespace EnglishDictTester
             {
                 progressBarWordGame.Value += 1;
             }
-            if (words[q] == writeWord)
-            {
-                countScore++;
-                labelScore.Text = $"Score: {countScore}";
-            }
-
-            labelShuffleWord.Text = Scramble(words[q].ToString());
+            counter++;
+            labelShuffleWord.Text = Scramble(words[counter].ToString());
             textBoxWord.Text = "";
 
             textBoxWord.Focus();
