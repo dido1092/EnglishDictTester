@@ -131,7 +131,7 @@ namespace EnglishDictTester
 
                         labelExamWord.Text = arrSelectedWords[0];
 
-                        AddFirstWord();
+                        AddTestWordsToDict();
 
                         Pronounce();
                     }
@@ -247,7 +247,7 @@ namespace EnglishDictTester
                         isFinish = true;
                         textBoxTranslateWord.Text = "";
                         correctAnswer = 0;
-                        TestResults();
+                        //TestResults();
                         MessageBox.Show("Finish");
 
                     }
@@ -297,18 +297,9 @@ namespace EnglishDictTester
 
                     Pronounce();
 
-                    string currentWord = labelExamWord.Text;
+                    //string currentWord = labelExamWord.Text;
 
-                    if (!dictResultWords.ContainsKey(currentWord))
-                    {
-                        dictResultWords.Add(currentWord, 1);
-
-                    }
-                    else
-                    {
-                        dictResultWords[currentWord] += 1;
-                    }
-
+                    AddTestWordsToDict();
 
                     textBoxTranslateWord.Focus();
                 }
@@ -392,7 +383,7 @@ namespace EnglishDictTester
         {
             if (isButtonLoadClicked)
             {
-                MessageBox.Show(arrSelectedWords[i + 1]);//i+1
+                MessageBox.Show(arrSelectedWords![i + 1]);//i+1
             }
             if (isButtonLoadAllIncorrectAnswersIsClicked && comboBoxNumberOfIncorrectWords.Text != "")
             {
@@ -400,11 +391,11 @@ namespace EnglishDictTester
                 {
                     if (comboBoxLanguage.Text == "En")
                     {
-                        MessageBox.Show(arrAllCorrectedBgWords[i]);
+                        MessageBox.Show(arrAllCorrectedBgWords![i]);
                     }
                     else if (comboBoxLanguage.Text == "Bg")
                     {
-                        MessageBox.Show(arrAllCorrectedEnWords[i]);
+                        MessageBox.Show(arrAllCorrectedEnWords![i]);
                     }
                 }
             }
@@ -463,7 +454,7 @@ namespace EnglishDictTester
                 var bgCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.bgId, t.lngName, t.enW, t.answer }).Where(a => a.answer == "Incorrect" && a.lngName == "Bg");
                 var bgIds = bgCorrectWordsId?.Select(w => new { w.bgId });
 
-                arrAllCorrectedEnWords = new string[bgIds.Count()];
+                arrAllCorrectedEnWords = new string[bgIds!.Count()];
                 arrAllCorrectedBgWords = new string[bgIds.Count()];
 
                 labelIncorrectWords.Text = "Incorrect words: " + bgIds?.Count().ToString();
@@ -475,14 +466,14 @@ namespace EnglishDictTester
 
                         var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordBgId == getIdBg.bgId.Value);
 
-                        correctIdBgAnalog = mapTableIDs.WordBgId.Value;
-                        correctIdEnAnalog = mapTableIDs.WordEnId.Value;
+                        correctIdBgAnalog = mapTableIDs!.WordBgId!.Value;
+                        correctIdEnAnalog = mapTableIDs.WordEnId!.Value;
 
                         var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(i => i.WordBgId.ToString() == correctIdBgAnalog.ToString());
                         var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(i => i.WordEnId.ToString() == correctIdEnAnalog.ToString());
 
-                        arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
-                        arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
+                        arrAllCorrectedBgWords[count] = correctWordBg!.BgWord!.ToString();
+                        arrAllCorrectedEnWords[count] = correctWordEn!.EnWord!.ToString();
 
                         count++;
                     }
@@ -525,11 +516,11 @@ namespace EnglishDictTester
                 {
                     if (comboBoxLanguage.Text == "En")
                     {
-                        labelExamWord.Text = arrAllCorrectedEnWords[0];
+                        labelExamWord.Text = arrAllCorrectedEnWords![0];
                     }
                     else if (comboBoxLanguage.Text == "Bg")
                     {
-                        labelExamWord.Text = arrAllCorrectedBgWords[0];
+                        labelExamWord.Text = arrAllCorrectedBgWords![0];
                     }
                     if (comboBoxNumberOfIncorrectWords.Text != "")
                     {
@@ -541,19 +532,19 @@ namespace EnglishDictTester
                             ProgressBarTest.Maximum = cbNumberOfWords;
                         }
                     }
-                    AddFirstWord();
+                    AddTestWordsToDict();
                     Pronounce();
                 }
             }
         }
 
-        private void AddFirstWord()
+        private void AddTestWordsToDict()
         {
             if (!dictResultWords.ContainsKey(labelExamWord.Text))
             {
-                dictResultWords.Add(labelExamWord.Text, 1);
-
+                dictResultWords.Add(labelExamWord.Text, 0);
             }
+            dictResultWords[labelExamWord.Text] += 1;
         }
 
         private void ReadText(string word)
