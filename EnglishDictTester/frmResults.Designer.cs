@@ -34,10 +34,8 @@ namespace EnglishDictTester
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResults));
             dataGridViewResults = new DataGridView();
-            testIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            test = new DataGridViewTextBoxColumn();
             lngNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            bgId = new DataGridViewTextBoxColumn();
-            enId = new DataGridViewTextBoxColumn();
             bgWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             enWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             answerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -48,7 +46,10 @@ namespace EnglishDictTester
             buttonDelete = new Button();
             buttonRemoveAllIncorrectTests = new Button();
             buttonRemoveAllCorrectTests = new Button();
-            labelNumberOfTests = new Label();
+            labelNumberOfWords = new Label();
+            comboBoxResultTest = new ComboBox();
+            buttonLoadTest = new Button();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).BeginInit();
             SuspendLayout();
@@ -60,53 +61,45 @@ namespace EnglishDictTester
             dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewResults.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { testIdDataGridViewTextBoxColumn, lngNameDataGridViewTextBoxColumn, bgId, enId, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn, dateTime });
+            dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { test, lngNameDataGridViewTextBoxColumn, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn, dateTime });
             dataGridViewResults.DataSource = testsBindingSource;
-            dataGridViewResults.Location = new Point(12, 22);
+            dataGridViewResults.Location = new Point(12, 82);
             dataGridViewResults.Name = "dataGridViewResults";
             dataGridViewResults.RowTemplate.Height = 25;
-            dataGridViewResults.Size = new Size(894, 591);
+            dataGridViewResults.Size = new Size(882, 591);
             dataGridViewResults.TabIndex = 0;
             // 
-            // testIdDataGridViewTextBoxColumn
+            // test
             // 
-            testIdDataGridViewTextBoxColumn.DataPropertyName = "testId";
-            testIdDataGridViewTextBoxColumn.HeaderText = "testId";
-            testIdDataGridViewTextBoxColumn.Name = "testIdDataGridViewTextBoxColumn";
+            test.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            test.DataPropertyName = "test";
+            test.HeaderText = "test";
+            test.Name = "test";
             // 
             // lngNameDataGridViewTextBoxColumn
             // 
+            lngNameDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             lngNameDataGridViewTextBoxColumn.DataPropertyName = "lngName";
             lngNameDataGridViewTextBoxColumn.HeaderText = "lngName";
             lngNameDataGridViewTextBoxColumn.Name = "lngNameDataGridViewTextBoxColumn";
             // 
-            // bgId
-            // 
-            bgId.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            bgId.DataPropertyName = "bgId";
-            bgId.HeaderText = "bgId";
-            bgId.Name = "bgId";
-            // 
-            // enId
-            // 
-            enId.DataPropertyName = "enId";
-            enId.HeaderText = "enId";
-            enId.Name = "enId";
-            // 
             // bgWDataGridViewTextBoxColumn
             // 
+            bgWDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             bgWDataGridViewTextBoxColumn.DataPropertyName = "bgW";
             bgWDataGridViewTextBoxColumn.HeaderText = "bgW";
             bgWDataGridViewTextBoxColumn.Name = "bgWDataGridViewTextBoxColumn";
             // 
             // enWDataGridViewTextBoxColumn
             // 
+            enWDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             enWDataGridViewTextBoxColumn.DataPropertyName = "enW";
             enWDataGridViewTextBoxColumn.HeaderText = "enW";
             enWDataGridViewTextBoxColumn.Name = "enWDataGridViewTextBoxColumn";
             // 
             // answerDataGridViewTextBoxColumn
             // 
+            answerDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             answerDataGridViewTextBoxColumn.DataPropertyName = "answer";
             answerDataGridViewTextBoxColumn.HeaderText = "answer";
             answerDataGridViewTextBoxColumn.Name = "answerDataGridViewTextBoxColumn";
@@ -124,7 +117,7 @@ namespace EnglishDictTester
             // 
             // buttonResultRefresh
             // 
-            buttonResultRefresh.Location = new Point(931, 22);
+            buttonResultRefresh.Location = new Point(914, 82);
             buttonResultRefresh.Name = "buttonResultRefresh";
             buttonResultRefresh.Size = new Size(93, 34);
             buttonResultRefresh.TabIndex = 1;
@@ -134,7 +127,7 @@ namespace EnglishDictTester
             // 
             // buttonUpdateResult
             // 
-            buttonUpdateResult.Location = new Point(931, 81);
+            buttonUpdateResult.Location = new Point(914, 141);
             buttonUpdateResult.Name = "buttonUpdateResult";
             buttonUpdateResult.Size = new Size(93, 32);
             buttonUpdateResult.TabIndex = 2;
@@ -144,7 +137,7 @@ namespace EnglishDictTester
             // 
             // buttonDelete
             // 
-            buttonDelete.Location = new Point(931, 142);
+            buttonDelete.Location = new Point(914, 202);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(93, 32);
             buttonDelete.TabIndex = 3;
@@ -154,7 +147,7 @@ namespace EnglishDictTester
             // 
             // buttonRemoveAllIncorrectTests
             // 
-            buttonRemoveAllIncorrectTests.Location = new Point(931, 204);
+            buttonRemoveAllIncorrectTests.Location = new Point(914, 264);
             buttonRemoveAllIncorrectTests.Name = "buttonRemoveAllIncorrectTests";
             buttonRemoveAllIncorrectTests.Size = new Size(93, 45);
             buttonRemoveAllIncorrectTests.TabIndex = 4;
@@ -164,7 +157,7 @@ namespace EnglishDictTester
             // 
             // buttonRemoveAllCorrectTests
             // 
-            buttonRemoveAllCorrectTests.Location = new Point(931, 568);
+            buttonRemoveAllCorrectTests.Location = new Point(914, 572);
             buttonRemoveAllCorrectTests.Name = "buttonRemoveAllCorrectTests";
             buttonRemoveAllCorrectTests.Size = new Size(93, 45);
             buttonRemoveAllCorrectTests.TabIndex = 5;
@@ -172,21 +165,51 @@ namespace EnglishDictTester
             buttonRemoveAllCorrectTests.UseVisualStyleBackColor = true;
             buttonRemoveAllCorrectTests.Click += buttonRemoveAllCorrectTests_Click;
             // 
-            // labelNumberOfTests
+            // labelNumberOfWords
             // 
-            labelNumberOfTests.AutoSize = true;
-            labelNumberOfTests.Location = new Point(775, 616);
-            labelNumberOfTests.Name = "labelNumberOfTests";
-            labelNumberOfTests.Size = new Size(96, 15);
-            labelNumberOfTests.TabIndex = 6;
-            labelNumberOfTests.Text = "Number of Tests:";
+            labelNumberOfWords.AutoSize = true;
+            labelNumberOfWords.Location = new Point(767, 676);
+            labelNumberOfWords.Name = "labelNumberOfWords";
+            labelNumberOfWords.Size = new Size(102, 15);
+            labelNumberOfWords.TabIndex = 6;
+            labelNumberOfWords.Text = "Number of Words";
+            // 
+            // comboBoxResultTest
+            // 
+            comboBoxResultTest.FormattingEnabled = true;
+            comboBoxResultTest.Location = new Point(56, 39);
+            comboBoxResultTest.Name = "comboBoxResultTest";
+            comboBoxResultTest.Size = new Size(65, 23);
+            comboBoxResultTest.TabIndex = 7;
+            // 
+            // buttonLoadTest
+            // 
+            buttonLoadTest.Location = new Point(127, 39);
+            buttonLoadTest.Name = "buttonLoadTest";
+            buttonLoadTest.Size = new Size(75, 23);
+            buttonLoadTest.TabIndex = 8;
+            buttonLoadTest.Text = "Load Test";
+            buttonLoadTest.UseVisualStyleBackColor = true;
+            buttonLoadTest.Click += buttonLoadTest_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(56, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(34, 15);
+            label1.TabIndex = 9;
+            label1.Text = "Test#";
             // 
             // frmResults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1132, 655);
-            Controls.Add(labelNumberOfTests);
+            ClientSize = new Size(1076, 700);
+            Controls.Add(label1);
+            Controls.Add(buttonLoadTest);
+            Controls.Add(comboBoxResultTest);
+            Controls.Add(labelNumberOfWords);
             Controls.Add(buttonRemoveAllCorrectTests);
             Controls.Add(buttonRemoveAllIncorrectTests);
             Controls.Add(buttonDelete);
@@ -212,14 +235,15 @@ namespace EnglishDictTester
         private Button buttonDelete;
         private Button buttonRemoveAllIncorrectTests;
         private Button buttonRemoveAllCorrectTests;
-        private Label labelNumberOfTests;
-        private DataGridViewTextBoxColumn testIdDataGridViewTextBoxColumn;
+        private Label labelNumberOfWords;
+        private DataGridViewTextBoxColumn test;
         private DataGridViewTextBoxColumn lngNameDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn bgId;
-        private DataGridViewTextBoxColumn enId;
         private DataGridViewTextBoxColumn bgWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn enWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn answerDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dateTime;
+        private ComboBox comboBoxResultTest;
+        private Button buttonLoadTest;
+        private Label label1;
     }
 }

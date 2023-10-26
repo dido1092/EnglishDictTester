@@ -50,6 +50,9 @@ namespace EnglishDictTester
             buttonUpdateTableEn = new Button();
             labelTablesNumberOfWords = new Label();
             buttonUpdateTableBg = new Button();
+            textBoxInsert = new TextBox();
+            buttonInsert = new Button();
+            buttonExport = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBg).BeginInit();
             ((System.ComponentModel.ISupportInitialize)wordBgBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewEn).BeginInit();
@@ -195,11 +198,41 @@ namespace EnglishDictTester
             buttonUpdateTableBg.UseVisualStyleBackColor = true;
             buttonUpdateTableBg.Click += buttonUpdateTableBg_Click;
             // 
+            // textBoxInsert
+            // 
+            textBoxInsert.Location = new Point(21, 12);
+            textBoxInsert.Name = "textBoxInsert";
+            textBoxInsert.Size = new Size(312, 23);
+            textBoxInsert.TabIndex = 18;
+            // 
+            // buttonInsert
+            // 
+            buttonInsert.Location = new Point(339, 12);
+            buttonInsert.Name = "buttonInsert";
+            buttonInsert.Size = new Size(71, 24);
+            buttonInsert.TabIndex = 19;
+            buttonInsert.Text = "Insert";
+            buttonInsert.UseVisualStyleBackColor = true;
+            buttonInsert.Click += buttonInsert_Click;
+            // 
+            // buttonExport
+            // 
+            buttonExport.Location = new Point(745, 88);
+            buttonExport.Name = "buttonExport";
+            buttonExport.Size = new Size(80, 36);
+            buttonExport.TabIndex = 20;
+            buttonExport.Text = "Export";
+            buttonExport.UseVisualStyleBackColor = true;
+            buttonExport.Click += buttonExport_Click;
+            // 
             // frmTables
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(837, 501);
+            Controls.Add(buttonExport);
+            Controls.Add(buttonInsert);
+            Controls.Add(textBoxInsert);
             Controls.Add(buttonUpdateTableBg);
             Controls.Add(labelTablesNumberOfWords);
             Controls.Add(buttonUpdateTableEn);
@@ -241,5 +274,8 @@ namespace EnglishDictTester
         private DataGridViewTextBoxColumn transcriptionsDataGridViewTextBoxColumn;
         private Label labelTablesNumberOfWords;
         private Button buttonUpdateTableBg;
+        private TextBox textBoxInsert;
+        private Button buttonInsert;
+        private Button buttonExport;
     }
 }

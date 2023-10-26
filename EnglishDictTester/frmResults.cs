@@ -19,7 +19,7 @@ namespace EnglishDictTester
     public partial class frmResults : Form
     {
         EnglishDictTesterContext context = new EnglishDictTesterContext();
-
+        private static string connectionString = DbConfig.ConnectionString;
         public frmResults()
         {
             InitializeComponent();
@@ -27,8 +27,7 @@ namespace EnglishDictTester
 
         private void buttonResultRefresh_Click(object sender, EventArgs e)
         {
-            string connectionString = null;
-            connectionString = DbConfig.ConnectionString; //ConnectionString();
+            //ConnectionString();
 
             SqlConnection cnn = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand();
@@ -36,7 +35,7 @@ namespace EnglishDictTester
 
             try
             {
-                TableTests(connectionString);
+                Tests(connectionString);
             }
             catch (Exception)
             {
@@ -60,11 +59,18 @@ namespace EnglishDictTester
             conn.Open();
             int recordCount = (int)cmd.ExecuteScalar();
             conn.Close();
-            labelNumberOfTests.Text = $"Number of Test: {recordCount}";
+            labelNumberOfWords.Text = $"Number of Words: {recordCount}";
         }
-        private void TableTests(string connectionString)
+        private void Tests(string connectionString)
         {
             SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Tests", connectionString);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Tests");
+            dataGridViewResults.DataSource = ds.Tables["Tests"]?.DefaultView;
+        }
+        private void TestsSelected(string connectionString, int testNumber)
+        {
+            SqlDataAdapter da = new SqlDataAdapter($"SELECT * FROM Tests WHERE test={testNumber}", connectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "Tests");
             dataGridViewResults.DataSource = ds.Tables["Tests"]?.DefaultView;
@@ -115,8 +121,8 @@ namespace EnglishDictTester
         {
             DataGridViewCell cell = dataGridViewResults.SelectedCells[0] as DataGridViewCell;
 
-            string value = cell.Value.ToString();
-            int getID = int.Parse(value);
+            string value = cell.Value.ToString()!;
+            int getID = int.Parse(value!);
 
             //Remove row from DataGridView
             int rowIndex = dataGridViewResults.CurrentCell.RowIndex;
@@ -179,6 +185,29 @@ namespace EnglishDictTester
             }
 
 
+        }
+
+        private void buttonLoadTest_Click(object sender, EventArgs e)
+        {
+            comboBoxResultTest.Items.Clear();
+            HashSet<int> testNumbers = new HashSet<int>();
+
+            var tests = context.Tests!.Select(t => t.test).ToList();
+
+            testNumbers = tests.ToHashSet();
+
+            foreach (var testN in testNumbers)
+            {
+                comboBoxResultTest.Items.Add(testN);
+            }
+            if (comboBoxResultTest.Text != "")
+            {
+                int testNumber = int.Parse(comboBoxResultTest.Text);
+                int numberOfTest = context.Tests!.Where(t => t.test == testNumber).Count();
+
+                TestsSelected(connectionString, testNumber);
+                labelNumberOfWords.Text = $"Number of Words: {numberOfTest.ToString()}";
+            }
         }
     }
 }

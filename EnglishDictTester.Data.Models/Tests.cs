@@ -17,6 +17,9 @@ namespace EnglishDictTester.Data.Models
         [MaxLength(ValidationConstants.languageName)]
         public string? lngName { get; set; }
 
+        [Required]
+        public int test { get; set; }
+
         public int? bgId { get; set; }
 
         [Required]

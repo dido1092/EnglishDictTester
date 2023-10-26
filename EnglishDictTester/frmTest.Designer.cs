@@ -54,13 +54,16 @@ namespace EnglishDictTester
             pictureBox1 = new PictureBox();
             richTextBoxTestResult = new RichTextBox();
             labelTestResult = new Label();
+            comboBoxTestNumber = new ComboBox();
+            label4 = new Label();
+            buttonLoadTests = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
-            comboBoxNumberOfWords.Location = new Point(15, 137);
+            comboBoxNumberOfWords.Location = new Point(15, 199);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
             comboBoxNumberOfWords.Size = new Size(63, 23);
             comboBoxNumberOfWords.TabIndex = 1;
@@ -68,7 +71,7 @@ namespace EnglishDictTester
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(15, 119);
+            label1.Location = new Point(15, 181);
             label1.Name = "label1";
             label1.Size = new Size(63, 15);
             label1.TabIndex = 2;
@@ -131,7 +134,7 @@ namespace EnglishDictTester
             // 
             // buttonLoad
             // 
-            buttonLoad.Location = new Point(81, 137);
+            buttonLoad.Location = new Point(81, 199);
             buttonLoad.Name = "buttonLoad";
             buttonLoad.Size = new Size(84, 23);
             buttonLoad.TabIndex = 9;
@@ -142,7 +145,7 @@ namespace EnglishDictTester
             // labelAllWords
             // 
             labelAllWords.AutoSize = true;
-            labelAllWords.Location = new Point(15, 89);
+            labelAllWords.Location = new Point(15, 151);
             labelAllWords.Name = "labelAllWords";
             labelAllWords.Size = new Size(60, 15);
             labelAllWords.TabIndex = 10;
@@ -150,7 +153,7 @@ namespace EnglishDictTester
             // 
             // buttonLoadAllWords
             // 
-            buttonLoadAllWords.Location = new Point(12, 63);
+            buttonLoadAllWords.Location = new Point(12, 125);
             buttonLoadAllWords.Name = "buttonLoadAllWords";
             buttonLoadAllWords.Size = new Size(96, 23);
             buttonLoadAllWords.TabIndex = 11;
@@ -171,7 +174,7 @@ namespace EnglishDictTester
             // 
             // buttonLoadAllIncorrectAnswers
             // 
-            buttonLoadAllIncorrectAnswers.Location = new Point(12, 188);
+            buttonLoadAllIncorrectAnswers.Location = new Point(12, 250);
             buttonLoadAllIncorrectAnswers.Name = "buttonLoadAllIncorrectAnswers";
             buttonLoadAllIncorrectAnswers.Size = new Size(153, 23);
             buttonLoadAllIncorrectAnswers.TabIndex = 13;
@@ -182,7 +185,7 @@ namespace EnglishDictTester
             // labelIncorrectWords
             // 
             labelIncorrectWords.AutoSize = true;
-            labelIncorrectWords.Location = new Point(12, 214);
+            labelIncorrectWords.Location = new Point(12, 276);
             labelIncorrectWords.Name = "labelIncorrectWords";
             labelIncorrectWords.Size = new Size(95, 15);
             labelIncorrectWords.TabIndex = 14;
@@ -191,7 +194,7 @@ namespace EnglishDictTester
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 246);
+            label2.Location = new Point(12, 308);
             label2.Name = "label2";
             label2.Size = new Size(113, 15);
             label2.TabIndex = 16;
@@ -200,14 +203,14 @@ namespace EnglishDictTester
             // comboBoxNumberOfIncorrectWords
             // 
             comboBoxNumberOfIncorrectWords.FormattingEnabled = true;
-            comboBoxNumberOfIncorrectWords.Location = new Point(12, 264);
+            comboBoxNumberOfIncorrectWords.Location = new Point(12, 326);
             comboBoxNumberOfIncorrectWords.Name = "comboBoxNumberOfIncorrectWords";
             comboBoxNumberOfIncorrectWords.Size = new Size(66, 23);
             comboBoxNumberOfIncorrectWords.TabIndex = 18;
             // 
             // buttonLoadSelectedWords
             // 
-            buttonLoadSelectedWords.Location = new Point(81, 264);
+            buttonLoadSelectedWords.Location = new Point(81, 326);
             buttonLoadSelectedWords.Name = "buttonLoadSelectedWords";
             buttonLoadSelectedWords.Size = new Size(84, 23);
             buttonLoadSelectedWords.TabIndex = 19;
@@ -235,7 +238,7 @@ namespace EnglishDictTester
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Audio_24;
-            pictureBox1.Location = new Point(501, 74);
+            pictureBox1.Location = new Point(530, 74);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(25, 30);
             pictureBox1.TabIndex = 23;
@@ -246,7 +249,7 @@ namespace EnglishDictTester
             // 
             richTextBoxTestResult.Location = new Point(582, 35);
             richTextBoxTestResult.Name = "richTextBoxTestResult";
-            richTextBoxTestResult.Size = new Size(201, 343);
+            richTextBoxTestResult.Size = new Size(204, 343);
             richTextBoxTestResult.TabIndex = 24;
             richTextBoxTestResult.Text = "";
             // 
@@ -259,11 +262,41 @@ namespace EnglishDictTester
             labelTestResult.TabIndex = 25;
             labelTestResult.Text = "Selected words:";
             // 
+            // comboBoxTestNumber
+            // 
+            comboBoxTestNumber.FormattingEnabled = true;
+            comboBoxTestNumber.Location = new Point(12, 81);
+            comboBoxTestNumber.Name = "comboBoxTestNumber";
+            comboBoxTestNumber.Size = new Size(63, 23);
+            comboBoxTestNumber.TabIndex = 26;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 63);
+            label4.Name = "label4";
+            label4.Size = new Size(37, 15);
+            label4.TabIndex = 27;
+            label4.Text = "Test #";
+            // 
+            // buttonLoadTests
+            // 
+            buttonLoadTests.Location = new Point(81, 81);
+            buttonLoadTests.Name = "buttonLoadTests";
+            buttonLoadTests.Size = new Size(84, 23);
+            buttonLoadTests.TabIndex = 28;
+            buttonLoadTests.Text = "Load Tests";
+            buttonLoadTests.UseVisualStyleBackColor = true;
+            buttonLoadTests.Click += buttonLoadTests_Click;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(808, 419);
+            Controls.Add(buttonLoadTests);
+            Controls.Add(label4);
+            Controls.Add(comboBoxTestNumber);
             Controls.Add(labelTestResult);
             Controls.Add(richTextBoxTestResult);
             Controls.Add(pictureBox1);
@@ -323,5 +356,8 @@ namespace EnglishDictTester
         private PictureBox pictureBox1;
         private RichTextBox richTextBoxTestResult;
         private Label labelTestResult;
+        private ComboBox comboBoxTestNumber;
+        private Label label4;
+        private Button buttonLoadTests;
     }
 }

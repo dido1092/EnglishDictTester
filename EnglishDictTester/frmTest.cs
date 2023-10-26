@@ -42,7 +42,7 @@ namespace EnglishDictTester
         {
             if (comboBoxLanguage.SelectedIndex == 0 || comboBoxLanguage.SelectedIndex == 1)
             {
-                if (comboBoxNumberOfWords.Text != "")
+                if (comboBoxNumberOfWords.Text != "" && comboBoxTestNumber.Text != "")
                 {
                     if (int.Parse(comboBoxNumberOfWords.Text) != 0)
                     {
@@ -190,7 +190,7 @@ namespace EnglishDictTester
             int numberOfIncorrectWords = 0;
 
             countWords++;
-            if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords)
+            if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords && comboBoxTestNumber.Text != "")
             {
                 if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
                 {
@@ -335,6 +335,7 @@ namespace EnglishDictTester
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
+                        test = int.Parse(comboBoxTestNumber.Text),
                         enW = labelExamWord.Text.ToUpper(),
                         bgW = textBoxTranslateWord.Text.ToUpper(),
                         answer = getAnswer,
@@ -350,6 +351,7 @@ namespace EnglishDictTester
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
+                        test = int.Parse(comboBoxTestNumber.Text),
                         enW = textBoxTranslateWord.Text.ToUpper(),
                         bgW = labelExamWord.Text.ToUpper(),
                         answer = getAnswer,
@@ -517,7 +519,7 @@ namespace EnglishDictTester
             isButtonLoadSelectedIncorrectWordsClicked = true;
             numberOfWords = int.Parse(comboBoxNumberOfIncorrectWords.Text);
 
-            if (comboBoxNumberOfIncorrectWords.Text != "")
+            if (comboBoxNumberOfIncorrectWords.Text != "" && comboBoxTestNumber.Text != "")
             {
                 if (int.Parse(comboBoxNumberOfIncorrectWords.Text) != 0)
                 {
@@ -566,6 +568,21 @@ namespace EnglishDictTester
             {
                 string word = labelExamWord.Text;
                 ReadText(word);
+            }
+        }
+
+        private void buttonLoadTests_Click(object sender, EventArgs e)
+        {
+            comboBoxTestNumber.Items.Clear();
+            var tests = context.Tests!.Select(t => t.test).ToList();
+
+            HashSet<int> testNumbers = new HashSet<int>();
+
+            testNumbers = tests.ToHashSet();
+
+            foreach (var testN in testNumbers)
+            {
+                comboBoxTestNumber.Items.Add(testN);
             }
         }
     }

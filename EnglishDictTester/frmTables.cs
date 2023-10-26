@@ -1,16 +1,25 @@
-﻿using EnglishDictTester.Data.Common;
+﻿using EnglishDictTester.Data;
+using EnglishDictTester.Data.Common;
+using EnglishDictTester.Data.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace EnglishDictTester
 {
@@ -20,7 +29,8 @@ namespace EnglishDictTester
         {
             InitializeComponent();
         }
-
+        private static string connectionString = DbConfig.ConnectionString;
+        EnglishDictTesterContext context = new EnglishDictTesterContext();
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             Refresh();
@@ -28,8 +38,7 @@ namespace EnglishDictTester
 
         private void Refresh()
         {
-            string connectionString = null;
-            connectionString = DbConfig.ConnectionString; //ConnectionString();
+            //ConnectionString();
 
             SqlConnection cnn = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand();
@@ -208,6 +217,124 @@ namespace EnglishDictTester
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            OpenFile();
+            InsertInTables();
+
+        }
+        private void InsertInTables()
+        {
+            //OpenFile();
+
+            string patternBg = @"[А-Я]";
+            string patternEn = @"[A-Z]";
+
+            string[] lines = System.IO.File.ReadAllLines(textBoxInsert.Text);
+
+            foreach (var line in lines)
+            {
+                string[] words = line.Split('-', '[', ']');
+
+                string bgWords = words[0].ToUpper();
+                string enWords = words[1].ToUpper();
+                string transcriptions = words[2];
+
+                if (Regex.Matches(bgWords, patternBg).Count > 0 && Regex.Matches(enWords, patternEn).Count > 0)
+                {
+                    WordBg wBg = new WordBg()
+                    {
+                        BgWord = bgWords
+                    };
+                    context.WordBgs!.Add(wBg);
+
+                    WordEn wEn = new WordEn()
+                    {
+                        EnWord = enWords,
+                        Transcriptions = transcriptions
+                    };
+                    context.WordEns!.Add(wEn);
+
+                    context.SaveChanges();
+                }
+            }
+            MessageBox.Show("Import Done!");
+        }
+        private void OpenFile()
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = @"C:\",
+                Title = "Browse Text Files",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "txt",
+                Filter = "txt files (*.txt)|*.txt",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBoxInsert.Text = openFileDialog1.FileName;
+            }
+        }
+
+
+        private void buttonExport_Click(object sender, EventArgs e)
+        {
+            Save();
+
+            HashSet<string> hsWords = Export();
+
+            File.WriteAllText(textBoxInsert.Text, string.Join("\n", hsWords));
+            MessageBox.Show("Done!");
+        }
+
+        private HashSet<string> Export()
+        {
+            List<string> lsBgWords = new List<string>();
+            List<string> lsEnWords = new List<string>();
+            List<string> lsEnTranscriptions = new List<string>();
+            HashSet<string> hsWords = new HashSet<string>();
+
+            var bgWords = context.WordBgs!.OrderBy(w => w.WordBgId).Select(w => w.BgWord).ToList();
+            var enWords = context.WordEns!.OrderBy(w => w.WordEnId).Select(w => w.EnWord).ToList();
+            var enTranscriptions = context.WordEns!.OrderBy(w => w.WordEnId).Select(w => w.Transcriptions).ToList();
+
+            lsBgWords = bgWords.ToList()!;
+            lsEnWords = enWords.ToList()!;
+            lsEnTranscriptions = enTranscriptions.ToList()!;
+
+            for (int i = 0; i < lsBgWords.Count(); i++)
+            {
+                hsWords.Add($"{lsBgWords[i]} - {lsEnWords[i]} [{lsEnTranscriptions[i]}]");
+            }
+
+            return hsWords;
+        }
+
+        private void Save()
+        {
+            SaveFileDialog savefile = new SaveFileDialog();
+            savefile.RestoreDirectory = true;
+            savefile.InitialDirectory = "e:\\faktur";
+            savefile.FileName = String.Format("{0}.txt", Text);
+            savefile.DefaultExt = "*.txt*";
+            savefile.Filter = "TEXT Files|*.txt";
+
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                using (System.IO.StreamWriter sw = new System.IO.StreamWriter(savefile.FileName)) { }
+                textBoxInsert.Text = savefile.FileName;
             }
         }
     }
