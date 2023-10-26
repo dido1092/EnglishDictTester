@@ -1,4 +1,7 @@
-﻿namespace EnglishDictTester
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace EnglishDictTester
 {
     partial class frmTest
     {
@@ -49,6 +52,8 @@
             labelPronounce = new Label();
             ProgressBarTest = new ProgressBar();
             pictureBox1 = new PictureBox();
+            richTextBoxTestResult = new RichTextBox();
+            labelTestResult = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -237,11 +242,30 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // richTextBoxTestResult
+            // 
+            richTextBoxTestResult.Location = new Point(582, 35);
+            richTextBoxTestResult.Name = "richTextBoxTestResult";
+            richTextBoxTestResult.Size = new Size(201, 343);
+            richTextBoxTestResult.TabIndex = 24;
+            richTextBoxTestResult.Text = "";
+            // 
+            // labelTestResult
+            // 
+            labelTestResult.AutoSize = true;
+            labelTestResult.Location = new Point(582, 381);
+            labelTestResult.Name = "labelTestResult";
+            labelTestResult.Size = new Size(89, 15);
+            labelTestResult.TabIndex = 25;
+            labelTestResult.Text = "Selected words:";
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(603, 419);
+            ClientSize = new Size(808, 419);
+            Controls.Add(labelTestResult);
+            Controls.Add(richTextBoxTestResult);
             Controls.Add(pictureBox1);
             Controls.Add(ProgressBarTest);
             Controls.Add(labelPronounce);
@@ -297,5 +321,7 @@
         private Label labelPronounce;
         private ProgressBar ProgressBarTest;
         private PictureBox pictureBox1;
+        private RichTextBox richTextBoxTestResult;
+        private Label labelTestResult;
     }
 }

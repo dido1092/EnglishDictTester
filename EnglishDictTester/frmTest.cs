@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Speech.Recognition;
 using System.Data;
 using System.Speech.Synthesis;
+using System;
+using System.Windows.Forms;
 
 namespace EnglishDictTester
 {
@@ -31,6 +33,7 @@ namespace EnglishDictTester
         bool isButtonLoadClicked = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
+        Dictionary<string, int> dictResultWords = new Dictionary<string, int>();
         public frmTest()
         {
             InitializeComponent();
@@ -46,16 +49,18 @@ namespace EnglishDictTester
                         i = 0;
                         wordA = 0;
                         wordB = 1;
-                        correctAnswer = 0;
-                        numberOfWords = 0;
                         countWords = 0;
                         isFinish = false;
-                        textBoxTranslateWord.Text = "";
+                        correctAnswer = 0;
+                        numberOfWords = 0;
+                        dictResultWords.Clear();
+                        richTextBoxTestResult.Clear();
                         isButtonLoadClicked = true;
+                        ProgressBarTest.Maximum = 0;
+                        labelScore.Text = "Score: 0";
+                        textBoxTranslateWord.Text = "";
                         isButtonLoadAllIncorrectAnswersIsClicked = false;
                         isButtonLoadSelectedIncorrectWordsClicked = false;
-                        labelScore.Text = "Score: 0";
-                        ProgressBarTest.Maximum = 0;
 
                         int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
                         arrAllWords = new string[arrayLength];
@@ -126,6 +131,8 @@ namespace EnglishDictTester
 
                         labelExamWord.Text = arrSelectedWords[0];
 
+                        AddFirstWord();
+
                         Pronounce();
                     }
                 }
@@ -184,8 +191,6 @@ namespace EnglishDictTester
 
             countWords++;
             if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords)
-            //if (textBoxTranslateWord.Text != "" && correctAnswer < numberOfWords)
-            //if (textBoxTranslateWord.Text != "")
             {
                 if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
                 {
@@ -242,6 +247,7 @@ namespace EnglishDictTester
                         isFinish = true;
                         textBoxTranslateWord.Text = "";
                         correctAnswer = 0;
+                        TestResults();
                         MessageBox.Show("Finish");
 
                     }
@@ -250,6 +256,7 @@ namespace EnglishDictTester
 
                         if (i == arrWords.Length - 2)
                         {
+                            TestResults();
                             MessageBox.Show("Finish!");
                             isFinish = true;
                         }
@@ -268,6 +275,7 @@ namespace EnglishDictTester
                         {
                             if (i == arrWords.Length)
                             {
+                                TestResults();
                                 MessageBox.Show("Finish!");
                                 isFinish = true;
                                 return;
@@ -289,10 +297,33 @@ namespace EnglishDictTester
 
                     Pronounce();
 
+                    string currentWord = labelExamWord.Text;
+
+                    if (!dictResultWords.ContainsKey(currentWord))
+                    {
+                        dictResultWords.Add(currentWord, 1);
+
+                    }
+                    else
+                    {
+                        dictResultWords[currentWord] += 1;
+                    }
+
+
                     textBoxTranslateWord.Focus();
                 }
             }
         }
+
+        private void TestResults()
+        {
+            foreach (var word in dictResultWords.OrderByDescending(w => w.Value))
+            {
+                richTextBoxTestResult.Text += $"{word.Key} - {word.Value}\n";
+            }
+            labelTestResult.Text = $"Selected words: {dictResultWords.Count.ToString()}";
+        }
+
         private void InsertIntoTest(string getAnswer)
         {
             GetWordEnId getEnId = new GetWordEnId();
@@ -308,7 +339,8 @@ namespace EnglishDictTester
                         bgW = textBoxTranslateWord.Text.ToUpper(),
                         answer = getAnswer,
                         enId = getEnId.GetWordEnID(labelExamWord.Text),
-                        bgId = getBgId.GetWordBgID(textBoxTranslateWord.Text)
+                        bgId = getBgId.GetWordBgID(textBoxTranslateWord.Text),
+                        dateTime = DateTime.Now
                     };
                     context.Add(t);
                     context.SaveChanges();
@@ -478,6 +510,8 @@ namespace EnglishDictTester
             isFinish = false;
             correctAnswer = 0;
             ProgressBarTest.Maximum = 0;
+            dictResultWords.Clear();
+            richTextBoxTestResult.Clear();
             labelScore.Text = "Score: 0";
             textBoxTranslateWord.Text = "";
             isButtonLoadSelectedIncorrectWordsClicked = true;
@@ -505,8 +539,18 @@ namespace EnglishDictTester
                             ProgressBarTest.Maximum = cbNumberOfWords;
                         }
                     }
+                    AddFirstWord();
                     Pronounce();
                 }
+            }
+        }
+
+        private void AddFirstWord()
+        {
+            if (!dictResultWords.ContainsKey(labelExamWord.Text))
+            {
+                dictResultWords.Add(labelExamWord.Text, 1);
+
             }
         }
 

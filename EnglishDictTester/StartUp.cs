@@ -1,4 +1,6 @@
 using EnglishDictTester.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Windows.Forms;
 
 namespace EnglishDictTester
 {
@@ -15,7 +17,9 @@ namespace EnglishDictTester
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
 
-            //var contex = new EnglishDictTesterContext();
+            //var context = new EnglishDictTesterContext();
+            //context.Database.EnsureDeleted();
+            //context.Database.EnsureCreated();
         }
     }
 }

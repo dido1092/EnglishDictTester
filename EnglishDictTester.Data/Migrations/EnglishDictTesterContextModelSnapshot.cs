@@ -43,6 +43,9 @@ namespace EnglishDictTester.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("enId")
                         .HasColumnType("int");
 

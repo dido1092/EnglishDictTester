@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -19,7 +20,8 @@ namespace EnglishDictTester.Data.Migrations
                     bgW = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     enId = table.Column<int>(type: "int", nullable: true),
                     enW = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    answer = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                    answer = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

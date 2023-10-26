@@ -1,4 +1,7 @@
-﻿namespace EnglishDictTester
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace EnglishDictTester
 {
     partial class Form1
     {

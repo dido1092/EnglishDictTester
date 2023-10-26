@@ -34,5 +34,8 @@ namespace EnglishDictTester.Data.Models
         [MaxLength(ValidationConstants.Answer)]
         public string? answer { get; set; }
 
+        [Required]
+        public  DateTime dateTime { get; set; }
+
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishDictTester.Data.Migrations
 {
     [DbContext(typeof(EnglishDictTesterContext))]
-    [Migration("20231017225840_ChangeConnectionString2")]
-    partial class ChangeConnectionString2
+    [Migration("20231026142655_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,9 @@ namespace EnglishDictTester.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("enId")
                         .HasColumnType("int");
