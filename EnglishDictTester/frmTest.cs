@@ -423,25 +423,25 @@ namespace EnglishDictTester
                 var enCorrectWordsId = context.Tests?.Select(t => new { t.enId, t.bgId, t.lngName, t.enW, t.answer }).Where(a => a.answer == "Incorrect" && a.lngName == "En");
                 var enIds = enCorrectWordsId?.Select(w => new { w.enId });
 
-                arrAllCorrectedEnWords = new string[enIds.Count()];
-                arrAllCorrectedBgWords = new string[enIds.Count()];
+                arrAllCorrectedEnWords = new string[enIds!.Count()];
+                arrAllCorrectedBgWords = new string[enIds!.Count()];
 
                 labelIncorrectWords.Text = "Incorrect words: " + enIds?.Count().ToString();
 
-                foreach (var getIdEn in enIds)
+                foreach (var getIdEn in enIds!)
                 {
                     if (getIdEn != null)
                     {
-                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordEnId == getIdEn.enId.Value);
+                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordEnId == getIdEn.enId!.Value);
 
-                        correctIdBgAnalog = mapTableIDs.WordBgId.Value;
-                        correctIdEnAnalog = mapTableIDs.WordEnId.Value;
+                        correctIdBgAnalog = mapTableIDs?.WordBgId!.Value;
+                        correctIdEnAnalog = mapTableIDs?.WordEnId!.Value;
 
                         var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(x => x.WordBgId.ToString() == correctIdBgAnalog.ToString());
                         var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(x => x.WordEnId.ToString() == correctIdEnAnalog.ToString());
 
-                        arrAllCorrectedBgWords[count] = correctWordBg.BgWord.ToString();
-                        arrAllCorrectedEnWords[count] = correctWordEn.EnWord.ToString();
+                        arrAllCorrectedBgWords[count] = correctWordBg!.BgWord!.ToString();
+                        arrAllCorrectedEnWords[count] = correctWordEn!.EnWord!.ToString();
 
 
 
