@@ -59,38 +59,59 @@ namespace EnglishDictTester
 
                 FillWordsWithHintsInDict(testNumber);
                 FillWordsInDict(testNumber);
-                //labelNumberOfWords.Text = $"Number of Words: {numberOfTest.ToString()}";
             }
         }
         private void FillWordsWithHintsInDict(int testNumber)
         {
-            var words = context.Tests!.Select(w => new { w.enW, w.test, w.Hint }).Where(w => w.test == testNumber && w.Hint == true).ToList();
+            var words = context.Tests!.Select(w => new { w.lngName, w.bgW, w.enW, w.test, w.Hint }).Where(w => w.test == testNumber && w.Hint == true).ToList();
 
             foreach (var word in words)
             {
-                if (!dictWordsWithHints.ContainsKey(word.enW!))
+                if (word.lngName == "En")
                 {
-                    dictWordsWithHints.Add(word.enW!, 0);
+                    if (!dictWordsWithHints.ContainsKey(word.enW!))
+                    {
+                        dictWordsWithHints.Add(word.enW!, 0);
+                    }
+                    dictWordsWithHints[word.enW!] += 1;
                 }
-                dictWordsWithHints[word.enW!] += 1;
+                else if (word.lngName == "Bg")
+                {
+                    if (!dictWordsWithHints.ContainsKey(word.bgW!))
+                    {
+                        dictWordsWithHints.Add(word.bgW!, 0);
+                    }
+                    dictWordsWithHints[word.bgW!] += 1;
+                }
             }
             CreateChartSeriesHints();
         }
         private void FillWordsInDict(int testNumber)
         {
-            var words = context.Tests!.Select(w => new { w.enW, w.test }).Where(w => w.test == testNumber).ToList();
+            var words = context.Tests!.Select(w => new { w.lngName, w.bgW, w.enW, w.test }).Where(w => w.test == testNumber).ToList();
 
             foreach (var word in words)
             {
-                if (!dictWords.ContainsKey(word.enW!))
+                if (word.lngName == "En")
                 {
-                    dictWords.Add(word.enW!, 0);
+                    if (!dictWords.ContainsKey(word.enW!))
+                    {
+                        dictWords.Add(word.enW!, 0);
+                    }
+                    dictWords[word.enW!] += 1;
                 }
-                dictWords[word.enW!] += 1;
+                else if (word.lngName == "Bg")
+                {
+                    if (!dictWords.ContainsKey(word.bgW!))
+                    {
+                        dictWords.Add(word.bgW!, 0);
+                    }
+                    dictWords[word.bgW!] += 1;
+                }
             }
             CreateChartSeries();
         }
-        private void CreateChartSeriesHints()
+        private void CreateChartSeriesHints()//Chart Hint
         {
             foreach (var word in dictWordsWithHints)
             {
@@ -100,7 +121,7 @@ namespace EnglishDictTester
                 }
             }
         }
-        private void CreateChartSeries()
+        private void CreateChartSeries()//Chart Times
         {
             foreach (var word in dictWords)
             {

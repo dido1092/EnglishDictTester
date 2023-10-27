@@ -34,6 +34,7 @@
             FastReport.DataVisualization.Charting.ChartArea chartArea2 = new FastReport.DataVisualization.Charting.ChartArea();
             FastReport.DataVisualization.Charting.Legend legend2 = new FastReport.DataVisualization.Charting.Legend();
             FastReport.DataVisualization.Charting.Title title2 = new FastReport.DataVisualization.Charting.Title();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChart));
             chartHint = new System.Windows.Forms.DataVisualization.Charting.Chart();
             comboBoxTestNumber = new ComboBox();
             buttonLoadTestNumber = new Button();
@@ -113,6 +114,7 @@
             Controls.Add(comboBoxTestNumber);
             Controls.Add(chartHint);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmChart";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Charts";

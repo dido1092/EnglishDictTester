@@ -31,6 +31,7 @@ namespace EnglishDictTester
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWordGame));
             buttonLoad = new Button();
             textBoxWord = new TextBox();
             buttonNext = new Button();
@@ -124,7 +125,8 @@ namespace EnglishDictTester
             Controls.Add(buttonNext);
             Controls.Add(textBoxWord);
             Controls.Add(buttonLoad);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmWordGame";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "WordGame";
