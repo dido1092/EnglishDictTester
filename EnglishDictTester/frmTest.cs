@@ -351,7 +351,8 @@ namespace EnglishDictTester
                         answer = getAnswer,
                         enId = getEnId.GetWordEnID(textBoxTranslateWord.Text),
                         bgId = getBgId.GetWordBgID(labelExamWord.Text),
-                        Hint = isButtonHintClicked
+                        Hint = isButtonHintClicked,
+                        dateTime = DateTime.Now
                     };
                     context.Add(t);
                     context.SaveChanges();
