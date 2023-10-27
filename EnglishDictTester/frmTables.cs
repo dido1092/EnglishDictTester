@@ -1,6 +1,7 @@
 ﻿using EnglishDictTester.Data;
 using EnglishDictTester.Data.Common;
 using EnglishDictTester.Data.Models;
+using EnglishDictTester.Get_Id_s;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -239,18 +240,23 @@ namespace EnglishDictTester
             {
                 string[] words = line.Split('-', '[', ']');
 
-                string bgWords = words[0].ToUpper();
-                string enWords = words[1].ToUpper();
-                string transcriptions = words[2];
+                string bgWords = words[0].Replace(" ", "").ToUpper();
+                string enWords = words[1].Replace(" ", "").ToUpper();
+                string transcriptions = words[2].Replace(" ", "");
+                //WordsEnBg wEnBg = new WordsEnBg();
+                GetWordBgId getBgId = new GetWordBgId();
+                GetWordEnId getEnId = new GetWordEnId();
 
                 if (Regex.Matches(bgWords, patternBg).Count > 0 && Regex.Matches(enWords, patternEn).Count > 0)
                 {
+                    //WordBg Table
                     WordBg wBg = new WordBg()
                     {
                         BgWord = bgWords
                     };
                     context.WordBgs!.Add(wBg);
 
+                    //WordEn Table
                     WordEn wEn = new WordEn()
                     {
                         EnWord = enWords,
@@ -258,6 +264,21 @@ namespace EnglishDictTester
                     };
                     context.WordEns!.Add(wEn);
 
+                    //Save
+                    context.SaveChanges();
+
+                    //Mapping Table
+                    int? wordBgId = getBgId.GetWordBgID(wBg.BgWord);
+                    int? wordEnId = getEnId.GetWordEnID(wEn.EnWord);
+
+                    WordsEnBg wEnBg = new WordsEnBg ()
+                    { 
+                        WordBgId = wordBgId, 
+                        WordEnId = wordEnId 
+                    };
+                    context.WordsEnBgs!.Add(wEnBg);
+
+                    //Save
                     context.SaveChanges();
                 }
             }

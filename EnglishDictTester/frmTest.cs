@@ -31,6 +31,7 @@ namespace EnglishDictTester
         bool isButtonLoadAllIncorrectAnswersIsClicked = false;
         bool isButtonLoadSelectedIncorrectWordsClicked = false;
         bool isButtonLoadClicked = false;
+        bool isButtonHintClicked = false;
         Random rnd = new Random();
         Dictionary<string, string> dictWords = new Dictionary<string, string>();
         Dictionary<string, int> dictResultWords = new Dictionary<string, int>();
@@ -59,6 +60,7 @@ namespace EnglishDictTester
                         ProgressBarTest.Maximum = 0;
                         labelScore.Text = "Score: 0";
                         textBoxTranslateWord.Text = "";
+                        isButtonHintClicked = false;
                         isButtonLoadAllIncorrectAnswersIsClicked = false;
                         isButtonLoadSelectedIncorrectWordsClicked = false;
 
@@ -74,7 +76,7 @@ namespace EnglishDictTester
                         var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordBgId, enBg.WordEnId }).ToList();
 
 
-                        foreach (var mapTableID in mapTableIDs!)
+                        foreach (var mapTableID in mapTableIDs)
                         {
                             string wordEn = string.Empty;
                             string wordBg = string.Empty;
@@ -226,7 +228,7 @@ namespace EnglishDictTester
 
                     if (translateWord != "")
                     {
-                        if (writtenWord == translateWord)
+                        if (writtenWord.Replace(" ", "") == translateWord.Replace(" ",""))
                         {
                             correctAnswer++;
                             InsertIntoTest("correct");
@@ -250,7 +252,6 @@ namespace EnglishDictTester
                         TestResults();
                         MessageBox.Show("Finish");
                         return;
-
                     }
 
                     if (!isButtonLoadAllIncorrectAnswersIsClicked)
@@ -333,6 +334,7 @@ namespace EnglishDictTester
                         answer = getAnswer,
                         enId = getEnId.GetWordEnID(labelExamWord.Text),
                         bgId = getBgId.GetWordBgID(textBoxTranslateWord.Text),
+                        Hint = isButtonHintClicked,
                         dateTime = DateTime.Now
                     };
                     context.Add(t);
@@ -348,7 +350,8 @@ namespace EnglishDictTester
                         bgW = labelExamWord.Text.ToUpper(),
                         answer = getAnswer,
                         enId = getEnId.GetWordEnID(textBoxTranslateWord.Text),
-                        bgId = getBgId.GetWordBgID(labelExamWord.Text)
+                        bgId = getBgId.GetWordBgID(labelExamWord.Text),
+                        Hint = isButtonHintClicked
                     };
                     context.Add(t);
                     context.SaveChanges();
@@ -400,6 +403,7 @@ namespace EnglishDictTester
                     }
                 }
             }
+            isButtonHintClicked = true;
         }
         private void buttonLoadAllIncorrectAnswers_Click(object sender, EventArgs e)
         {
@@ -508,6 +512,7 @@ namespace EnglishDictTester
             richTextBoxTestResult.Clear();
             labelScore.Text = "Score: 0";
             textBoxTranslateWord.Text = "";
+            isButtonHintClicked = false;
             isButtonLoadSelectedIncorrectWordsClicked = true;
             numberOfWords = int.Parse(comboBoxNumberOfIncorrectWords.Text);
 

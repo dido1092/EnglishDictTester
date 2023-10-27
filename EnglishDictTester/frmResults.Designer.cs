@@ -34,12 +34,6 @@ namespace EnglishDictTester
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmResults));
             dataGridViewResults = new DataGridView();
-            test = new DataGridViewTextBoxColumn();
-            lngNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            bgWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            enWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            answerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            dateTime = new DataGridViewTextBoxColumn();
             testsBindingSource = new BindingSource(components);
             buttonResultRefresh = new Button();
             buttonUpdateResult = new Button();
@@ -50,6 +44,13 @@ namespace EnglishDictTester
             comboBoxResultTest = new ComboBox();
             buttonLoadTest = new Button();
             label1 = new Label();
+            test = new DataGridViewTextBoxColumn();
+            lngNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bgWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            enWDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            answerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Hint = new DataGridViewCheckBoxColumn();
+            dateTime = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewResults).BeginInit();
             ((System.ComponentModel.ISupportInitialize)testsBindingSource).BeginInit();
             SuspendLayout();
@@ -61,55 +62,13 @@ namespace EnglishDictTester
             dataGridViewResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewResults.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { test, lngNameDataGridViewTextBoxColumn, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn, dateTime });
+            dataGridViewResults.Columns.AddRange(new DataGridViewColumn[] { test, lngNameDataGridViewTextBoxColumn, bgWDataGridViewTextBoxColumn, enWDataGridViewTextBoxColumn, answerDataGridViewTextBoxColumn, Hint, dateTime });
             dataGridViewResults.DataSource = testsBindingSource;
             dataGridViewResults.Location = new Point(12, 82);
             dataGridViewResults.Name = "dataGridViewResults";
             dataGridViewResults.RowTemplate.Height = 25;
             dataGridViewResults.Size = new Size(882, 591);
             dataGridViewResults.TabIndex = 0;
-            // 
-            // test
-            // 
-            test.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            test.DataPropertyName = "test";
-            test.HeaderText = "test";
-            test.Name = "test";
-            // 
-            // lngNameDataGridViewTextBoxColumn
-            // 
-            lngNameDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            lngNameDataGridViewTextBoxColumn.DataPropertyName = "lngName";
-            lngNameDataGridViewTextBoxColumn.HeaderText = "lngName";
-            lngNameDataGridViewTextBoxColumn.Name = "lngNameDataGridViewTextBoxColumn";
-            // 
-            // bgWDataGridViewTextBoxColumn
-            // 
-            bgWDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            bgWDataGridViewTextBoxColumn.DataPropertyName = "bgW";
-            bgWDataGridViewTextBoxColumn.HeaderText = "bgW";
-            bgWDataGridViewTextBoxColumn.Name = "bgWDataGridViewTextBoxColumn";
-            // 
-            // enWDataGridViewTextBoxColumn
-            // 
-            enWDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            enWDataGridViewTextBoxColumn.DataPropertyName = "enW";
-            enWDataGridViewTextBoxColumn.HeaderText = "enW";
-            enWDataGridViewTextBoxColumn.Name = "enWDataGridViewTextBoxColumn";
-            // 
-            // answerDataGridViewTextBoxColumn
-            // 
-            answerDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            answerDataGridViewTextBoxColumn.DataPropertyName = "answer";
-            answerDataGridViewTextBoxColumn.HeaderText = "answer";
-            answerDataGridViewTextBoxColumn.Name = "answerDataGridViewTextBoxColumn";
-            // 
-            // dateTime
-            // 
-            dateTime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dateTime.DataPropertyName = "dateTime";
-            dateTime.HeaderText = "dateTime";
-            dateTime.Name = "dateTime";
             // 
             // testsBindingSource
             // 
@@ -201,6 +160,54 @@ namespace EnglishDictTester
             label1.TabIndex = 9;
             label1.Text = "Test#";
             // 
+            // test
+            // 
+            test.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            test.DataPropertyName = "test";
+            test.HeaderText = "test";
+            test.Name = "test";
+            // 
+            // lngNameDataGridViewTextBoxColumn
+            // 
+            lngNameDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            lngNameDataGridViewTextBoxColumn.DataPropertyName = "lngName";
+            lngNameDataGridViewTextBoxColumn.HeaderText = "lngName";
+            lngNameDataGridViewTextBoxColumn.Name = "lngNameDataGridViewTextBoxColumn";
+            // 
+            // bgWDataGridViewTextBoxColumn
+            // 
+            bgWDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            bgWDataGridViewTextBoxColumn.DataPropertyName = "bgW";
+            bgWDataGridViewTextBoxColumn.HeaderText = "bgW";
+            bgWDataGridViewTextBoxColumn.Name = "bgWDataGridViewTextBoxColumn";
+            // 
+            // enWDataGridViewTextBoxColumn
+            // 
+            enWDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            enWDataGridViewTextBoxColumn.DataPropertyName = "enW";
+            enWDataGridViewTextBoxColumn.HeaderText = "enW";
+            enWDataGridViewTextBoxColumn.Name = "enWDataGridViewTextBoxColumn";
+            // 
+            // answerDataGridViewTextBoxColumn
+            // 
+            answerDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            answerDataGridViewTextBoxColumn.DataPropertyName = "answer";
+            answerDataGridViewTextBoxColumn.HeaderText = "answer";
+            answerDataGridViewTextBoxColumn.Name = "answerDataGridViewTextBoxColumn";
+            // 
+            // Hint
+            // 
+            Hint.DataPropertyName = "Hint";
+            Hint.HeaderText = "Hint";
+            Hint.Name = "Hint";
+            // 
+            // dateTime
+            // 
+            dateTime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dateTime.DataPropertyName = "dateTime";
+            dateTime.HeaderText = "dateTime";
+            dateTime.Name = "dateTime";
+            // 
             // frmResults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -236,14 +243,15 @@ namespace EnglishDictTester
         private Button buttonRemoveAllIncorrectTests;
         private Button buttonRemoveAllCorrectTests;
         private Label labelNumberOfWords;
+        private ComboBox comboBoxResultTest;
+        private Button buttonLoadTest;
+        private Label label1;
         private DataGridViewTextBoxColumn test;
         private DataGridViewTextBoxColumn lngNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn bgWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn enWDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn answerDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn Hint;
         private DataGridViewTextBoxColumn dateTime;
-        private ComboBox comboBoxResultTest;
-        private Button buttonLoadTest;
-        private Label label1;
     }
 }

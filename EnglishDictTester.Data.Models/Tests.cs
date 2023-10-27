@@ -38,6 +38,9 @@ namespace EnglishDictTester.Data.Models
         public string? answer { get; set; }
 
         [Required]
+        public bool Hint { get; set; }
+
+        [Required]
         public  DateTime dateTime { get; set; }
 
     }
