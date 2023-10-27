@@ -243,7 +243,7 @@ namespace EnglishDictTester
                 string bgWords = words[0].Replace(" ", "").ToUpper();
                 string enWords = words[1].Replace(" ", "").ToUpper();
                 string transcriptions = words[2].Replace(" ", "");
-                //WordsEnBg wEnBg = new WordsEnBg();
+
                 GetWordBgId getBgId = new GetWordBgId();
                 GetWordEnId getEnId = new GetWordEnId();
 

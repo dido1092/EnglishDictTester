@@ -209,5 +209,17 @@ namespace EnglishDictTester
                 labelNumberOfWords.Text = $"Number of Words: {numberOfTest.ToString()}";
             }
         }
+
+        private void buttonChart_Click(object sender, EventArgs e)
+        {
+            frmChart chart = new frmChart();
+            chart.Show();
+        }
+
+        private void chartsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChart chart = new frmChart();
+            chart.Show();
+        }
     }
 }
