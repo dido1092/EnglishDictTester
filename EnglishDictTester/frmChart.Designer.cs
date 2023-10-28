@@ -45,7 +45,7 @@
             label1 = new Label();
             chartAnswers = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonCalcWHints = new Button();
-            buttonAllTestsRate = new Button();
+            labelAllTestRate = new Label();
             ((System.ComponentModel.ISupportInitialize)chartHint).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartTimes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartAnswers).BeginInit();
@@ -135,22 +135,23 @@
             buttonCalcWHints.UseVisualStyleBackColor = true;
             buttonCalcWHints.Click += button1_Click;
             // 
-            // buttonAllTestsRate
+            // labelAllTestRate
             // 
-            buttonAllTestsRate.Location = new Point(1088, 454);
-            buttonAllTestsRate.Name = "buttonAllTestsRate";
-            buttonAllTestsRate.Size = new Size(121, 32);
-            buttonAllTestsRate.TabIndex = 7;
-            buttonAllTestsRate.Text = "All Tests Rate";
-            buttonAllTestsRate.UseVisualStyleBackColor = true;
-            buttonAllTestsRate.Click += buttonAllTestsRate_Click;
+            labelAllTestRate.AutoSize = true;
+            labelAllTestRate.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAllTestRate.Location = new Point(715, 399);
+            labelAllTestRate.Name = "labelAllTestRate";
+            labelAllTestRate.Size = new Size(107, 21);
+            labelAllTestRate.TabIndex = 8;
+            labelAllTestRate.Text = "All Test Rate: ";
+            labelAllTestRate.Click += labelAllTestRate_Click;
             // 
             // frmChart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1261, 734);
-            Controls.Add(buttonAllTestsRate);
+            Controls.Add(labelAllTestRate);
             Controls.Add(buttonCalcWHints);
             Controls.Add(chartAnswers);
             Controls.Add(label1);
@@ -179,6 +180,6 @@
         private Label label1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartAnswers;
         private Button buttonCalcWHints;
-        private Button buttonAllTestsRate;
+        private Label labelAllTestRate;
     }
 }

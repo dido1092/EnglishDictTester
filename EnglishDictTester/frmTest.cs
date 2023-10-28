@@ -604,19 +604,19 @@ namespace EnglishDictTester
             }
         }
 
-        private void buttonLoadTests_Click(object sender, EventArgs e)
-        {
-            comboBoxTestNumber.Items.Clear();
-            var tests = context.Tests!.Select(t => t.test).ToList();
+        //private void buttonLoadTests_Click(object sender, EventArgs e)
+        //{
+        //    comboBoxTestNumber.Items.Clear();
+        //    var tests = context.Tests!.Select(t => t.test).ToList();
 
-            HashSet<int> testNumbers = new HashSet<int>();
+        //    HashSet<int> testNumbers = new HashSet<int>();
 
-            testNumbers = tests.ToHashSet();
+        //    testNumbers = tests.ToHashSet();
 
-            foreach (var testN in testNumbers)
-            {
-                comboBoxTestNumber.Items.Add(testN);
-            }
-        }
+        //    foreach (var testN in testNumbers)
+        //    {
+        //        comboBoxTestNumber.Items.Add(testN);
+        //    }
+        //}
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,6 +50,7 @@ namespace EnglishDictTester
             dictWordsAnswers.Clear();
             allRating = 0;
             allWords = 0;
+            labelAllTestRate.Text = $"All Tests Rate: ";
 
             var tests = context.Tests!.Select(t => t.test).ToList();
 
@@ -243,10 +245,15 @@ namespace EnglishDictTester
 
         private void buttonAllTestsRate_Click(object sender, EventArgs e)
         {
-            Dictionary<string, int> dictEvaluation = new Dictionary<string, int>();
-            chartAnswers.Series.Clear();
+            //AllTestsRate();
+        }
 
-            CreateChartSeriesAnswers();
+        private void AllTestsRate()
+        {
+            Dictionary<string, int> dictEvaluation = new Dictionary<string, int>();
+            //chartAnswers.Series.Clear();
+
+            //CreateChartSeriesAnswers();
 
             var allAnswers = context.Tests!.Select(t => new { t.enW, t.answer }).ToList();
 
@@ -269,9 +276,15 @@ namespace EnglishDictTester
                     dictEvaluation[a.enW!] = 2;
                 }
             }
-            double sumEvaluations = dictEvaluation.Values.Sum();
+            double avg = dictEvaluation.Values.Average();
 
-            chartAnswers.Series.Add($"All Tests Rate: {dictEvaluation.Values.Average():F2}");
+            //chartAnswers.Series.Add($"All Tests Rate: {dictEvaluation.Values.Average():F2}");
+            labelAllTestRate.Text = $"All Tests Rate: {avg:F2}";
+        }
+
+        private void labelAllTestRate_Click(object sender, EventArgs e)
+        {
+            AllTestsRate();
         }
     }
 }
