@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            FastReport.DataVisualization.Charting.ChartArea chartArea5 = new FastReport.DataVisualization.Charting.ChartArea();
-            FastReport.DataVisualization.Charting.Legend legend5 = new FastReport.DataVisualization.Charting.Legend();
-            FastReport.DataVisualization.Charting.Title title5 = new FastReport.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            FastReport.DataVisualization.Charting.ChartArea chartArea2 = new FastReport.DataVisualization.Charting.ChartArea();
+            FastReport.DataVisualization.Charting.Legend legend2 = new FastReport.DataVisualization.Charting.Legend();
+            FastReport.DataVisualization.Charting.Title title2 = new FastReport.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChart));
             chartHint = new System.Windows.Forms.DataVisualization.Charting.Chart();
             comboBoxTestNumber = new ComboBox();
@@ -53,18 +53,18 @@
             // 
             // chartHint
             // 
-            chartArea4.Name = "ChartArea1";
-            chartHint.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chartHint.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            chartHint.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartHint.Legends.Add(legend1);
             chartHint.Location = new Point(204, 60);
             chartHint.Name = "chartHint";
             chartHint.Size = new Size(494, 306);
             chartHint.TabIndex = 0;
             chartHint.Text = "chart1";
-            title4.Name = "Hint";
-            title4.Text = "Hint";
-            chartHint.Titles.Add(title4);
+            title1.Name = "Hint";
+            title1.Text = "Hint";
+            chartHint.Titles.Add(title1);
             chartHint.Click += chartHint_Click;
             // 
             // comboBoxTestNumber
@@ -87,18 +87,18 @@
             // 
             // chartTimes
             // 
-            chartArea5.Name = "ChartArea1";
-            chartTimes.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            chartTimes.Legends.Add(legend5);
+            chartArea2.Name = "ChartArea1";
+            chartTimes.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartTimes.Legends.Add(legend2);
             chartTimes.Location = new Point(204, 388);
             chartTimes.Name = "chartTimes";
             chartTimes.Size = new Size(494, 306);
             chartTimes.TabIndex = 3;
             chartTimes.Text = "chart1";
-            title5.Name = "Times";
-            title5.Text = "Times";
-            chartTimes.Titles.Add(title5);
+            title2.Name = "Times";
+            title2.Text = "Times";
+            chartTimes.Titles.Add(title2);
             chartTimes.Click += chartTimes_Click;
             // 
             // label1
@@ -112,18 +112,18 @@
             // 
             // chartAnswers
             // 
-            chartArea6.Name = "ChartArea1";
-            chartAnswers.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            chartAnswers.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            chartAnswers.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartAnswers.Legends.Add(legend3);
             chartAnswers.Location = new Point(715, 60);
             chartAnswers.Name = "chartAnswers";
             chartAnswers.Size = new Size(494, 306);
             chartAnswers.TabIndex = 5;
             chartAnswers.Text = "chart1";
-            title6.Name = "Answers";
-            title6.Text = "Answers";
-            chartAnswers.Titles.Add(title6);
+            title3.Name = "Answers";
+            title3.Text = "Answers";
+            chartAnswers.Titles.Add(title3);
             // 
             // buttonCalcWHints
             // 
@@ -137,7 +137,7 @@
             // 
             // buttonAllTestsRate
             // 
-            buttonAllTestsRate.Location = new Point(1088, 447);
+            buttonAllTestsRate.Location = new Point(1088, 454);
             buttonAllTestsRate.Name = "buttonAllTestsRate";
             buttonAllTestsRate.Size = new Size(121, 32);
             buttonAllTestsRate.TabIndex = 7;

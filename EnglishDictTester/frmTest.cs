@@ -20,6 +20,7 @@ namespace EnglishDictTester
         int correctAnswer = 0;
         int numberOfWords = 0;
         int countWords = 0;
+        int getTestNumber = 0;
         string translateWord = string.Empty;
         string[]? arrAllWords;
         string[]? arrSelectedWords;
@@ -43,7 +44,8 @@ namespace EnglishDictTester
         {
             if (comboBoxLanguage.SelectedIndex == 0 || comboBoxLanguage.SelectedIndex == 1)
             {
-                if (comboBoxNumberOfWords.Text != "" && comboBoxTestNumber.Text != "")
+                //if (comboBoxNumberOfWords.Text != "" && comboBoxTestNumber.Text != "")
+                if (comboBoxNumberOfWords.Text != "")
                 {
                     if (int.Parse(comboBoxNumberOfWords.Text) != 0)
                     {
@@ -63,6 +65,8 @@ namespace EnglishDictTester
                         isButtonHintClicked = false;
                         isButtonLoadAllIncorrectAnswersIsClicked = false;
                         isButtonLoadSelectedIncorrectWordsClicked = false;
+
+                        //getTestNumber = context.Tests!.Select(t => t.test).OrderByDescending(t => t).FirstOrDefaultAsync().Result;
 
                         int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
                         arrAllWords = new string[arrayLength];
@@ -129,6 +133,8 @@ namespace EnglishDictTester
 
                             }
                         }
+                        GetTestNumber();
+
                         SelectedWords(numberOfWords);
 
                         labelExamWord.Text = arrSelectedWords![0];
@@ -192,7 +198,8 @@ namespace EnglishDictTester
             //int numberOfIncorrectWords = 0;
 
             countWords++;
-            if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords && comboBoxTestNumber.Text != "")
+            //if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords && comboBoxTestNumber.Text != "")
+            if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords)
             {
                 if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
                 {
@@ -228,7 +235,7 @@ namespace EnglishDictTester
 
                     if (translateWord != "")
                     {
-                        if (writtenWord.Replace(" ", "") == translateWord.Replace(" ",""))
+                        if (writtenWord.Replace(" ", "") == translateWord.Replace(" ", ""))
                         {
                             correctAnswer++;
                             InsertIntoTest("correct");
@@ -249,6 +256,7 @@ namespace EnglishDictTester
                         isFinish = true;
                         textBoxTranslateWord.Text = "";
                         correctAnswer = 0;
+                        getTestNumber = 0;
                         TestResults();
                         MessageBox.Show("Finish");
                         return;
@@ -259,6 +267,7 @@ namespace EnglishDictTester
 
                         if (i == arrWords!.Length - 2)
                         {
+                            getTestNumber = 0;
                             TestResults();
                             MessageBox.Show("Finish!");
                             isFinish = true;
@@ -278,6 +287,7 @@ namespace EnglishDictTester
                         {
                             if (i == arrWords.Length)
                             {
+                                getTestNumber = 0;
                                 TestResults();
                                 MessageBox.Show("Finish!");
                                 isFinish = true;
@@ -321,6 +331,21 @@ namespace EnglishDictTester
         {
             GetWordEnId getEnId = new GetWordEnId();
             GetWordBgId getBgId = new GetWordBgId();
+            int testNumber = 0;
+
+
+            if (isFinish)
+            {
+                getTestNumber = context.Tests!.Select(t => t.test).OrderByDescending(t => t).FirstOrDefaultAsync().Result;
+            }
+            if (getTestNumber != null)
+            {
+                testNumber = getTestNumber + 1;
+            }
+            else
+            {
+                testNumber = 1;
+            }
             try
             {
                 if (comboBoxLanguage.Text == "En")
@@ -328,7 +353,8 @@ namespace EnglishDictTester
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
-                        test = int.Parse(comboBoxTestNumber.Text),
+                        //test = int.Parse(comboBoxTestNumber.Text),
+                        test = testNumber,
                         enW = labelExamWord.Text.ToUpper(),
                         bgW = textBoxTranslateWord.Text.ToUpper(),
                         answer = getAnswer,
@@ -345,7 +371,8 @@ namespace EnglishDictTester
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
-                        test = int.Parse(comboBoxTestNumber.Text),
+                        //test = int.Parse(comboBoxTestNumber.Text),
+                        test = testNumber,
                         enW = textBoxTranslateWord.Text.ToUpper(),
                         bgW = labelExamWord.Text.ToUpper(),
                         answer = getAnswer,
@@ -539,10 +566,18 @@ namespace EnglishDictTester
                             ProgressBarTest.Maximum = cbNumberOfWords;
                         }
                     }
+
+                    GetTestNumber();
+
                     AddTestWordsToDictResult();
                     Pronounce();
                 }
             }
+        }
+
+        private void GetTestNumber()
+        {
+            getTestNumber = context.Tests!.Select(t => t.test).OrderByDescending(t => t).FirstOrDefaultAsync().Result;
         }
 
         private void AddTestWordsToDictResult()
