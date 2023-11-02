@@ -239,10 +239,12 @@ namespace EnglishDictTester
                         {
                             correctAnswer++;
                             InsertIntoTest("correct");
+                            isButtonHintClicked = false;
                         }
                         else
                         {
                             InsertIntoTest("Incorrect");
+                            isButtonHintClicked = false;
                         }
                     }
                     else
