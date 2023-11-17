@@ -55,13 +55,21 @@ namespace EnglishDictTester
             richTextBoxTestResult = new RichTextBox();
             labelTestResult = new Label();
             checkBoxSoundOnly = new CheckBox();
+            richTextBoxWords = new RichTextBox();
+            buttonAdd = new Button();
+            richTextBoxSelectedWords = new RichTextBox();
+            buttonRemove = new Button();
+            labelRichTextBoxAllWords = new Label();
+            labelRichTextBoxSelectedWords = new Label();
+            buttonExcludeWords = new Button();
+            buttonIncludeWords = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // comboBoxNumberOfWords
             // 
             comboBoxNumberOfWords.FormattingEnabled = true;
-            comboBoxNumberOfWords.Location = new Point(15, 148);
+            comboBoxNumberOfWords.Location = new Point(11, 148);
             comboBoxNumberOfWords.Name = "comboBoxNumberOfWords";
             comboBoxNumberOfWords.Size = new Size(63, 23);
             comboBoxNumberOfWords.TabIndex = 1;
@@ -163,7 +171,7 @@ namespace EnglishDictTester
             // 
             labelScore.AutoSize = true;
             labelScore.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            labelScore.Location = new Point(480, 357);
+            labelScore.Location = new Point(480, 328);
             labelScore.Name = "labelScore";
             labelScore.RightToLeft = RightToLeft.No;
             labelScore.Size = new Size(56, 21);
@@ -271,11 +279,93 @@ namespace EnglishDictTester
             checkBoxSoundOnly.UseVisualStyleBackColor = true;
             checkBoxSoundOnly.CheckedChanged += checkBoxSoundOnly_CheckedChanged;
             // 
+            // richTextBoxWords
+            // 
+            richTextBoxWords.Location = new Point(12, 378);
+            richTextBoxWords.Name = "richTextBoxWords";
+            richTextBoxWords.Size = new Size(153, 284);
+            richTextBoxWords.TabIndex = 27;
+            richTextBoxWords.Text = "";
+            // 
+            // buttonAdd
+            // 
+            buttonAdd.Location = new Point(181, 486);
+            buttonAdd.Name = "buttonAdd";
+            buttonAdd.Size = new Size(75, 23);
+            buttonAdd.TabIndex = 28;
+            buttonAdd.Text = ">>";
+            buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
+            // 
+            // richTextBoxSelectedWords
+            // 
+            richTextBoxSelectedWords.Location = new Point(276, 381);
+            richTextBoxSelectedWords.Name = "richTextBoxSelectedWords";
+            richTextBoxSelectedWords.Size = new Size(150, 283);
+            richTextBoxSelectedWords.TabIndex = 29;
+            richTextBoxSelectedWords.Text = "";
+            // 
+            // buttonRemove
+            // 
+            buttonRemove.Location = new Point(432, 381);
+            buttonRemove.Name = "buttonRemove";
+            buttonRemove.Size = new Size(75, 23);
+            buttonRemove.TabIndex = 30;
+            buttonRemove.Text = "Remove";
+            buttonRemove.UseVisualStyleBackColor = true;
+            buttonRemove.Click += buttonRemove_Click;
+            // 
+            // labelRichTextBoxAllWords
+            // 
+            labelRichTextBoxAllWords.AutoSize = true;
+            labelRichTextBoxAllWords.Location = new Point(14, 664);
+            labelRichTextBoxAllWords.Name = "labelRichTextBoxAllWords";
+            labelRichTextBoxAllWords.Size = new Size(64, 15);
+            labelRichTextBoxAllWords.TabIndex = 31;
+            labelRichTextBoxAllWords.Text = "All Words: ";
+            // 
+            // labelRichTextBoxSelectedWords
+            // 
+            labelRichTextBoxSelectedWords.AutoSize = true;
+            labelRichTextBoxSelectedWords.Location = new Point(276, 667);
+            labelRichTextBoxSelectedWords.Name = "labelRichTextBoxSelectedWords";
+            labelRichTextBoxSelectedWords.Size = new Size(92, 15);
+            labelRichTextBoxSelectedWords.TabIndex = 32;
+            labelRichTextBoxSelectedWords.Text = "Selected words: ";
+            // 
+            // buttonExcludeWords
+            // 
+            buttonExcludeWords.Location = new Point(432, 527);
+            buttonExcludeWords.Name = "buttonExcludeWords";
+            buttonExcludeWords.Size = new Size(104, 41);
+            buttonExcludeWords.TabIndex = 34;
+            buttonExcludeWords.Text = "Exclude words";
+            buttonExcludeWords.UseVisualStyleBackColor = true;
+            buttonExcludeWords.Click += buttonExcludeWords_Click;
+            // 
+            // buttonIncludeWords
+            // 
+            buttonIncludeWords.Location = new Point(432, 468);
+            buttonIncludeWords.Name = "buttonIncludeWords";
+            buttonIncludeWords.Size = new Size(104, 41);
+            buttonIncludeWords.TabIndex = 35;
+            buttonIncludeWords.Text = "Include words";
+            buttonIncludeWords.UseVisualStyleBackColor = true;
+            buttonIncludeWords.Click += buttonIncludeWords_Click;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(808, 419);
+            ClientSize = new Size(812, 691);
+            Controls.Add(buttonIncludeWords);
+            Controls.Add(buttonExcludeWords);
+            Controls.Add(labelRichTextBoxSelectedWords);
+            Controls.Add(labelRichTextBoxAllWords);
+            Controls.Add(buttonRemove);
+            Controls.Add(richTextBoxSelectedWords);
+            Controls.Add(buttonAdd);
+            Controls.Add(richTextBoxWords);
             Controls.Add(checkBoxSoundOnly);
             Controls.Add(labelTestResult);
             Controls.Add(richTextBoxTestResult);
@@ -337,5 +427,14 @@ namespace EnglishDictTester
         private RichTextBox richTextBoxTestResult;
         private Label labelTestResult;
         private CheckBox checkBoxSoundOnly;
+        private RichTextBox richTextBoxWords;
+        private Button buttonAdd;
+        private RichTextBox richTextBoxSelectedWords;
+        private Button buttonRemove;
+        private Label labelRichTextBoxAllWords;
+        private Label labelRichTextBoxSelectedWords;
+        private Button buttonLoadFromRichTextBoxSelectedWords;
+        private Button buttonExcludeWords;
+        private Button buttonIncludeWords;
     }
 }

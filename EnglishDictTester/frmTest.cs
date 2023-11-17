@@ -15,11 +15,13 @@ namespace EnglishDictTester
     {
         EnglishDictTesterContext context = new EnglishDictTesterContext();
         int i = 0;
-        int wordA = 0;
-        int wordB = 0;
+        int indexEn = 0;
+        int indexBg = 0;
         int correctAnswer = 0;
         int numberOfWords = 0;
         int countWords = 0;
+        int counterWords = 0;
+        int counterAddToSelectedWords = 0;
         int getTestNumber = 0;
         string translateWord = string.Empty;
         string[]? arrAllWords;
@@ -27,10 +29,13 @@ namespace EnglishDictTester
         string[]? arrAllCorrectedBgWords;
         string[]? arrAllCorrectedEnWords;
         string[]? arrWords;
+        List<string> allWords = new List<string>();
         List<object>? lsEnIds = new List<object>();
+        List<string> selectedWords = new List<string>();
         bool isFinish = false;
         bool isButtonLoadAllIncorrectAnswersIsClicked = false;
         bool isButtonLoadSelectedIncorrectWordsClicked = false;
+        bool isbuttonIncludeWordsClicked = false;
         bool isButtonLoadClicked = false;
         bool isButtonHintClicked = false;
         Random rnd = new Random();
@@ -50,8 +55,8 @@ namespace EnglishDictTester
                     if (int.Parse(comboBoxNumberOfWords.Text) != 0)
                     {
                         i = 0;
-                        wordA = 0;
-                        wordB = 1;
+                        indexEn = 0;
+                        indexBg = 1;
                         countWords = 0;
                         isFinish = false;
                         correctAnswer = 0;
@@ -69,8 +74,6 @@ namespace EnglishDictTester
 
                         //getTestNumber = context.Tests!.Select(t => t.test).OrderByDescending(t => t).FirstOrDefaultAsync().Result;
 
-                        int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
-                        arrAllWords = new string[arrayLength];
 
                         var enWordsId = context.WordEns?.Select(i => new { i.WordEnId }).ToList();
                         var bgWordsId = context.WordBgs?.Select(i => new { i.WordBgId }).ToList();
@@ -80,8 +83,17 @@ namespace EnglishDictTester
 
                         var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordBgId, enBg.WordEnId }).ToList();
 
+                        if (isbuttonIncludeWordsClicked)
+                        {
+                            arrAllWords = new string[mapTableIDs!.Count * 2];
+                        }
+                        else
+                        {
+                            int arrayLength = int.Parse(comboBoxNumberOfWords.Text) * 2;
+                            arrAllWords = new string[arrayLength];
+                        }
 
-                        foreach (var mapTableID in mapTableIDs)
+                        foreach (var mapTableID in mapTableIDs!)
                         {
                             string wordEn = string.Empty;
                             string wordBg = string.Empty;
@@ -106,18 +118,18 @@ namespace EnglishDictTester
 
                             if (comboBoxLanguage.SelectedIndex == 0)//En
                             {
-                                arrAllWords[wordA] = wordEn;
-                                arrAllWords[wordB] = wordBg;
+                                arrAllWords[indexEn] = wordEn;
+                                arrAllWords[indexBg] = wordBg;
                             }
                             else if (comboBoxLanguage.SelectedIndex == 1)//Bg
                             {
-                                arrAllWords[wordA] = wordBg;
-                                arrAllWords[wordB] = wordEn;
+                                arrAllWords[indexEn] = wordBg;
+                                arrAllWords[indexBg] = wordEn;
                             }
 
-                            wordA += 2;
-                            wordB += 2;
-                            if (numberOfWords.ToString() == comboBoxNumberOfWords.Text)
+                            indexEn += 2;
+                            indexBg += 2;
+                            if (numberOfWords.ToString() == comboBoxNumberOfWords.Text && !isbuttonIncludeWordsClicked)
                             {
                                 break;
                             }
@@ -153,28 +165,49 @@ namespace EnglishDictTester
 
         private void SelectedWords(int numberOfWords)
         {
-            arrSelectedWords = new string[numberOfWords * 2];
+            
+            string[] arrSelectedWordsFromRichTextBox = new string[selectedWords.Count() * 2];
 
-            for (int k = 0, j = 1; k < numberOfWords * 2; k += 2, j += 2)
+            if (isbuttonIncludeWordsClicked)
             {
-                if (j < numberOfWords * 2)
-                {
-                    int index = rnd.Next(arrAllWords!.Length - 2);
+                arrSelectedWords = new string[selectedWords.Count() * 2];
 
-                    if (index % 2 == 0)//En or Bg
+                for (int k = 0, j = 0; k < selectedWords.Count(); j += 2, k++)
+                {
+                    if (arrAllWords!.Contains(selectedWords.ElementAt(k)))
                     {
-                        arrSelectedWords[k] = arrAllWords[index];
-                        arrSelectedWords[j] = arrAllWords[index + 1];
+                        int getIndexWord = Array.IndexOf(arrAllWords!, selectedWords.ElementAt(k));
+                        arrSelectedWords[j] = selectedWords![k];
+                        arrSelectedWords[j + 1] = arrAllWords![getIndexWord + 1];
+
+                    }
+                }
+            }
+            else
+            {
+                arrSelectedWords = new string[numberOfWords * 2];
+
+                for (int k = 0, j = 1; k < numberOfWords * 2; k += 2, j += 2)
+                {
+                    if (j < numberOfWords * 2)
+                    {
+                        int index = rnd.Next(arrAllWords!.Length - 2);
+
+                        if (index % 2 == 0)//En or Bg
+                        {
+                            arrSelectedWords[k] = arrAllWords[index];
+                            arrSelectedWords[j] = arrAllWords[index + 1];
+                        }
+                        else
+                        {
+                            arrSelectedWords[k] = arrAllWords[index + 1];
+                            arrSelectedWords[j] = arrAllWords[index + 2];
+                        }
                     }
                     else
                     {
-                        arrSelectedWords[k] = arrAllWords[index + 1];
-                        arrSelectedWords[j] = arrAllWords[index + 2];
+                        break;
                     }
-                }
-                else
-                {
-                    break;
                 }
             }
         }
@@ -399,22 +432,35 @@ namespace EnglishDictTester
         }
         private async void buttonLoadAllWords_Click(object sender, EventArgs e)
         {
+            richTextBoxWords.Clear();
             int numberOfRows = 0;
             isButtonLoadSelectedIncorrectWordsClicked = false;
+            allWords.Clear();
 
             if (comboBoxLanguage.Text == "En")
             {
                 numberOfRows = await context.WordEns!.CountAsync();
+                allWords = await context.WordEns!.Select(enW => enW.EnWord!).ToListAsync();
             }
             else if (comboBoxLanguage.Text == "Bg")
             {
                 numberOfRows = await context.WordBgs!.CountAsync();
+                allWords = await context.WordBgs!.Select(enW => enW.BgWord!).ToListAsync();
             }
 
-            labelAllWords.Text = numberOfRows.ToString();
-            comboBoxNumberOfWords.Items.Clear();
-            comboBoxNumberOfWords.Text = numberOfRows.ToString();
+            foreach (var word in allWords)
+            {
+                richTextBoxWords.Text += word + "\n";
+            }
+            counterWords = numberOfRows;
 
+            labelAllWords.Text = numberOfRows.ToString();
+
+            labelRichTextBoxAllWords.Text = numberOfRows.ToString();
+
+            comboBoxNumberOfWords.Items.Clear();
+
+            comboBoxNumberOfWords.Text = numberOfRows.ToString();
         }
 
         public async void buttonHint_ClickAsync(object sender, EventArgs e)
@@ -623,19 +669,72 @@ namespace EnglishDictTester
             //}
         }
 
-        //private void buttonLoadTests_Click(object sender, EventArgs e)
-        //{
-        //    comboBoxTestNumber.Items.Clear();
-        //    var tests = context.Tests!.Select(t => t.test).ToList();
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            counterWords--;
+            counterAddToSelectedWords++;
+            string getWord = richTextBoxWords.SelectedText;
 
-        //    HashSet<int> testNumbers = new HashSet<int>();
+            richTextBoxWords.Text = "";
 
-        //    testNumbers = tests.ToHashSet();
+            allWords.Remove(getWord);
 
-        //    foreach (var testN in testNumbers)
-        //    {
-        //        comboBoxTestNumber.Items.Add(testN);
-        //    }
-        //}
+            foreach (var word in allWords)
+            {
+                richTextBoxWords.Text += word + "\n";
+            }
+
+            selectedWords.Add(getWord);
+
+            richTextBoxSelectedWords.Text += getWord + "\n";
+
+            //comboBoxNumberOfWords.Text = $"{counterAddToSelectedWords}";
+
+            labelRichTextBoxAllWords.Text = $"All words: {counterWords}";
+            labelRichTextBoxSelectedWords.Text = $"Selected words: {counterAddToSelectedWords}";
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            string selectedWord = richTextBoxSelectedWords.SelectedText;
+            richTextBoxSelectedWords.Clear();
+            selectedWords.Remove(selectedWord);
+            counterAddToSelectedWords--;
+
+            foreach (var word in selectedWords)
+            {
+                richTextBoxSelectedWords.Text += word + "\n";
+            }
+
+            comboBoxNumberOfWords.Text = $"{counterAddToSelectedWords}";
+
+            labelRichTextBoxSelectedWords.Text = $"Selected words: {counterAddToSelectedWords}";
+        }
+
+        private void buttonExcludeWords_Click(object sender, EventArgs e)
+        {
+            isbuttonIncludeWordsClicked = false;
+            selectedWords.Clear();
+            richTextBoxSelectedWords.Text = "";
+            labelRichTextBoxSelectedWords.Text = $"Selected words: 0";
+            //buttonIncludeWords.BackColor = Color.Red;
+        }
+
+        private void buttonIncludeWords_Click(object sender, EventArgs e)
+        {
+            //if (isbuttonIncludeWordsClicked)
+            //{
+            //    isbuttonIncludeWordsClicked = false;
+            //    buttonIncludeWords.BackColor = Color.Red;
+            //}
+            //else
+            //{
+            //    buttonIncludeWords.BackColor = Color.LightGreen;
+            //    isbuttonIncludeWordsClicked = true;
+            //}
+
+            isbuttonIncludeWordsClicked = true;
+            comboBoxNumberOfWords.Text = selectedWords.Count.ToString();
+        }
     }
 }
