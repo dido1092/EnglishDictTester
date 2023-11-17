@@ -54,6 +54,7 @@ namespace EnglishDictTester
             pictureBox1 = new PictureBox();
             richTextBoxTestResult = new RichTextBox();
             labelTestResult = new Label();
+            checkBoxSoundOnly = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -259,11 +260,23 @@ namespace EnglishDictTester
             labelTestResult.TabIndex = 25;
             labelTestResult.Text = "Selected words:";
             // 
+            // checkBoxSoundOnly
+            // 
+            checkBoxSoundOnly.AutoSize = true;
+            checkBoxSoundOnly.Location = new Point(101, 34);
+            checkBoxSoundOnly.Name = "checkBoxSoundOnly";
+            checkBoxSoundOnly.Size = new Size(86, 19);
+            checkBoxSoundOnly.TabIndex = 26;
+            checkBoxSoundOnly.Text = "Sound only";
+            checkBoxSoundOnly.UseVisualStyleBackColor = true;
+            checkBoxSoundOnly.CheckedChanged += checkBoxSoundOnly_CheckedChanged;
+            // 
             // frmTest
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(808, 419);
+            Controls.Add(checkBoxSoundOnly);
             Controls.Add(labelTestResult);
             Controls.Add(richTextBoxTestResult);
             Controls.Add(pictureBox1);
@@ -323,5 +336,6 @@ namespace EnglishDictTester
         private PictureBox pictureBox1;
         private RichTextBox richTextBoxTestResult;
         private Label labelTestResult;
+        private CheckBox checkBoxSoundOnly;
     }
 }

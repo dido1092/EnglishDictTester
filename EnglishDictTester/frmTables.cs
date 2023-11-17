@@ -347,7 +347,7 @@ namespace EnglishDictTester
         {
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.RestoreDirectory = true;
-            savefile.InitialDirectory = "e:\\faktur";
+            //savefile.InitialDirectory = "e:\\faktur";
             savefile.FileName = String.Format("{0}.txt", Text);
             savefile.DefaultExt = "*.txt*";
             savefile.Filter = "TEXT Files|*.txt";

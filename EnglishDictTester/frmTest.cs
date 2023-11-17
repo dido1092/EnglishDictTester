@@ -63,6 +63,7 @@ namespace EnglishDictTester
                         labelScore.Text = "Score: 0";
                         textBoxTranslateWord.Text = "";
                         isButtonHintClicked = false;
+                        //checkBoxSoundOnly.Checked = true;
                         isButtonLoadAllIncorrectAnswersIsClicked = false;
                         isButtonLoadSelectedIncorrectWordsClicked = false;
 
@@ -137,6 +138,9 @@ namespace EnglishDictTester
 
                         SelectedWords(numberOfWords);
 
+                        //if (checkBoxSoundOnly.Checked == false)
+                        //{
+                        //}
                         labelExamWord.Text = arrSelectedWords![0];
 
                         AddTestWordsToDictResult();
@@ -243,7 +247,7 @@ namespace EnglishDictTester
                         else
                         {
                             InsertIntoTest("Incorrect");
-                            
+
                         }
                         isButtonHintClicked = false;
                     }
@@ -462,18 +466,19 @@ namespace EnglishDictTester
                     {
                         var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordEnId == getIdEn.enId!.Value);
 
-                        correctIdBgAnalog = mapTableIDs?.WordBgId!.Value;
-                        correctIdEnAnalog = mapTableIDs?.WordEnId!.Value;
+                        if (mapTableIDs != null)
+                        {
+                            correctIdBgAnalog = mapTableIDs?.WordBgId!.Value;
+                            correctIdEnAnalog = mapTableIDs?.WordEnId!.Value;
 
-                        var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(x => x.WordBgId.ToString() == correctIdBgAnalog.ToString());
-                        var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(x => x.WordEnId.ToString() == correctIdEnAnalog.ToString());
+                            var correctWordBg = context.WordBgs?.Select(x => new { x.WordBgId, x.BgWord }).SingleOrDefault(x => x.WordBgId.ToString() == correctIdBgAnalog.ToString());
+                            var correctWordEn = context.WordEns?.Select(x => new { x.WordEnId, x.EnWord }).SingleOrDefault(x => x.WordEnId.ToString() == correctIdEnAnalog.ToString());
 
-                        arrAllCorrectedBgWords[count] = correctWordBg!.BgWord!.ToString();
-                        arrAllCorrectedEnWords[count] = correctWordEn!.EnWord!.ToString();
+                            arrAllCorrectedBgWords[count] = correctWordBg!.BgWord!.ToString();
+                            arrAllCorrectedEnWords[count] = correctWordEn!.EnWord!.ToString();
 
-
-
-                        count++;
+                            count++;
+                        }
                     }
                 }
                 if (arrAllCorrectedEnWords.Length != 0)
@@ -604,6 +609,18 @@ namespace EnglishDictTester
                 string word = labelExamWord.Text;
                 ReadText(word);
             }
+        }
+
+        private void checkBoxSoundOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (checkBoxSoundOnly.Checked)
+            //{
+            //    checkBoxSoundOnly.Checked = false;
+            //}
+            //else
+            //{
+            //    checkBoxSoundOnly.Checked = true;
+            //}
         }
 
         //private void buttonLoadTests_Click(object sender, EventArgs e)
