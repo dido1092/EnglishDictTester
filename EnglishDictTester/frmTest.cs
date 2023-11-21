@@ -75,11 +75,11 @@ namespace EnglishDictTester
                         //getTestNumber = context.Tests!.Select(t => t.test).OrderByDescending(t => t).FirstOrDefaultAsync().Result;
 
 
-                        var enWordsId = context.WordEns?.Select(i => new { i.WordEnId }).ToList();
-                        var bgWordsId = context.WordBgs?.Select(i => new { i.WordBgId }).ToList();
+                        //var enWordsId = context.WordEns?.Select(i => new { i.WordEnId }).ToList();
+                        //var bgWordsId = context.WordBgs?.Select(i => new { i.WordBgId }).ToList();
 
-                        var enWords = context.WordEns?.Select(e => new { e.EnWord }).ToList();
-                        var bgWords = context.WordBgs?.Select(b => new { b.BgWord }).ToList();
+                        //var enWords = context.WordEns?.Select(e => new { e.EnWord }).ToList();
+                        //var bgWords = context.WordBgs?.Select(b => new { b.BgWord }).ToList();
 
                         var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordBgId, enBg.WordEnId }).ToList();
 
@@ -176,9 +176,14 @@ namespace EnglishDictTester
                 {
                     if (arrAllWords!.Contains(selectedWords.ElementAt(k)))
                     {
-                        int getIndexWord = Array.IndexOf(arrAllWords!, selectedWords.ElementAt(k));
+                        int indexWord = Array.IndexOf(arrAllWords!, selectedWords.ElementAt(k));
+                        
+                        //if (indexWord % 2 == 0)
+                        //{
+
+                        //}
                         arrSelectedWords[j] = selectedWords![k];
-                        arrSelectedWords[j + 1] = arrAllWords![getIndexWord + 1];
+                        arrSelectedWords[j + 1] = arrAllWords![indexWord + 1];
 
                     }
                 }
@@ -673,7 +678,7 @@ namespace EnglishDictTester
         {
             counterWords--;
             counterAddToSelectedWords++;
-            string getWord = richTextBoxWords.SelectedText;
+            string getWord = richTextBoxWords.SelectedText.Replace("\n", "");
 
             richTextBoxWords.Text = "";
 
