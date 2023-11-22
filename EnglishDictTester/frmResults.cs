@@ -27,8 +27,6 @@ namespace EnglishDictTester
 
         private void buttonResultRefresh_Click(object sender, EventArgs e)
         {
-            //ConnectionString();
-
             SqlConnection cnn = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cnn;
@@ -122,21 +120,18 @@ namespace EnglishDictTester
             DataGridViewCell cell = dataGridViewResults.SelectedCells[0] as DataGridViewCell;
 
             string value = cell.Value.ToString()!;
-            int getTestNumber = int.Parse(value!);
+            int getTestId = int.Parse(value!);
 
-            var test = context.Tests!.Where(v => v.test == getTestNumber);
+            var testId = context.Tests!.Where(v => v.testId == getTestId).FirstOrDefault();
 
             try
             {
-                if (test != null)
+                if (testId != null)
                 {
-                    foreach (var words in test)
-                    {
-                        context.Remove(words);
-                    }
+                    context.Remove(testId);
                     context.SaveChanges();
                 }
-                MessageBox.Show($"The Test '{getTestNumber}' has been deleted! ");
+                MessageBox.Show($"The TestId '{getTestId}' has been deleted! ");
 
                 buttonResultRefresh.PerformClick();
             }
