@@ -152,7 +152,7 @@ namespace EnglishDictTester
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(93, 32);
             buttonDelete.TabIndex = 3;
-            buttonDelete.Text = "Delete";
+            buttonDelete.Text = "Delete Test";
             buttonDelete.UseVisualStyleBackColor = true;
             buttonDelete.Click += buttonDelete_Click;
             // 
@@ -231,7 +231,7 @@ namespace EnglishDictTester
             // chartsToolStripMenuItem
             // 
             chartsToolStripMenuItem.Name = "chartsToolStripMenuItem";
-            chartsToolStripMenuItem.Size = new Size(180, 22);
+            chartsToolStripMenuItem.Size = new Size(108, 22);
             chartsToolStripMenuItem.Text = "Charts";
             chartsToolStripMenuItem.Click += chartsToolStripMenuItem_Click;
             // 

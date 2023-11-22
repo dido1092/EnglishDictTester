@@ -122,32 +122,27 @@ namespace EnglishDictTester
             DataGridViewCell cell = dataGridViewResults.SelectedCells[0] as DataGridViewCell;
 
             string value = cell.Value.ToString()!;
-            int getID = int.Parse(value!);
+            int getTestNumber = int.Parse(value!);
 
-            //Remove row from DataGridView
-            int rowIndex = dataGridViewResults.CurrentCell.RowIndex;
-            this.dataGridViewResults.Rows.RemoveAt(rowIndex);
-
-            //String Connection
-            string connetionString = null;
-            connetionString = DbConfig.ConnectionString;
-            SqlConnection cnn = new SqlConnection(connetionString);
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = cnn;
-
-            //Delete from DB
-            cmd.CommandText = ("Delete From Tests Where testId=" + getID + "");
+            var test = context.Tests!.Where(v => v.test == getTestNumber);
 
             try
             {
-                cnn.Open();
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("The row has been deleted ! ");
-                cnn.Close();
+                if (test != null)
+                {
+                    foreach (var words in test)
+                    {
+                        context.Remove(words);
+                    }
+                    context.SaveChanges();
+                }
+                MessageBox.Show($"The Test '{getTestNumber}' has been deleted! ");
+
+                buttonResultRefresh.PerformClick();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot open connection ! ");
+                MessageBox.Show("Cannot delete Test! ");
             }
         }
 
