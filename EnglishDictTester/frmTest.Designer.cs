@@ -281,15 +281,15 @@ namespace EnglishDictTester
             // 
             // richTextBoxWords
             // 
-            richTextBoxWords.Location = new Point(12, 378);
+            richTextBoxWords.Location = new Point(11, 378);
             richTextBoxWords.Name = "richTextBoxWords";
-            richTextBoxWords.Size = new Size(153, 284);
+            richTextBoxWords.Size = new Size(189, 284);
             richTextBoxWords.TabIndex = 27;
             richTextBoxWords.Text = "";
             // 
             // buttonAdd
             // 
-            buttonAdd.Location = new Point(181, 486);
+            buttonAdd.Location = new Point(206, 490);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(75, 23);
             buttonAdd.TabIndex = 28;
@@ -299,15 +299,15 @@ namespace EnglishDictTester
             // 
             // richTextBoxSelectedWords
             // 
-            richTextBoxSelectedWords.Location = new Point(276, 381);
+            richTextBoxSelectedWords.Location = new Point(287, 378);
             richTextBoxSelectedWords.Name = "richTextBoxSelectedWords";
-            richTextBoxSelectedWords.Size = new Size(150, 283);
+            richTextBoxSelectedWords.Size = new Size(188, 283);
             richTextBoxSelectedWords.TabIndex = 29;
             richTextBoxSelectedWords.Text = "";
             // 
             // buttonRemove
             // 
-            buttonRemove.Location = new Point(432, 381);
+            buttonRemove.Location = new Point(480, 381);
             buttonRemove.Name = "buttonRemove";
             buttonRemove.Size = new Size(75, 23);
             buttonRemove.TabIndex = 30;
@@ -335,7 +335,7 @@ namespace EnglishDictTester
             // 
             // buttonExcludeWords
             // 
-            buttonExcludeWords.Location = new Point(432, 527);
+            buttonExcludeWords.Location = new Point(480, 509);
             buttonExcludeWords.Name = "buttonExcludeWords";
             buttonExcludeWords.Size = new Size(104, 41);
             buttonExcludeWords.TabIndex = 34;
@@ -345,7 +345,7 @@ namespace EnglishDictTester
             // 
             // buttonIncludeWords
             // 
-            buttonIncludeWords.Location = new Point(432, 468);
+            buttonIncludeWords.Location = new Point(480, 451);
             buttonIncludeWords.Name = "buttonIncludeWords";
             buttonIncludeWords.Size = new Size(104, 41);
             buttonIncludeWords.TabIndex = 35;

@@ -150,9 +150,6 @@ namespace EnglishDictTester
 
                         SelectedWords(numberOfWords);
 
-                        //if (checkBoxSoundOnly.Checked == false)
-                        //{
-                        //}
                         labelExamWord.Text = arrSelectedWords![0];
 
                         AddTestWordsToDictResult();
@@ -165,7 +162,7 @@ namespace EnglishDictTester
 
         private void SelectedWords(int numberOfWords)
         {
-            
+
             string[] arrSelectedWordsFromRichTextBox = new string[selectedWords.Count() * 2];
 
             if (isbuttonIncludeWordsClicked)
@@ -177,11 +174,7 @@ namespace EnglishDictTester
                     if (arrAllWords!.Contains(selectedWords.ElementAt(k)))
                     {
                         int indexWord = Array.IndexOf(arrAllWords!, selectedWords.ElementAt(k));
-                        
-                        //if (indexWord % 2 == 0)
-                        //{
 
-                        //}
                         arrSelectedWords[j] = selectedWords![k];
                         arrSelectedWords[j + 1] = arrAllWords![indexWord + 1];
 
