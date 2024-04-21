@@ -232,125 +232,129 @@ namespace EnglishDictTester
         {
             //int numberOfIncorrectWords = 0;
 
-            countWords++;
             //if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords && comboBoxTestNumber.Text != "")
-            if (textBoxTranslateWord.Text != "" && countWords <= numberOfWords)
+            if (textBoxTranslateWord.Text != "")
             {
-                if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
+                countWords++;
+
+                if (countWords <= numberOfWords)
                 {
-                    string writtenWord = string.Empty;
-                    ProgressBarTest.Value++;
+                    if (isButtonLoadClicked || isButtonLoadSelectedIncorrectWordsClicked)
+                    {
+                        string writtenWord = string.Empty;
+                        ProgressBarTest.Value++;
 
-                    if (isFinish)
-                    {
-                        return;
-                    }
-                    if (isButtonLoadAllIncorrectAnswersIsClicked)
-                    {
-                        if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords != null && arrAllCorrectedBgWords != null)
+                        if (isFinish)
                         {
-                            arrWords = arrAllCorrectedEnWords;
-                            translateWord = arrAllCorrectedBgWords[i];
-
-
+                            return;
                         }
-                        if (comboBoxLanguage.Text == "Bg" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
+                        if (isButtonLoadAllIncorrectAnswersIsClicked)
                         {
-                            arrWords = arrAllCorrectedBgWords;
-                            translateWord = arrAllCorrectedEnWords![i];
+                            if (comboBoxLanguage.Text == "En" && arrAllCorrectedEnWords != null && arrAllCorrectedBgWords != null)
+                            {
+                                arrWords = arrAllCorrectedEnWords;
+                                translateWord = arrAllCorrectedBgWords[i];
+
+
+                            }
+                            if (comboBoxLanguage.Text == "Bg" && arrAllCorrectedEnWords?.Length != 0 && arrAllCorrectedBgWords?.Length != 0)
+                            {
+                                arrWords = arrAllCorrectedBgWords;
+                                translateWord = arrAllCorrectedEnWords![i];
+                            }
                         }
-                    }
-                    else if (isButtonLoadClicked)
-                    {
-                        arrWords = arrSelectedWords;
-                        translateWord = arrWords![i + 1];//Because the words in array are evens or odds in different language
-                    }
-
-                    writtenWord = textBoxTranslateWord.Text.ToUpper();
-
-                    if (translateWord != "")
-                    {
-                        if (writtenWord.Replace(" ", "") == translateWord.Replace(" ", ""))
+                        else if (isButtonLoadClicked)
                         {
-                            correctAnswer++;
-                            InsertIntoTest("correct");
+                            arrWords = arrSelectedWords;
+                            translateWord = arrWords![i + 1];//Because the words in array are evens or odds in different language
+                        }
+
+                        writtenWord = textBoxTranslateWord.Text.ToUpper();
+
+                        if (translateWord != "")
+                        {
+                            if (writtenWord.Replace(" ", "") == translateWord.Replace(" ", ""))
+                            {
+                                correctAnswer++;
+                                InsertIntoTest("correct");
+                            }
+                            else
+                            {
+                                InsertIntoTest("Incorrect");
+
+                            }
+                            isButtonHintClicked = false;
                         }
                         else
                         {
-                            InsertIntoTest("Incorrect");
-
+                            return;
                         }
-                        isButtonHintClicked = false;
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    labelScore.Text = "Score: " + correctAnswer;
+                        labelScore.Text = "Score: " + correctAnswer;
 
-                    if (isButtonLoadSelectedIncorrectWordsClicked && i == int.Parse(comboBoxNumberOfIncorrectWords.Text) - 1)
-                    {
-                        isFinish = true;
-                        textBoxTranslateWord.Text = "";
-                        correctAnswer = 0;
-                        getTestNumber = 0;
-                        TestResults();
-                        MessageBox.Show("Finish");
-                        return;
-                    }
-
-                    if (!isButtonLoadAllIncorrectAnswersIsClicked)
-                    {
-
-                        if (i == arrWords!.Length - 2)
+                        if (isButtonLoadSelectedIncorrectWordsClicked && i == int.Parse(comboBoxNumberOfIncorrectWords.Text) - 1)
                         {
+                            isFinish = true;
+                            textBoxTranslateWord.Text = "";
+                            correctAnswer = 0;
                             getTestNumber = 0;
                             TestResults();
-                            MessageBox.Show("Finish!");
-                            isFinish = true;
+                            MessageBox.Show("Finish");
+                            return;
                         }
-                        if (i < arrWords.Length)
+
+                        if (!isButtonLoadAllIncorrectAnswersIsClicked)
                         {
-                            if (isFinish == false)
-                            {
-                                i += 2;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        i++;
-                        if (arrWords != null)
-                        {
-                            if (i == arrWords.Length)
+
+                            if (i == arrWords!.Length - 2)
                             {
                                 getTestNumber = 0;
                                 TestResults();
                                 MessageBox.Show("Finish!");
                                 isFinish = true;
-                                return;
+                            }
+                            if (i < arrWords.Length)
+                            {
+                                if (isFinish == false)
+                                {
+                                    i += 2;
+                                }
                             }
                         }
+                        else
+                        {
+                            i++;
+                            if (arrWords != null)
+                            {
+                                if (i == arrWords.Length)
+                                {
+                                    getTestNumber = 0;
+                                    TestResults();
+                                    MessageBox.Show("Finish!");
+                                    isFinish = true;
+                                    return;
+                                }
+                            }
 
+                        }
+                        if (comboBoxNumberOfIncorrectWords.Text == "")
+                        {
+                            comboBoxNumberOfIncorrectWords.Text = "0";
+                        }
+                        //if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)//While i reach number of incorrect words
+                        if ((i != int.Parse(comboBoxNumberOfIncorrectWords.Text)) && arrWords != null)//While i reach number of incorrect words
+                        {
+                            labelExamWord.Text = arrWords[i];
+
+                        }
+
+                        textBoxTranslateWord.Text = "";
+
+                        Pronounce();
+
+                        AddTestWordsToDictResult();
+
+                        textBoxTranslateWord.Focus();
                     }
-                    if (comboBoxNumberOfIncorrectWords.Text == "")
-                    {
-                        comboBoxNumberOfIncorrectWords.Text = "0";
-                    }
-                    //if ((!(i == int.Parse(comboBoxNumberOfIncorrectWords.Text))) && arrWords != null)//While i reach number of incorrect words
-                    if ((i != int.Parse(comboBoxNumberOfIncorrectWords.Text)) && arrWords != null)//While i reach number of incorrect words
-                    {
-                        labelExamWord.Text = arrWords[i];
-
-                    }
-
-                    textBoxTranslateWord.Text = "";
-
-                    Pronounce();
-
-                    AddTestWordsToDictResult();
-
-                    textBoxTranslateWord.Focus();
                 }
             }
         }
