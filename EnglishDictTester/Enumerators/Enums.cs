@@ -10,6 +10,6 @@ namespace EnglishDictTester.Enumerators
     {
         WordBg_Duplicated,
         WordEn_Duplicated,
-        WordBgEn_Duplicated      
+        WordBg_Or_And_En_Duplicated      
     }
 }

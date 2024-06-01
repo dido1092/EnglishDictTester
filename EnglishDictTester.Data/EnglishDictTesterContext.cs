@@ -22,6 +22,7 @@ namespace EnglishDictTester.Data
                 // Sett default connection string
                 // Someone used empty constructor of our DbContext
                 optionsBuilder.UseSqlServer(DbConfig.ConnectionString);
+                optionsBuilder.EnableSensitiveDataLogging();
 
             }
             base.OnConfiguring(optionsBuilder);

@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace EnglishDictTester
 {
@@ -28,26 +29,17 @@ namespace EnglishDictTester
         {
             string wordBg = textBoxWordBg.Text.ToUpper();
             string wordEn = textBoxWordEn.Text.ToUpper();
-            string transcriptions = textBoxTranscriptions.Text;
-
+            string transcription = textBoxTranscriptions.Text;
 
             if (wordBg != "" && wordEn != "")
             {
-                try
-                {
-                    InsertBgWord(wordBg, wordEn);
-                    InsertEnWord(wordEn, transcriptions, wordBg);
-                    InsertInMappingTable(wordBg, wordEn);
-
-                    ClearTextBoxes();
-
-                    MessageBox.Show("Success!");
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Unsuccess!");
-                    //throw;
-                }              
+                InsertWords(wordBg, wordEn, transcription);
+                //InsertEnWord(wordEn, transcription, wordBg);
+                InsertInMappingTable(wordBg, wordEn);
+            }
+            else
+            {
+                MessageBox.Show("Enter BgWord AND EnWord!");
             }
         }
 
@@ -67,79 +59,75 @@ namespace EnglishDictTester
             int? wordBgId = getBgId.GetWordBgID(wordBg);
             int? wordEnId = getEnId.GetWordEnID(wordEn);
 
-            try
+            if (wordBgId != null & wordEnId != null)
             {
                 wEnBg = new WordsEnBg { WordBgId = wordBgId, WordEnId = wordEnId };
                 context.Add(wEnBg);
                 context.SaveChanges();
+
+                ClearTextBoxes();
+                MessageBox.Show("Success!");
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show(Enums.WordBgEn_Duplicated.ToString());
-                throw;
+                MessageBox.Show("Unsuccess!");
             }
         }
 
-        private static void InsertBgWord(string wordBg, string wordEn)
+        private void InsertWords(string wordBg, string wordEn, string transaction)
         {
             var checkWordBg = context.WordBgs?.Select(bg => new { bg.BgWord }).SingleOrDefault(wBg => wBg.BgWord == wordBg);
-            var checkWordEn = context.WordEns?.Select(bg => new { bg.EnWord }).SingleOrDefault(wBg => wBg.EnWord == wordEn);
-            try
-            {
-                if (checkWordEn == null)
-                {
-                    try
-                    {
-                        if (checkWordBg == null)
-                        {
-                            WordBg wBg = new WordBg { BgWord = wordBg };
-                            context.Add(wBg);
-                            context.SaveChanges();
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show(Enums.WordBg_Duplicated.ToString());
-                        //throw;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Enums.WordEn_Duplicated.ToString());
-                //throw;
-            }         
-        }
-        private static void InsertEnWord(string wordEn, string transcriptions, string wordBg)
-        {
-            var checkWordEn = context.WordEns?.Select(bg => new { bg.EnWord }).SingleOrDefault(wBg => wBg.EnWord == wordEn);
-            var checkWordBg = context.WordBgs?.Select(bg => new { bg.BgWord }).SingleOrDefault(wBg => wBg.BgWord == wordBg);
-            try
-            {
-                if (checkWordBg == null)
-                {
-                    try
-                    {
-                        if (checkWordEn == null && checkWordBg == null)
-                        {
-                            WordEn wEn = new WordEn { EnWord = wordEn, Transcriptions = transcriptions };
-                            context.Add(wEn);
-                            context.SaveChanges();
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show(Enums.WordEn_Duplicated.ToString());
-                        //throw;
-                    }
-                }
-            }
-            catch (Exception)
+            var checkWordEn = context.WordEns?.Select(en => new { en.EnWord }).SingleOrDefault(wEn => wEn.EnWord == wordEn);
+
+            if (checkWordBg != null)
             {
                 MessageBox.Show(Enums.WordBg_Duplicated.ToString());
-                //throw;
-            }          
+            }
+            if (checkWordEn != null)
+            {
+                MessageBox.Show(Enums.WordEn_Duplicated.ToString());
+            }
+            if (checkWordBg == null && checkWordEn == null)
+            {
+                WordBg wBg = new WordBg { BgWord = wordBg };
+                WordEn wEn = new WordEn { EnWord = wordEn, Transcriptions = transaction };
+                context.Add(wBg);
+                context.Add(wEn);
+                context.SaveChanges();
+                MessageBox.Show("Record in each tables!");
+            }
         }
+        //private void InsertEnWord(string wordEn, string transcriptions, string wordBg)
+        //{
+        //    var checkWordEn = context.WordEns?.Select(bg => new { bg.EnWord }).SingleOrDefault(wBg => wBg.EnWord == wordEn);
+        //    var checkWordBg = context.WordBgs?.Select(bg => new { bg.BgWord }).SingleOrDefault(wBg => wBg.BgWord == wordBg);
+        //    try
+        //    {
+        //        if (checkWordBg == null)
+        //        {
+        //            try
+        //            {
+        //                if (checkWordEn == null)
+        //                {
+        //                    WordEn wEn = new WordEn { EnWord = wordEn, Transcriptions = transcriptions };
+        //                    context.Add(wEn);
+        //                    context.SaveChanges();
+        //                    //MessageBox.Show("Success!");
+        //                }
+        //            }
+        //            catch (Exception)
+        //            {
+        //                MessageBox.Show(Enums.WordEn_Duplicated.ToString());
+        //                //throw;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        MessageBox.Show(Enums.WordBg_Duplicated.ToString());
+        //        throw;
+        //    }
+        //}
 
         private void button1_Click(object sender, EventArgs e)//Button Tables
         {

@@ -225,12 +225,9 @@ namespace EnglishDictTester
         {
             OpenFile();
             InsertInTables();
-
         }
         private void InsertInTables()
         {
-            //OpenFile();
-
             string patternBg = @"[А-Я]";
             string patternEn = @"[A-Z]";
 
@@ -262,23 +259,21 @@ namespace EnglishDictTester
                         EnWord = enWords,
                         Transcriptions = transcriptions
                     };
-                    context.WordEns!.Add(wEn);
 
-                    //Save
+                    context.WordEns!.Add(wEn);
                     context.SaveChanges();
 
                     //Mapping Table
                     int? wordBgId = getBgId.GetWordBgID(wBg.BgWord);
                     int? wordEnId = getEnId.GetWordEnID(wEn.EnWord);
 
-                    WordsEnBg wEnBg = new WordsEnBg ()
-                    { 
-                        WordBgId = wordBgId, 
-                        WordEnId = wordEnId 
+                    WordsEnBg wEnBg = new WordsEnBg()
+                    {
+                        WordBgId = wordBgId,
+                        WordEnId = wordEnId,
                     };
-                    context.WordsEnBgs!.Add(wEnBg);
 
-                    //Save
+                    context.WordsEnBgs!.Add(wEnBg);
                     context.SaveChanges();
                 }
             }

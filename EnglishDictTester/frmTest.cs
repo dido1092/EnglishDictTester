@@ -218,10 +218,13 @@ namespace EnglishDictTester
 
                 int? getEnId = getWordEnId1.GetWordEnID(getExamWord);
 
+                //foreach (var getEnId in getEnIds)
+                //{
                 var getPronounce = context.WordEns?.Select(x => new { x.EnWord, x.WordEnId, x.Transcriptions }).SingleOrDefault(p => p.WordEnId == getEnId);
                 string? pronounce = getPronounce!.Transcriptions;
 
                 labelPronounce.Text = $"{pronounce}";
+                //}
             }
             else if (comboBoxLanguage.Text == "Bg")
             {
@@ -389,8 +392,17 @@ namespace EnglishDictTester
             }
             try
             {
+                //int? enIds = new List<int?>();
+                //enIds = getEnId.GetWordEnID(labelExamWord.Text);
+                //List<int?> bgIds = new List<int?>();
+                //bgIds = getBgId.GetWordBgID(textBoxTranslateWord.Text);
+
                 if (comboBoxLanguage.Text == "En")
                 {
+                    //foreach (var enId1 in enIds)
+                    //{
+                    //foreach (var bgId1 in bgIds)
+                    //{
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
@@ -402,13 +414,23 @@ namespace EnglishDictTester
                         enId = getEnId.GetWordEnID(labelExamWord.Text),
                         bgId = getBgId.GetWordBgID(textBoxTranslateWord.Text),
                         Hint = isButtonHintClicked,
-                        dateTime = DateTime.Now
+                        dateTime = DateTime.Now,
                     };
                     context.Add(t);
+                    //break;
+                    //}
+                    //}
                     context.SaveChanges();
                 }
                 else if (comboBoxLanguage.Text == "Bg")
                 {
+                    //enIds = getBgId.GetWordBgID(textBoxTranslateWord.Text);
+                    //bgIds = getBgId.GetWordBgID(labelExamWord.Text);
+
+                    //foreach (var enId1 in enIds)
+                    //{
+                    //foreach (var bgId1 in bgIds)
+                    //{
                     Tests t = new Tests
                     {
                         lngName = comboBoxLanguage.Text,
@@ -417,13 +439,15 @@ namespace EnglishDictTester
                         enW = textBoxTranslateWord.Text.ToUpper(),
                         bgW = labelExamWord.Text.ToUpper(),
                         answer = getAnswer,
-                        enId = getEnId.GetWordEnID(textBoxTranslateWord.Text),
+                        enId = getBgId.GetWordBgID(textBoxTranslateWord.Text),
                         bgId = getBgId.GetWordBgID(labelExamWord.Text),
                         Hint = isButtonHintClicked,
                         dateTime = DateTime.Now
                     };
                     context.Add(t);
                     context.SaveChanges();
+                    //}
+                    //}
                 }
             }
             catch (Exception)
@@ -465,7 +489,7 @@ namespace EnglishDictTester
             comboBoxNumberOfWords.Text = numberOfRows.ToString();
         }
 
-        public async void buttonHint_ClickAsync(object sender, EventArgs e)
+        public void buttonHint_ClickAsync(object sender, EventArgs e)
         {
             if (isButtonLoadClicked)
             {
@@ -552,7 +576,7 @@ namespace EnglishDictTester
                     if (getIdBg != null)
                     {
 
-                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordBgId == getIdBg.bgId.Value);
+                        var mapTableIDs = context.WordsEnBgs?.Select(enBg => new { enBg.WordEnId, enBg.WordBgId }).SingleOrDefault(x => x.WordBgId == getIdBg.bgId!.Value);
 
                         correctIdBgAnalog = mapTableIDs!.WordBgId!.Value;
                         correctIdEnAnalog = mapTableIDs.WordEnId!.Value;
