@@ -33,13 +33,21 @@ namespace EnglishDictTester
 
             if (wordBg != "" && wordEn != "")
             {
-                InsertBgWord(wordBg);
-                InsertEnWord(wordEn, transcriptions);
-                InsertInMappingTable(wordBg, wordEn);
+                try
+                {
+                    InsertBgWord(wordBg, wordEn);
+                    InsertEnWord(wordEn, transcriptions, wordBg);
+                    InsertInMappingTable(wordBg, wordEn);
 
-                ClearTextBoxes();
+                    ClearTextBoxes();
 
-                MessageBox.Show("Success!");
+                    MessageBox.Show("Success!");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Unsuccess!");
+                    //throw;
+                }              
             }
         }
 
@@ -72,41 +80,65 @@ namespace EnglishDictTester
             }
         }
 
-        private static void InsertBgWord(string wordBg)
+        private static void InsertBgWord(string wordBg, string wordEn)
         {
             var checkWordBg = context.WordBgs?.Select(bg => new { bg.BgWord }).SingleOrDefault(wBg => wBg.BgWord == wordBg);
-            try
-            {
-                if (checkWordBg == null)
-                {
-                    WordBg wBg = new WordBg { BgWord = wordBg };
-                    context.Add(wBg);
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Enums.WordBg_Duplicated.ToString());
-                throw;
-            }
-        }
-        private static void InsertEnWord(string wordEn, string transcriptions)
-        {
             var checkWordEn = context.WordEns?.Select(bg => new { bg.EnWord }).SingleOrDefault(wBg => wBg.EnWord == wordEn);
             try
             {
                 if (checkWordEn == null)
                 {
-                    WordEn wEn = new WordEn { EnWord = wordEn, Transcriptions = transcriptions };
-                    context.Add(wEn);
-                    context.SaveChanges();
+                    try
+                    {
+                        if (checkWordBg == null)
+                        {
+                            WordBg wBg = new WordBg { BgWord = wordBg };
+                            context.Add(wBg);
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show(Enums.WordBg_Duplicated.ToString());
+                        //throw;
+                    }
                 }
             }
             catch (Exception)
             {
                 MessageBox.Show(Enums.WordEn_Duplicated.ToString());
-                throw;
+                //throw;
+            }         
+        }
+        private static void InsertEnWord(string wordEn, string transcriptions, string wordBg)
+        {
+            var checkWordEn = context.WordEns?.Select(bg => new { bg.EnWord }).SingleOrDefault(wBg => wBg.EnWord == wordEn);
+            var checkWordBg = context.WordBgs?.Select(bg => new { bg.BgWord }).SingleOrDefault(wBg => wBg.BgWord == wordBg);
+            try
+            {
+                if (checkWordBg == null)
+                {
+                    try
+                    {
+                        if (checkWordEn == null && checkWordBg == null)
+                        {
+                            WordEn wEn = new WordEn { EnWord = wordEn, Transcriptions = transcriptions };
+                            context.Add(wEn);
+                            context.SaveChanges();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show(Enums.WordEn_Duplicated.ToString());
+                        //throw;
+                    }
+                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show(Enums.WordBg_Duplicated.ToString());
+                //throw;
+            }          
         }
 
         private void button1_Click(object sender, EventArgs e)//Button Tables
