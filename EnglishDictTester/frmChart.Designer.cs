@@ -46,6 +46,7 @@
             chartAnswers = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonCalcWHints = new Button();
             labelAllTestRate = new Label();
+            labelWords = new Label();
             ((System.ComponentModel.ISupportInitialize)chartHint).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartTimes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartAnswers).BeginInit();
@@ -146,11 +147,22 @@
             labelAllTestRate.Text = "All Test Rate: ";
             labelAllTestRate.Click += labelAllTestRate_Click;
             // 
+            // labelWords
+            // 
+            labelWords.AutoSize = true;
+            labelWords.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelWords.Location = new Point(715, 435);
+            labelWords.Name = "labelWords";
+            labelWords.Size = new Size(58, 21);
+            labelWords.TabIndex = 9;
+            labelWords.Text = "Words:";
+            // 
             // frmChart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1261, 734);
+            Controls.Add(labelWords);
             Controls.Add(labelAllTestRate);
             Controls.Add(buttonCalcWHints);
             Controls.Add(chartAnswers);
@@ -181,5 +193,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartAnswers;
         private Button buttonCalcWHints;
         private Label labelAllTestRate;
+        private Label labelWords;
     }
 }

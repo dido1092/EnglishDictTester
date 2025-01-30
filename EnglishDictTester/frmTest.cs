@@ -159,6 +159,10 @@ namespace EnglishDictTester
                 }
             }
         }
+        public int NumberOfWords()
+        { 
+            return numberOfWords;
+        }
 
         private void SelectedWords(int numberOfWords)
         {
@@ -416,11 +420,11 @@ namespace EnglishDictTester
                         Hint = isButtonHintClicked,
                         dateTime = DateTime.Now,
                     };
-                    context.Add(t);
+                    context.Tests!.Add(t);
                     //break;
                     //}
                     //}
-                    context.SaveChanges();
+                    //context.SaveChanges();
                 }
                 else if (comboBoxLanguage.Text == "Bg")
                 {
@@ -444,11 +448,11 @@ namespace EnglishDictTester
                         Hint = isButtonHintClicked,
                         dateTime = DateTime.Now
                     };
-                    context.Add(t);
-                    context.SaveChanges();
+                    context.Tests!.Add(t);
                     //}
                     //}
                 }
+                context.SaveChanges();
             }
             catch (Exception)
             {

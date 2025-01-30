@@ -94,7 +94,7 @@ namespace EnglishDictTester
                 context.Add(wBg);
                 context.Add(wEn);
                 context.SaveChanges();
-                MessageBox.Show("Record in each tables!");
+                //MessageBox.Show("Record in each tables!");
             }
         }
         //private void InsertEnWord(string wordEn, string transcriptions, string wordBg)

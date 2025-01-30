@@ -39,7 +39,9 @@ namespace EnglishDictTester
 
         private void buttonLoadTestNumber_Click(object sender, EventArgs e)
         {
-            HashSet<int> testNumbers = new HashSet<int>();
+            HashSet<int> hsTestNumbers = new HashSet<int>();
+            HashSet<string> hsUniqeWords = new HashSet<string>();  
+            
 
             comboBoxTestNumber.Items.Clear();
             chartHint.Series.Clear();
@@ -54,22 +56,34 @@ namespace EnglishDictTester
 
             var tests = context.Tests!.Select(t => t.test).ToList();
 
-            testNumbers = tests.ToHashSet();
+            hsTestNumbers = tests.ToHashSet();
 
             //Fill comboBox
-            foreach (var testN in testNumbers)
+            foreach (var testN in hsTestNumbers)
             {
                 comboBoxTestNumber.Items.Add(testN);
             }
 
             if (comboBoxTestNumber.Text != "")
             {
+
                 int testNumber = int.Parse(comboBoxTestNumber.Text);
-                int numberOfTest = context.Tests!.Where(t => t.test == testNumber).Count();
+
+                //int numberOfTest = context.Tests!.Where(t => t.test == testNumber).Count();
 
                 FillWordsWithHintsInDict(testNumber);
                 FillWordsWithTimesInDict(testNumber);
                 FillWordsWithAnswersInDict(testNumber);
+
+
+                var numberOfWords = context.Tests!.Select(w => new { w.test, w.bgW }).Where(w => w.test == testNumber);
+                
+                foreach (var word in numberOfWords)
+                {
+                    hsUniqeWords.Add(word.bgW!);
+                }
+
+                labelWords.Text = $"Words: {hsUniqeWords.Count}";
             }
         }
         private void FillWordsWithHintsInDict(int testNumber)
@@ -178,19 +192,22 @@ namespace EnglishDictTester
                     chartHint.Series.Add($"{word.Key}").Points.AddXY($"Hint", word.Value);
                 }
             }
+            chartHint.Series.Add($"All Hints: {dictWordsWithHints.Count}");
         }
         private void CreateChartSeriesTimes()//Chart Times
         {
             int allValue = 0;
+
             foreach (var word in dictWords.OrderBy(w => w.Key))
             {
                 allValue += word.Value;
+
                 if (chartTimes.Series.IsUniqueName(word!.ToString()))
                 {
                     chartTimes.Series.Add($"{word.Key}").Points.AddXY($"Times", word.Value);
                 }
             }
-            chartTimes.Series.Add($"All words: {allValue}");
+            chartTimes.Series.Add($"All The Time: {allValue}");
         }
         private void CreateChartSeriesAnswers()//Chart Times
         {
@@ -208,6 +225,7 @@ namespace EnglishDictTester
                     chartAnswers.Series.Add($"{word.Key}").Points.AddXY($"Rating", word.Value);
                 }
             }
+            chartAnswers.Series.Add($"All Answers: {dictWordsAnswers.Count}");
             chartAnswers.Series.Add($"Rate: {allRating / allWords:f2}");
         }
         private void chartTimes_Click(object sender, EventArgs e)
@@ -229,17 +247,23 @@ namespace EnglishDictTester
 
             var allHints = context.Tests!.Select(t => new { t.enW, t.test, t.Hint }).Where(t => t.Hint == true && t.test == testNumber).Count();
 
-            evaluation = allHints * 4; //Еvaluation difference between 6 - 2
+            //evaluation = allHints * 4; //Еvaluation difference between 6 - 2
 
-            decimal calcWithoutHints = (allRating - evaluation) / allWords;
+            decimal correctАnswers = allWords - allHints;//Exmp: 2 from 7
+            decimal persentCorrectАnswers = (correctАnswers / allWords);
 
-            if (calcWithoutHints < 2)
+            decimal unit = 6 * persentCorrectАnswers;
+            evaluation = 2 + unit;
+
+            //decimal calcWithoutHints = (allRating - evaluation) / allWords;
+
+            if (evaluation < 2)
             {
                 chartAnswers.Series.Add($"Rate(whitout hints): 2");
             }
             else
             {
-                chartAnswers.Series.Add($"Rate(whitout hints): {calcWithoutHints:f2}");
+                chartAnswers.Series.Add($"Rate(whitout hints): {evaluation:f2}");
             }
         }
 
@@ -279,6 +303,7 @@ namespace EnglishDictTester
             double avg = dictEvaluation.Values.Average();
 
             //chartAnswers.Series.Add($"All Tests Rate: {dictEvaluation.Values.Average():F2}");
+
             labelAllTestRate.Text = $"All Tests Rate: {avg:F2}";
         }
 

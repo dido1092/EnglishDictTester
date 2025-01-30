@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnglishDictTester.Data.Migrations
 {
     [DbContext(typeof(EnglishDictTesterContext))]
-    [Migration("20231026142655_Initial")]
-    partial class Initial
+    [Migration("20250116185237_AddDataBase")]
+    partial class AddDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace EnglishDictTester.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("testId"), 1L, 1);
+
+                    b.Property<bool>("Hint")
+                        .HasColumnType("bit");
 
                     b.Property<string>("answer")
                         .IsRequired()
@@ -60,6 +63,9 @@ namespace EnglishDictTester.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("test")
+                        .HasColumnType("int");
 
                     b.HasKey("testId");
 
